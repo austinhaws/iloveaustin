@@ -1,0 +1,87 @@
+/* main layout */
+@main_width: 760px;
+
+
+/* forms */
+@form_width_large: 500px;
+@form_width_small: 300px;
+
+@form_width: 300px;
+@width_reduction: 5px;
+
+/* buttons */
+@button_width: 200px;
+@button_font_size:20px;
+@button_padding: 5px;
+@button_line_height: 20px;
+
+@button_width_small: 100px;
+@button_font_size_small: 12px;
+@button_padding_small: 5px;
+@button_line_height_small: 12px;
+
+
+.fakebutton {
+	font-size:@button_font_size;
+	color:#000;
+	text-decoration:none;
+/*	display:block; caused button to appear on next line in admin groups list*/
+	width:@button_width;
+	padding:@button_padding;
+	border:1px solid #DDD;
+	text-align:center;
+
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-o-border-radius:5px;
+	border-radius:5px;
+
+	background:#FFFFFF;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#EEE));
+	background:-moz-linear-gradient(0% 90% 90deg, #EEE, #FFF);
+
+	-webkit-transition: all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+	-o-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
+
+	line-height: @button_line_height;
+}
+.fakebutton:active {
+	background:#4195DD;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCC), to(#DDD));
+	background:-moz-linear-gradient(0% 90% 90deg, #CCC, #DDD);
+}
+
+.fakebutton:hover {
+	color:red;
+	border-color:#3278BE;
+}
+.fakebutton.small {
+	font-size:@button_font_size_small;
+	padding:@button_padding_small;
+	width:@button_width_small;
+	line-height:@button_line_height_small;
+}
+
+.fakebutton.disabled, .fakebutton.disabled:active {
+	cursor: default !important;
+	border-color:#DDD !important;
+	color: #DDD !important;
+	background:#FFFFFF !important;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#EEE)) !important;
+	background:-moz-linear-gradient(0% 90% 90deg, #EEE, #FFF) !important;
+}
+
+
+h1 {
+	clear: both;
+    border-bottom: 1px dashed #9A3466;
+    border-top: 1px dashed #9A3466;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin: 10px 30px 10px 20px;
+    padding: 10px 5px 5px;
+    text-transform: uppercase;
+    text-align: center;
+}
