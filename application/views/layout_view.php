@@ -1,4 +1,4 @@
-<?
+<?php
 	$CI =& get_instance();
 
 	$CI->load->helper('url');
@@ -38,9 +38,9 @@
 				  <li><a href="<?=base_url()?>graphs" class="<?=${LAYOUT_PAGES}[LAYOUT_BODY] == 'graphs_view' ? 'current' : ''?>">Graphs</a></li>
 				  <li><a href="<?=base_url()?>games" class="<?=${LAYOUT_PAGES}[LAYOUT_BODY] == 'games_view' ? 'current' : ''?>">Games</a></li>
 				<?	}	?>
-			  <? if (is_logged_in()) {	?>
+			  <?php if (is_logged_in()) {	?>
 				  <li><a href="<?=base_url()?>login/logoutUser">Logout</a></li>
-			  <? } ?>
+			  <?php } ?>
 				</ul>
 			</div>
 			<?	layout_piece(${LAYOUT_PAGES}, LAYOUT_BODY);	?>

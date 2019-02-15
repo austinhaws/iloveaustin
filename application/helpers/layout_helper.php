@@ -1,4 +1,4 @@
-<?
+<?php
 	function layout($pages, $data = array()) {
 		$CI =& get_instance();
 		$data[LAYOUT_PAGES] = $pages;

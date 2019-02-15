@@ -17,9 +17,9 @@
 			<div class="title"><?=$period['combined']?></div>
 			<a href="<?=base_url()?>budget/budget/<?=$next_period['month']?>/<?=$next_period['year']?>"><img src="<?=base_url()?>images/arrow_right.png" /></a>
 		</div>
-		<? if ($period['combined'] != $current_period['combined']) { ?>
+		<?php if ($period['combined'] != $current_period['combined']) { ?>
 			<div class="goto-current"><a href="<?=base_url()?>budget/budget/<?=$current_period['month']?>/<?=$current_period['year']?>">Go To Current Month</a></div>
-		<? } ?>
+		<?php } ?>
 	</div>
 
 	<br />
@@ -51,7 +51,7 @@
 				<td class="align-right"><?=format_currency($monthly->amt_goal)?></td>
 				<td class="align-right"><?=format_currency($monthly->amt_spent)?></td>
 				<td class="align-right"><?=format_currency($monthly->amt_goal - $monthly->amt_spent)?></td>
-				<? if (strtolower($monthly->name) == 'food') {	?>
+				<?php if (strtolower($monthly->name) == 'food') {	?>
 					<script>
 						globals.food_amt_goal = <?=$monthly->amt_goal?>;
 						globals.food_amt_spent = <?=$monthly->amt_spent?>;
@@ -100,7 +100,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?
+		<?php
 			foreach ($snapshots as $snapshot) {
 		?>
 			<tr snapshot_id="<?=$snapshot->id?>">

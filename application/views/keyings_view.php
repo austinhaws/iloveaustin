@@ -12,9 +12,9 @@
 			<div class="title"><?=$period['combined']?></div>
 			<a href="<?=base_url()?>keyings/keyings/<?=$next_period['month']?>/<?=$next_period['year']?>"><img src="<?=base_url()?>images/arrow_right.png" /></a>
 		</div>
-		<? if ($period['combined'] != $current_period['combined']) { ?>
+		<?php if ($period['combined'] != $current_period['combined']) { ?>
 			<div class="goto-current"><a href="<?=base_url()?>keyings/keyings/<?=$current_period['month']?>/<?=$current_period['year']?>">Go To Current Month</a></div>
-		<? } ?>
+		<?php } ?>
 	</div>
 
 	<br />
@@ -22,7 +22,7 @@
 <div class="add-link"><a href="<?=base_url()?>keying/add/<?=$period['month']?>/<?=$period['year']?>">Add New File</a></div>
 <?	if (!$keyings) {	?>
 	<div class="no-items-message">No Files. Click "Add New File" to get started.</div>
-<?
+<?php
 	} else {
 ?>
 	<table>
@@ -43,7 +43,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?
+		<?php
 			foreach ($keyings as $keying) {
 		?>
 			<tr keying_id="<?=$keying->id?>">

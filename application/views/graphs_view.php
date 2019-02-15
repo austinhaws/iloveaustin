@@ -14,9 +14,9 @@
 			<div class="title"><?=$period['combined']?></div>
 			<a href="<?=base_url()?>graphs/graph/<?=$next_period['month']?>/<?=$next_period['year']?>"><img src="<?=base_url()?>images/arrow_right.png" /></a>
 		</div>
-		<? if ($period['combined'] != $current_period['combined']) { ?>
+		<?php if ($period['combined'] != $current_period['combined']) { ?>
 			<div class="goto-current"><a href="<?=base_url()?>graphs/graph/<?=$current_period['month']?>/<?=$current_period['year']?>">Go To Current Month</a></div>
-		<? } ?>
+		<?php } ?>
 	</div>
 
 <div id="charts-explanation">Click a pie piece to see details on that monthly expense</div>

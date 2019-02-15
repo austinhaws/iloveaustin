@@ -1,4 +1,4 @@
-<?
+<?php
 	date_default_timezone_set('UTC');
 
 	// convert a variable to an object; useful for mimicing db results
