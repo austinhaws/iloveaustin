@@ -1,3 +1,0 @@
-- remove acount_values and put weeks_remaining in account
-- encrypt password in db
-- add last_backup to account
