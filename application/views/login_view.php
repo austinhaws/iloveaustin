@@ -1,6 +1,6 @@
-<link href="<?=base_url()?>css/login_view.less" rel="stylesheet/less" type="text/css" media="screen" />
-<script src="<?=base_url()?>js/login_view.js"></script>
-<script src="<?=base_url()?>js/jquery.rc4.js"></script>
+<link href="<?php echo base_url()?>css/login_view.less" rel="stylesheet/less" type="text/css" media="screen" />
+<script src="<?php echo base_url()?>js/login_view.js"></script>
+<script src="<?php echo base_url()?>js/jquery.rc4.js"></script>
 
 <div class="content_container">
     <h1>Welcome to <span style="color:#9C3163;">I Love Austin</span></h1>

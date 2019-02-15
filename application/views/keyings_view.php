@@ -1,26 +1,26 @@
-<script src="<?=base_url()?>js/keyings_view.js"></script>
-<link href="<?=base_url()?>css/keyings_view.less" rel="stylesheet/less" type="text/css" media="screen" />
+<script src="<?php echo base_url()?>js/keyings_view.js"></script>
+<link href="<?php echo base_url()?>css/keyings_view.less" rel="stylesheet/less" type="text/css" media="screen" />
 
 
 <script>
-	globals.agents = <?=$agents?>;
+	globals.agents = <?php echo $agents?>;
 </script>
 
 	<div class="keyings_title">
 		<div class="title-container">
-			<a href="<?=base_url()?>keyings/keyings/<?=$last_period['month']?>/<?=$last_period['year']?>"><img src="<?=base_url()?>images/arrow_left.png" /></a>
-			<div class="title"><?=$period['combined']?></div>
-			<a href="<?=base_url()?>keyings/keyings/<?=$next_period['month']?>/<?=$next_period['year']?>"><img src="<?=base_url()?>images/arrow_right.png" /></a>
+			<a href="<?php echo base_url()?>keyings/keyings/<?php echo $last_period['month']?>/<?php echo $last_period['year']?>"><img src="<?php echo base_url()?>images/arrow_left.png" /></a>
+			<div class="title"><?php echo $period['combined']?></div>
+			<a href="<?php echo base_url()?>keyings/keyings/<?php echo $next_period['month']?>/<?php echo $next_period['year']?>"><img src="<?php echo base_url()?>images/arrow_right.png" /></a>
 		</div>
 		<?php if ($period['combined'] != $current_period['combined']) { ?>
-			<div class="goto-current"><a href="<?=base_url()?>keyings/keyings/<?=$current_period['month']?>/<?=$current_period['year']?>">Go To Current Month</a></div>
+			<div class="goto-current"><a href="<?php echo base_url()?>keyings/keyings/<?php echo $current_period['month']?>/<?php echo $current_period['year']?>">Go To Current Month</a></div>
 		<?php } ?>
 	</div>
 
 	<br />
 
-<div class="add-link"><a href="<?=base_url()?>keying/add/<?=$period['month']?>/<?=$period['year']?>">Add New File</a></div>
-<?	if (!$keyings) {	?>
+<div class="add-link"><a href="<?php echo base_url()?>keying/add/<?php echo $period['month']?>/<?php echo $period['year']?>">Add New File</a></div>
+<?php  	if (!$keyings) {	?>
 	<div class="no-items-message">No Files. Click "Add New File" to get started.</div>
 <?php
 	} else {
@@ -46,44 +46,44 @@
 		<?php
 			foreach ($keyings as $keying) {
 		?>
-			<tr keying_id="<?=$keying->id?>">
-				<td><a href="<?=base_url()?>keying/edit/<?=$keying->id?>"><?=$keying->date?></a></td>
-				<td class="align-right"><?=$keying->num_pages?></td>
-				<td><a href="<?=base_url()?>keying/edit/<?=$keying->id?>"><?=$keying->claim_agent?></a></td>
-				<td><?=$keying->claimant?></td>
-				<td class="align-center"><?=$keying->qc ? 'X' : ''?></td>
-				<td class="align-center"><?=$keying->ex ? 'X' : ''?></td>
-				<td class="align-center"><?=$keying->inv ? 'X' : ''?></td>
-				<td class="align-center"><?=$keying->inv_qc ? 'X' : ''?></td>
-				<td class="align-center"><?=$keying->inv_ex ? 'X' : ''?></td>
-				<td class="align-center"><?=$keying->rating?></td>
-				<td><div style="height:20px;width:150px;overflow:hidden;white-space:nowrap;"><?=$keying->note?></div></td>
+			<tr keying_id="<?php echo $keying->id?>">
+				<td><a href="<?php echo base_url()?>keying/edit/<?php echo $keying->id?>"><?php echo $keying->date?></a></td>
+				<td class="align-right"><?php echo $keying->num_pages?></td>
+				<td><a href="<?php echo base_url()?>keying/edit/<?php echo $keying->id?>"><?php echo $keying->claim_agent?></a></td>
+				<td><?php echo $keying->claimant?></td>
+				<td class="align-center"><?php echo $keying->qc ? 'X' : ''?></td>
+				<td class="align-center"><?php echo $keying->ex ? 'X' : ''?></td>
+				<td class="align-center"><?php echo $keying->inv ? 'X' : ''?></td>
+				<td class="align-center"><?php echo $keying->inv_qc ? 'X' : ''?></td>
+				<td class="align-center"><?php echo $keying->inv_ex ? 'X' : ''?></td>
+				<td class="align-center"><?php echo $keying->rating?></td>
+				<td><div style="height:20px;width:150px;overflow:hidden;white-space:nowrap;"><?php echo $keying->note?></div></td>
 				<td>
-					<a href="#" class="delete-keying"><img title="Delete" alt="Delete" class="delete-link" src="<?=base_url()?>images/x.png" /></a>
+					<a href="#" class="delete-keying"><img title="Delete" alt="Delete" class="delete-link" src="<?php echo base_url()?>images/x.png" /></a>
 				</td>
 			</tr>
-		<?	}	?>
+		<?php  	}	?>
 		</tbody>
 		<tfoot>
 			<tr>
 				<td class="align-right">Total Pages</td>
-				<td class="align-right"><?=$keying_total?></td>
+				<td class="align-right"><?php echo $keying_total?></td>
 			</tr>
 			<tr>
 				<td class="align-right">Total Earned</td>
-				<td class="align-right">$<?=$keying_total_earned?></td>
+				<td class="align-right">$<?php echo $keying_total_earned?></td>
 			</tr>
 		</tfoot>
 	</table>
 	<br />
-<?	}	?>
+<?php  	}	?>
 
 <br />
 <div class="keyings_title"><span class="title">Claim Agents</span></div>
 <br />
-<?	if (!$agents) {	?>
+<?php  	if (!$agents) {	?>
 	<div class="no-items-message">No Agents. Click "Add New File" to get started.</div>
-<?	} else {	?>
+<?php  	} else {	?>
 	<div id="search-box">
 		Search For Agent: <input type="text" id="search-text" /> <a href="#" class="fakebutton small" id="search-clear">Clear</a>
 	</div>
@@ -102,7 +102,7 @@
 					<div id="agent-container">
 						<table>
 							<tbody>
-							<?/* Javascript will load this table so that filtering is all javascript */?>
+							<?php /* Javascript will load this table so that filtering is all javascript */ ?>
 							</tbody>
 						</table>
 					</div>
@@ -112,9 +112,9 @@
 		<tfoot>
 			<tr>
 				<td class="align-right" colspan="2">Total Files</td>
-				<td class="align-center"><?=$total_files?></td>
+				<td class="align-center"><?php echo $total_files?></td>
 			</tr>
 		</tfoot>
 	</table>
 	<br />
-<?	}	?>
+<?php  	}	?>

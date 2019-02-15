@@ -1,9 +1,9 @@
 <script src="https://www.google.com/jsapi"></script>
-<script src="<?=base_url()?>js/games_view.js"></script>
-<link href="<?=base_url()?>css/games_view.less" rel="stylesheet/less" type="text/css" media="screen" />
+<script src="<?php echo base_url()?>js/games_view.js"></script>
+<link href="<?php echo base_url()?>css/games_view.less" rel="stylesheet/less" type="text/css" media="screen" />
 
 <script>
-	globals.games = <?=$games?>;
+	globals.games = <?php echo $games?>;
 </script>
 
 <div class="games-container">
