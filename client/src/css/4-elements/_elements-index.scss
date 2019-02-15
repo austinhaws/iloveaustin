@@ -1,0 +1,43 @@
+/*
+############     _elements-index.scss      ############
+elemental html: h1, h2, h3, ul, li, etc.
+*/
+
+html {
+	font-family: $normalFont;
+	font-weight: $normalFontBaseWeight;
+	font-size: $baseFontSize;
+	color: $baseColor;
+}
+
+h1 {
+	background: $gray05;
+	padding: 20px 0;
+	margin: 0 0 $global-spacing-unit-large 0;
+}
+h2,
+h3 {
+	margin: 0 0 $global-spacing-unit 0;
+}
+
+p, ul, ol {
+	line-height: $global-line-height;
+	margin: 0 0 $global-spacing-unit 0;
+}
+
+a {
+	color: $primaryColor;
+
+	&:visited {
+		color: $primaryColor;
+	}
+	&:hover,
+	&:active {
+		color: $primaryColorDark;
+	}
+}
+
+.svg-icon {
+	height: 1em;
+	width: 1em;
+}

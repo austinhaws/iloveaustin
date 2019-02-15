@@ -1,0 +1,151 @@
+/*
+############     _button.scss      ############
+*/
+button {
+	background: white;
+	border-radius: $formBorderRadius;
+	border: 1px solid $primaryColor;
+	color: $primaryColor;
+	cursor: pointer;
+	fill: $primaryColor;
+	font-family: $normalFont;
+	min-height: $buttonHeight;
+	padding: 0 $buttonHeight / 2;
+	position: relative;
+	transition: all 200ms ease;
+
+	&:hover {
+		background: $primaryColor;
+		color: white;
+		fill: white;
+	}
+
+	&.complementary {
+		color: $complementaryColor;
+		fill: $complementaryColor;
+		border-color: $complementaryColor;
+		&:hover {
+			background: $complementaryColor;
+			color: white;
+			fill: white;
+		}
+	}
+
+	&.secondary {
+		color: $secondaryColor;
+		fill: $secondaryColor;
+		border-color: $secondaryColor;
+		&:hover {
+			background: $secondaryColor;
+			color: white;
+			fill: white;
+		}
+	}
+
+	&.neutral {
+		color: $neutralColorDark;
+		fill: $neutralColor;
+		border-color: $neutralColor;
+		&:hover {
+			background: $neutralColor;
+			color: white;
+			fill: white;
+		}
+	}
+
+	&[disabled],
+	&[disabled]:hover {
+		color: $gray30;
+		border-color: $gray40;
+		background: white;
+		cursor: default;
+
+		&.button--solid {
+			color: $gray05;
+			background: $gray30;
+			border-color: $gray30;
+		}
+	}
+
+	&.button--solid {
+		color: white;
+		fill: white;
+		background: $primaryColor;
+		&:hover {
+			background: $primaryColorDark;
+			border-color: $primaryColorDark;
+		}
+		&.complementary {
+			background: $complementaryColor;
+			&:hover {
+				background: $complementaryColorDark;
+				border-color: $complementaryColorDark;
+			}
+		}
+		&.secondary {
+			background: $secondaryColor;
+			&:hover {
+				background: $secondaryColorDark;
+				border-color: $secondaryColorDark;
+			}
+		}
+		&.neutral {
+			background: $neutralColor;
+			&:hover {
+				background: $neutralColorDark;
+				border-color: $neutralColorDark;
+			}
+		}
+	}
+
+	&.button--small {
+		font-size: .9rem;
+		min-height: $buttonHeight - 4px;
+	}
+
+	&.button--large {
+		font-size: 1.1rem;
+		min-height: $buttonHeight + 10px;
+	}
+
+	&.button--icon {
+		.button-label {
+			padding: 0 1.2rem 0 0;
+		}
+		svg + .button-label {
+			padding: 0 0 0 1.2rem;
+		}
+		svg {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translate(10px, -50%);
+		}
+		.button-label + svg {
+			left: 100%;
+			transform: translate(calc(-100% - 10px), -50%);
+		}
+		&.button--noLabel svg {
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		&.button--noChildren .button-label {
+			padding: 0;
+		}
+	}
+
+	&.busy {
+		padding: 0 2.5rem 0 1.2rem;
+		.css-spinner {
+			display: block;
+			position: absolute;
+			left: 100%;
+			top: 50%;
+			transform: translate(calc(-100% - 10px), -50%);
+		}
+	}
+
+	&.triggered {
+		opacity: .5;
+	}
+}

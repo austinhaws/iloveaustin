@@ -1,0 +1,158 @@
+/*
+############     _utilities.scss      ############
+utility classes, atomic css
+*/
+
+/* --------- Flex --------- */
+.flex {
+	display: flex;
+
+	&.justify-space-between {
+		justify-content: space-between;
+	}
+	&.justify-space-around {
+		justify-content: space-around;
+	}
+	&.justify-center {
+		justify-content: center;
+	}
+	&.justify-flex-start {
+		justify-content: flex-start;
+	}
+	&.justify-flex-end {
+		justify-content: flex-end;
+	}
+
+	&.align-items-start {
+		align-items: flex-start;
+	}
+	&.align-items-end {
+		align-items: flex-end;
+	}
+	&.align-items-center {
+		align-items: center;
+	}
+	&.align-items-stretch {
+		align-items: stretch;
+	}
+	&.align-items-baseline {
+		align-items: baseline;
+	}
+
+	&.flex-wrap {
+		flex-wrap: wrap;
+	}
+
+	&.direction-col {
+		flex-direction: column;
+	}
+
+	.fifty {
+		width: 50%;
+	}
+}
+
+.flex1 {
+	flex: 1 1 0;
+}
+
+.flex2 {
+	flex: 2 1 0;
+}
+
+/* --------- Utility Classes --------- */
+.center-text, .text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-red {
+	color: $red;
+}
+
+.color-primary {
+	color: $primaryColor;
+}
+.color-secondary {
+	color: $secondaryColor;
+}
+.color-tertiary {
+	color: $tertiaryColor;
+}
+.color-quaternary {
+	color: $quaternaryColor;
+}
+.color-neutral {
+	color: $neutralColor;
+}
+
+
+.hcenter {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.vcenter {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.vcenter.right {
+	right: 0;
+}
+
+.vcenter.left {
+	left: 0;
+}
+
+.vcenter.hcenter {
+	transform: translate(-50%, -50%);
+}
+
+.hcenter-margin {
+	display: block;
+	margin: 0 auto;
+}
+
+.mt-spacing {
+	margin-top: $global-spacing-unit;
+}
+.mb-spacing {
+	margin-bottom: $global-spacing-unit;
+}
+.mr-spacing {
+	margin-right: $global-spacing-unit;
+}
+.ml-spacing {
+	margin-left: $global-spacing-unit;
+}
+
+.visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.elevation {
+	@include elevation;
+}
