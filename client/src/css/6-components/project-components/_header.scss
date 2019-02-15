@@ -1,0 +1,69 @@
+/*
+############     _header.scss      ############
+*/
+
+/* --------- Main Header --------- */
+.main-header {
+	position: relative;
+	background: $primaryColor;
+	max-height: 40px;
+	color: white;
+
+	> * {
+		flex: 1 1 0;
+	}
+}
+
+/* --------- Menu Button --------- */
+.menu-button {
+	display: block;
+	position: relative;
+	width: 26px;
+	height: 20px;
+	border: 10px solid transparent;
+
+	span {
+		display: block;
+		position: absolute;
+		top: 0;
+		height: 3px;
+		width: 100%;
+		background: white;
+		text-indent: 9999px;
+		overflow: hidden;
+		transform: rotate(0);
+		transition-property: top, width, -webkit-transform;
+		transition-property: top, width, transform, -webkit-transform;
+		transition-property: top, width, transform;
+		transition-timing-function: ease-in-out;
+		transition-duration: 200ms;
+		transition-delay: 200ms, 200ms, 0ms;
+
+		&:nth-child(2) {
+			top: calc(50% - 1.5px);
+			left: 50%;
+			transform: translate(-50%);
+		}
+
+		&:nth-child(3) {
+			top: calc(100% - 3px);
+		}
+	}
+
+	&.open {
+		span {
+			transition-delay: 0ms, 0ms, 200ms;
+			top: calc(50% - 1.5px);
+
+			&:nth-child(1) {
+				transform: rotate(45deg);
+			}
+			&:nth-child(2) {
+				width: 0;
+			}
+			&:nth-child(3) {
+				transform: rotate(-45deg);
+			}
+		}
+	}
+}

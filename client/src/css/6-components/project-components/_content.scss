@@ -1,0 +1,28 @@
+/*
+############     _content.scss      ############
+*/
+.main-content-wrapper {
+	height: calc(100vh - 40px);;
+}
+
+.section-content {
+	position: relative;
+	overflow: auto;
+	padding: 0;
+}
+
+//content utility classes
+.content {
+	display: block;
+	max-width: 648px;
+	padding: 0 $global-spacing-unit-large;
+	margin: 0 auto;
+
+	&.full-width {
+		max-width: none;
+		margin: 0;
+	}
+}
+p.content {
+	margin: 0 auto $global-spacing-unit;
+}

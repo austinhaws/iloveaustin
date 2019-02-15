@@ -1,0 +1,88 @@
+/* ########     POPUP WINDOW     ######## */
+$small-popup-size: 500px;
+$large-popup-size: 700px;
+$popup-margins: 32px;
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes drop-in {
+	0% {
+		opacity: 0;
+		transform: translate(-50%, -$global-spacing-unit-xhuge);
+	}
+	100% {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}
+
+.popup-window {
+	position: absolute;
+	z-index: 10010;
+	left: 50%;
+	top: 0;
+	margin: $global-spacing-unit-xhuge 0;
+	transform: translateX(-50%);
+	background: white;
+	min-width: $small-popup-size;
+	animation: 400ms ease-in-out 100ms drop-in both;
+	border-radius: 5px;
+	overflow: visible;
+
+	&--large {
+		min-width: $large-popup-size;
+	}
+	&__backdrop {
+		position: fixed;
+		z-index: 10000;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.3);
+		animation: 300ms ease-in 100ms fade-in both;
+		overflow: auto;
+	}
+
+	&__content {
+		padding: 30px;
+	}
+
+	&__close-button {
+		display: block;
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		width: 12px;
+		height: 12px;
+		text-indent: 20000px;
+		overflow: hidden;
+		svg {
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		&:hover {
+			fill: $red;
+		}
+	}
+}
+
+@media only screen and (max-width: $large-popup-size + $popup-margins) {
+	.popup-window--large {
+		min-width: calc(100vw - #{$popup-margins});
+	}
+}
+
+@media only screen and (max-width: $small-popup-size + $popup-margins) {
+	.popup-window {
+		min-width: calc(100vw - #{$popup-margins});
+	}
+}

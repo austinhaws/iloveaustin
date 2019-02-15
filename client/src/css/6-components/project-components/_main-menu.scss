@@ -1,0 +1,127 @@
+/*
+############     _main-menu.scss      ############
+*/
+$menu-width: 275px;
+.main-menu {
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background: $gray03;
+	width: 0;
+	transition: width 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
+	border-right: 1px solid $gray13;
+	outline: none;
+
+	&.open {
+		width: $menu-width;
+		& > div {
+			visibility: visible;
+			transition: unset;
+		}
+	}
+	&.closed {
+		border: none;
+	}
+	& > div {
+		visibility: hidden;
+		width: $menu-width;
+		transition: visibility 1ms 300ms;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		overflow-y: auto;
+	}
+	& ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		& li {
+
+			& a {
+				text-decoration: none;
+				color: $gray80;
+				padding: 10px 25px 10px 15px;
+				display: flex;
+				align-items: center;
+				transition: all 200ms ease-in-out;
+				outline: none;
+				position: relative;
+				fill: $gray80;
+
+				&:hover, &:focus {
+					color: $gray01;
+					fill: $gray01;
+					background: $gray80;
+				}
+			}
+			&.selected a {
+				color: $primaryColor;
+				& .svg-arrow {
+					fill: $primaryColor;
+				}
+				&:hover, &:focus {
+					color: $primaryColorLight;
+					fill: $primaryColorLight;
+					& .svg-arrow {
+						fill: $primaryColorLight;
+					}
+				}
+			}
+
+			& ul {
+				background: #ffffff;
+				display: none;
+
+				& li a {
+					padding: 10px 25px 10px 44px;
+					border-top: 1px solid $gray05;
+					font-size: 0.9rem;
+				}
+			}
+			&.open {
+				& ul {
+					display: block;
+				}
+			}
+		}
+	}
+	& .svg-icon {
+		margin: 0 10px 0 0;
+		font-size: 1.2em;
+	}
+	& .svg-arrow,
+	& .svg-plus {
+		font-size: 0.8rem;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		fill: $gray40;
+	}
+	& .svg-plus {
+		font-size: 0.7rem;
+	}
+}
+
+.menu-footer {
+	margin: 30px 0;
+
+	&__logo {
+		width: $menu-width;
+		padding: 10px 20px;
+		box-sizing: border-box;
+
+		img {
+			height: 45px;
+		}
+		.logo-text {
+			font-size: 1.3em;
+		}
+	}
+	&__copyright {
+		font-size: $vsmallFontSize;
+	}
+}

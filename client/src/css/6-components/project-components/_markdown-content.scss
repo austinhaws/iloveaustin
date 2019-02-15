@@ -1,0 +1,29 @@
+.markdown-content {
+	h1 {
+		background: none;
+		color: $primaryColor;
+	}
+	h2 {
+		color: $complementaryColor;
+	}
+	code {
+		white-space: pre-wrap;
+		word-wrap: normal;
+		background: $complementaryColorLight;
+		color: $complementaryColor;
+		border-radius: $formBorderRadius;
+		padding: 2px 4px;
+	}
+	pre {
+		background: $complementaryColorLight;
+		width: 100%;
+		overflow-x: scroll;
+		padding: $global-spacing-unit;
+		border-radius: $formBorderRadius;
+
+		code {
+			white-space: pre;
+			word-wrap: normal;
+		}
+	}
+}
