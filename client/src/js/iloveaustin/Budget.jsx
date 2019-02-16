@@ -179,18 +179,20 @@ class Budget extends React.Component {
 						</TableBody>
 						<TableFooter>
 							<TableRow>
-								<TableCell/>
+								<TableCell align="right">Totals:</TableCell>
 								<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</b></TableCell>
 								<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</b></TableCell>
+								<TableCell/>
+							</TableRow>
+							<TableRow>
+								<TableCell align="right">No Wells Fargo Totals:</TableCell>
+								<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotalsNoWells.goal)}</b></TableCell>
+								<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotalsNoWells.current)}</b></TableCell>
 								<TableCell/>
 							</TableRow>
 						</TableFooter>
 					</Table>
 				</Paper>
-
-
-				No Wells Fargo Totals row: ??? total of all snapshots that are NOT flagged for wellsfargo
-
 
 				{this.state.editSnapshot && (
 					<Dialog

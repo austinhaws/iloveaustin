@@ -18,6 +18,7 @@ const defaultState = {
 	iLoveAustin: {
 		snapshots: undefined,
 		snapshotsTotals: undefined,
+		snapshotsTotalsNoWells: undefined,
 	},
 	app: {
 		ajaxSpinnerCount: 0,

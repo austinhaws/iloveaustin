@@ -47,6 +47,13 @@ const webservice = {
 							carry.current += snapshot.amt_current;
 							return carry;
 						}, { goal: 0, current: 0 })),
+						createPathActionPayload('iLoveAustin.snapshotsTotalsNoWells', list.filter(snapshot => snapshot.is_totalable === 0)
+							.reduce((carry, snapshot) => {
+								carry.goal += snapshot.amt_goal;
+								carry.current += snapshot.amt_current;
+								return carry;
+							}, { goal: 0, current: 0 })
+						),
 					]);
 				}),
 			save: snapshot => webserviceILoveAustin.post(`snapshot/save`, { ...snapshot, ...postTokenData() }),
