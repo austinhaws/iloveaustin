@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 import * as PropTypes from "prop-types";
-import webservice, {ajaxStatus} from "../app/Webservice";
+import webservice from "../app/Webservice";
 import green from '@material-ui/core/colors/green';
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -33,9 +33,18 @@ const styles = theme => ({
 		flexDirection: 'column',
 		margin: '0 auto',
 	},
+	addButton: {
+		margin: '0 auto',
+		borderColor: '#64991e',
+		color: '#64991e',
+		marginBottom: '10px',
+	},
 	formControl: {
 		margin: theme.spacing.unit,
 		minWidth: 120,
+	},
+	sectionTitle: {
+		textAlign: 'center',
 	},
 	selectEmpty: {
 		marginTop: theme.spacing.unit * 2,
@@ -74,7 +83,6 @@ class Budget extends React.Component {
 		}
 
 		const {classes} = this.props;
-		const ajaxing = ajaxStatus.isAjaxing();
 
 		return (
 			<div className={classes.root}>
@@ -86,8 +94,8 @@ class Budget extends React.Component {
 				totals: goal, spent, left
 
 
-				<h3>Snapshots</h3>
-				<a href="#">Add new snapshot</a>
+				<h3 className={classes.sectionTitle}>Snapshots</h3>
+				<Button variant="outlined" className={classes.addButton}>Add New Snapshot</Button>
 
 				<Paper className={classes.root}>
 					<Table className={classes.table}>
@@ -116,8 +124,9 @@ class Budget extends React.Component {
 						<TableFooter>
 							<TableRow>
 								<TableCell/>
-								<TableCell align="right">{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</TableCell>
-								<TableCell align="right">{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</TableCell>
+								<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</b></TableCell>
+								<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</b></TableCell>
+								<TableCell/>
 							</TableRow>
 						</TableFooter>
 					</Table>
