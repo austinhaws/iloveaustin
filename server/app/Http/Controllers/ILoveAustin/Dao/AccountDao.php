@@ -5,7 +5,7 @@ namespace App\Http\Controllers\ILoveAustin\Dao;
 use App\Http\Controllers\ILoveAustin\Models\Account;
 use Illuminate\Support\Facades\DB;
 
-class AccountDao
+class AccountDao extends BaseDao
 {
 
     public function selectAccountByUsername(string $username)
@@ -28,5 +28,13 @@ class AccountDao
         DB::table('account')
             ->where('id', $accountId)
             ->update(['token' => $token]);
+    }
+
+    public function selectAccountIdForToken(string $accountToken)
+    {
+        return DB::table('account')
+            ->select('id')
+            ->where('token', $accountToken)
+            ->first();
     }
 }

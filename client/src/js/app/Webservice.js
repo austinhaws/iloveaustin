@@ -25,11 +25,15 @@ const webserviceILoveAustin = new WebserviceCore({
 	rawPromiseCallback: rawPromiseCallback,
 });
 
-export default {
+const postTokenData = () => ({ token: store.getState().app.postToken });
+
+const webservice = {
 	iLoveAustin: {
 		login: credentials => webserviceILoveAustin.post('login', credentials),
 		snapshot: {
-			list: () => webserviceILoveAustin.post('snapshot/list', {token: store.getState().app.postToken})
+			delete: snapshotId => webserviceILoveAustin.post(`snapshot/delete`, { snapshotId, ...postTokenData() })
+				.then(() => webservice.iLoveAustin.snapshot.list()),
+			list: () => webserviceILoveAustin.post('snapshot/list', postTokenData())
 				.then(list => {
 					list.sort((a, b) => a.name.localeCompare(b.name));
 					list.forEach(snapshot => {
@@ -49,3 +53,4 @@ export default {
 		}
 	},
 };
+export default webservice;

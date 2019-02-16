@@ -7,14 +7,12 @@ class Daos
 {
     /** @var AccountDao */
     public $account;
+    /** @var SnapshotDao */
     public $snapshot;
 
-    public function __construct(
-        ?AccountDao $accountDao = null,
-        ?SnapshotDao $snapshotDao = null
-    )
+    public function __construct()
     {
-        $this->account = $accountDao;
-        $this->snapshot = $snapshotDao;
+        $this->account = new AccountDao($this);
+        $this->snapshot = new SnapshotDao($this);
     }
 }
