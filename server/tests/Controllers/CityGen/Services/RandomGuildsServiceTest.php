@@ -2,17 +2,17 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Constants\BooleanRandom;
-use App\Http\Controllers\CityGen\Constants\PopulationType;
-use App\Http\Controllers\CityGen\Models\City\City;
-use App\Http\Controllers\CityGen\Models\Post\PostData;
-use App\Http\Controllers\CityGen\Util\TestRoll;
+use App\Http\Controllers\ILoveAustin\Constants\BooleanRandom;
+use App\Http\Controllers\ILoveAustin\Constants\PopulationType;
+use App\Http\Controllers\ILoveAustin\Models\City\City;
+use App\Http\Controllers\ILoveAustin\Models\Post\PostData;
+use App\Http\Controllers\ILoveAustin\Util\TestRoll;
 use Test\Controllers\CityGen\Util\BaseTestCase;
 
 final class RandomGuildsServiceTest extends BaseTestCase
 {
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomGuildsService::determineGuilds
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomGuildsService::determineGuilds
      */
     public function testNoProfessions()
     {

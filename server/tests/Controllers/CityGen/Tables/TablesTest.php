@@ -2,7 +2,7 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Constants\Table;
+use App\Http\Controllers\ILoveAustin\Constants\Table;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use RuntimeException;

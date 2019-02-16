@@ -2,21 +2,21 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Constants\BooleanRandom;
-use App\Http\Controllers\CityGen\Constants\Integration;
-use App\Http\Controllers\CityGen\Constants\PopulationType;
-use App\Http\Controllers\CityGen\Constants\Race;
-use App\Http\Controllers\CityGen\Models\City\City;
-use App\Http\Controllers\CityGen\Models\Post\PostData;
-use App\Http\Controllers\CityGen\Models\Post\PostRaceRatio;
-use App\Http\Controllers\CityGen\Services\RandomCity\RandomService;
-use App\Http\Controllers\CityGen\Util\TestRoll;
+use App\Http\Controllers\ILoveAustin\Constants\BooleanRandom;
+use App\Http\Controllers\ILoveAustin\Constants\Integration;
+use App\Http\Controllers\ILoveAustin\Constants\PopulationType;
+use App\Http\Controllers\ILoveAustin\Constants\Race;
+use App\Http\Controllers\ILoveAustin\Models\City\City;
+use App\Http\Controllers\ILoveAustin\Models\Post\PostData;
+use App\Http\Controllers\ILoveAustin\Models\Post\PostRaceRatio;
+use App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomService;
+use App\Http\Controllers\ILoveAustin\Util\TestRoll;
 use Test\Controllers\CityGen\Util\BaseTestCase;
 
 final class RandomRacesServiceTest extends BaseTestCase
 {
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomRacesService::determineRaces
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomRacesService::determineRaces
      */
     public function testRaces()
     {
@@ -46,7 +46,7 @@ final class RandomRacesServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomRacesService::determineRaces
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomRacesService::determineRaces
      */
     public function testRacialMixSet()
     {
@@ -74,7 +74,7 @@ final class RandomRacesServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomRacesService::determineRaces
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomRacesService::determineRaces
      */
     public function testRaceSet()
     {

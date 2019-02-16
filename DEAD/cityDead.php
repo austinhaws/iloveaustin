@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CityGen\Models;
+namespace App\Http\Controllers\ILoveAustin\Models;
 
 class CityDead {
 	public $population_size = false;

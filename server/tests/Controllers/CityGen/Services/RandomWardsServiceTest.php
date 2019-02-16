@@ -2,19 +2,19 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Constants\BooleanRandom;
-use App\Http\Controllers\CityGen\Constants\PopulationType;
-use App\Http\Controllers\CityGen\Constants\Ward;
-use App\Http\Controllers\CityGen\Models\City\City;
-use App\Http\Controllers\CityGen\Models\Post\PostData;
-use App\Http\Controllers\CityGen\Models\Post\WardAdded;
-use App\Http\Controllers\CityGen\Util\TestRoll;
+use App\Http\Controllers\ILoveAustin\Constants\BooleanRandom;
+use App\Http\Controllers\ILoveAustin\Constants\PopulationType;
+use App\Http\Controllers\ILoveAustin\Constants\Ward;
+use App\Http\Controllers\ILoveAustin\Models\City\City;
+use App\Http\Controllers\ILoveAustin\Models\Post\PostData;
+use App\Http\Controllers\ILoveAustin\Models\Post\WardAdded;
+use App\Http\Controllers\ILoveAustin\Util\TestRoll;
 use Test\Controllers\CityGen\Util\BaseTestCase;
 
 final class RandomWardsServiceTest extends BaseTestCase
 {
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testDetermineWards()
     {
@@ -52,7 +52,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testNumGates()
     {
@@ -89,7 +89,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasSeaNotAlreadyDone()
     {
@@ -125,7 +125,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasSeaNotAlreadyDoneWalls()
     {
@@ -162,7 +162,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasSeaAlreadyDone()
     {
@@ -201,7 +201,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasRiverNotAlreadyDone()
     {
@@ -237,7 +237,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasRiverAlreadyDone()
     {
@@ -276,7 +276,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasMilitaryNotAlreadyDone()
     {
@@ -312,7 +312,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasMilitaryAlreadyDone()
     {
@@ -351,7 +351,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testHasMilitaryInsideWalls()
     {
@@ -391,7 +391,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testAdministrationSmallTownAlreadyDone()
     {
@@ -430,7 +430,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testAdministrationSmallTownNotAlreadyDone()
     {
@@ -468,7 +468,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testAdministrationSmallerThanSmallTownAlreadyDone()
     {
@@ -508,7 +508,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testAdministrationSmallerThanSmallTownNotAlreadyDone()
     {
@@ -546,7 +546,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testAdministrationLargerThanSmallTownAlreadyDone()
     {
@@ -585,7 +585,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testAdministrationLargerThanSmallTownNotAlreadyDone()
     {
@@ -623,7 +623,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testCraftsmenSmallCityAlreadyDone()
     {
@@ -663,7 +663,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testCraftsmenSmallCityNotAlreadyDone()
     {
@@ -702,7 +702,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testCraftsmenSmallerThanSmallCityAlreadyDone()
     {
@@ -742,7 +742,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testCraftsmenSmallerThanSmallCityNotAlreadyDone()
     {
@@ -780,7 +780,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testCraftsmenLargerThanSmallCityAlreadyDone()
     {
@@ -820,7 +820,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testCraftsmenLargerThanSmallCityNotAlreadyDone()
     {
@@ -859,7 +859,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testMarketAlreadyDone()
     {
@@ -897,7 +897,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testMerchantAlreadyDone()
     {
@@ -936,7 +936,7 @@ final class RandomWardsServiceTest extends BaseTestCase
 
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testPatriciateMetropolisMetropolisMetropolisMetropolisAlreadyDone()
     {
@@ -977,7 +977,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testPatriciateMetropolisNotAlreadyDone()
     {
@@ -1017,7 +1017,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testPatriciateSmallerThanMetropolisAlreadyDone()
     {
@@ -1059,7 +1059,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testPatriciateSmallerThanMetropolisNotAlreadyDone()
     {
@@ -1099,7 +1099,7 @@ final class RandomWardsServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomWardsService::determineWards
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomWardsService::determineWards
      */
     public function testGateAlreadyDone()
     {

@@ -1,106 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title>City Generator</title>
-	<meta name="description" content="Fantasy City Generator! - Complete with wards, professions, power centers, buildings, guilds, and more!"/>
-	<meta name="keywords" content="magical medieval city guide,expeditious retreat,city,Fantasy,rpg,generate,power,center,ward,districts,professions,jobs,wealth,army,military,jobs,military,city,town,village,thorp,metropolis,gates,walls,rivers,oceans,seas,wizards,warrior,thief,guild,king,society,buildings,houses,work places,population,race"/>
+	<meta charset="utf-8" />
+	<title>I Love Austin</title>
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-	<meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
+	<meta name="description" content="I Love Austin" />
+	<meta name="author" content="Austin" />
 
 	<script>
-		const globals = { urlBase: 'http://localhost/citygenerator/server/public/citygenerator/' };
+		const globals = {
+			base_url: '<?php echo base_url(); ?>',
+			webserviceUrlBase: 'http://localhost/iloveaustin3/server/public/',
+		};
 	</script>
 </head>
 <body>
-<div id="react"></div>
-<div id="latest-post-wrap">
-	<div id="latest-post" class="post">
-	</div>
-</div>
-<div id="content">
-	<div id="recent-posts">
-		<h2>Explanation</h2><br/>
-		<h3>The RPG City Generator takes a number of inputs and returns detailed, randomly generated, information about a city. It includes professions, medieval buildings, guilds, local hero classes and levels, and many other role playing tools to make your campaign worlds more believable. Your
-			fantasy adventures just got more detailed and exciting for your players with information about each city\'s wards, establishments, imports and exports, income, and lots more to make your role playing game full of rich detail for your players to enjoy. Here is a description of the
-			settings involved.</h3>
-		<p class="byline"></p>
-		<table class="table_center">
-			<thead/>
-			<tbody>
-			<tr>
-				<td class="right field_title2">Name:</td>
-				<td class="explanation">The city\'s name. If this field is blank, then a name will be randomly generated for the city. The generated name will be translated to the majority race language.</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Population:</td>
-				<td class="explanation">The number of people in the city. This is the base determiner for most all the stats, so choose wisely.</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">By the Sea:</td>
-				<td class="explanation">Does this city exist by the sea or ocean? If so, then one or more "Sea" ward(s) will be added to the city.</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">By a River:</td>
-				<td class="explanation">Does this city exist by a river? Or maybe one or more rivers flow through the city?</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Has Military:</td>
-				<td class="explanation">Does this city have a military stationed in it? Not even the biggest cities always have an army. This is not the local constabulary, but a full blown army.</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Number of Gates:</td>
-				<td class="explanation">How many gates does the city have in its walls? If the city has no walls, then the number of gates is 0 and vice versa.</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Generate Buildings:</td>
-				<td class="explanation">If you don\'t want to know all the buildings in a ward and you find it extremely annoying, you can have them turned off.</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Add Ward:</td>
-				<td class="explanation">If you are generating buildings you can specify which wards and the randomness weight of the buildings in that ward instead of having them completely randomly generated. Please note that the numbers are the weight that the building will occur. If you put
-					houses at a weight of 5 and the total of all the weights for all the buildings for the ward is 120 then houses have a 5 in 120 chance of being generated. Make the weight 0 to not allow a building to generate in that ward. The size of the city determines how many wards are
-					normally generated. If more wards are specified than the city uses all the wards will be added which may throw off the totals. If there are less wards specified than the city needs then wards will be generated to fill the extra slots.
-				</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Generate Professions:</td>
-				<td class="explanation">If you don\'t want to know all the professions of each and every member of the city and you find it extremely annoying, you can have them turned off. If generate professions is turned off, guilds will also not generate.</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Major Race:</td>
-				<td class="explanation">This allows selecting the predominant race of the city. Depending on the Society Type, other races have a percentage of minority for the city. The race also determines the type of name that will be randomly generated for a city (if the name isn\'t specifically
-					given).
-				</td>
-			</tr>
-			<tr>
-				<td class="right field_title2">Society Type:</td>
-				<td class="explanation">Depending on how remote or popular a city is, this effects the types of inhabitants found in it.</td>
-			</tr>
-			</tbody>
-		</table>
-		<br/><br/>
-		<div id="latest-post" class="post"/>
-		<div class="thanks">Thanks to bruno71 for ward bug spotting and ideas on ward frequency.</div>
-		<div class="thanks">Thanks to terrancefarrel for awesome ideas on custom wards and professions.</div>
-		<div class="thanks">Thanks to karrakerchris for compelling releasing layouts.</div>
-		<div class="thanks">Thanks to jmöller, owbrogers, and karrakerchris for suggesting custom entering population size.</div>
-		<div class="thanks contact">Please <a href="mailto:rpggenerate@gmail.com">Contact Us</a> if you have a feature you would like to see added.</div>
-		<br/>
-		<div style="clear: both; height: 40px;">&nbsp;</div>
-		<div class="center">
-			This uses content from the free pdf donwload, open gaming content, <a target="_blank" href="http://e23.sjgames.com/item.html?id=XRPFREE1">A Magical Medieval City Guide</a> which is chapters three and four out of <a href="http://www.rpgnow.com/product_info.php?products_id=711" target="_blank">A Magical Medieval Society: Western Europe</a> created by <a href="http://www.xrpshop.citymax.com" target="_blank">Expeditious Retreat</a>
-		</div>
-		<div style="clear: both; height: 40px;">&nbsp;</div>
-	</div>
-	</div>
-</div>
-<hr/>
-<div id="footer">
-	<p class="legal">&copy;2018 All Rights Reserved.</p>
-</div>
+	<div id="react"></div>
 </body>
 
 </html>

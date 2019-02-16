@@ -2,7 +2,7 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Util\TestRoll;
+use App\Http\Controllers\ILoveAustin\Util\TestRoll;
 use Test\Controllers\CityGen\Util\BaseTestCase;
 
 final class TestRollTest extends BaseTestCase
