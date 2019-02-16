@@ -14,6 +14,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import {toDollarString} from "../app/Money";
 import TableFooter from "@material-ui/core/TableFooter";
+import Button from "@material-ui/core/Button";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
@@ -60,12 +62,18 @@ class Budget extends React.Component {
 		webservice.iLoveAustin.snapshot.list();
 	};
 
+	deleteSnapshot = snapshot => {
+		if (confirm(`Are you sure you want to delete this snapshot "${snapshot.name}"?`)) {
+			webservice.iLoveAustin.snapshot.delete(snapshot.id);
+		}
+	};
+
 	render() {
 		if (!this.props.iLoveAustin.snapshots) {
 			return null;
 		}
 
-		const { classes } = this.props;
+		const {classes} = this.props;
 		const ajaxing = ajaxStatus.isAjaxing();
 
 		return (
@@ -74,7 +82,7 @@ class Budget extends React.Component {
 				Wells Fargo Balance = $5892.00
 				add new monthly
 				monthlies table
-					name, goal, spent, left, weeks remaining, weekly allotment, delete
+				name, goal, spent, left, weeks remaining, weekly allotment, delete
 				totals: goal, spent, left
 
 
@@ -88,7 +96,7 @@ class Budget extends React.Component {
 								<TableCell>Name</TableCell>
 								<TableCell align="right">Goal</TableCell>
 								<TableCell align="right">Current</TableCell>
-								<TableCell></TableCell>
+								<TableCell/>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -97,7 +105,11 @@ class Budget extends React.Component {
 									<TableCell component="th" scope="row">{snapshot.name}</TableCell>
 									<TableCell align="right">{toDollarString(snapshot.amt_goal)}</TableCell>
 									<TableCell align="right">{toDollarString(snapshot.amt_current)}</TableCell>
-									<TableCell align="right">delete</TableCell>
+									<TableCell align="right">
+										<Button size="small" variant="contained" color="secondary" className={classes.button} onClick={() => this.deleteSnapshot(snapshot)}>
+											<DeleteIcon fontSize="small" className={classes.rightIcon}/>
+										</Button>
+									</TableCell>
 								</TableRow>
 							))}
 						</TableBody>
@@ -110,8 +122,6 @@ class Budget extends React.Component {
 						</TableFooter>
 					</Table>
 				</Paper>
-
-
 
 
 				No Wells Fargo Totals row: ???

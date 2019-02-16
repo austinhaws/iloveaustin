@@ -13,4 +13,9 @@ class ControllerBase extends Controller
     {
         $this->services = $servicesService;
     }
+
+    protected function getRequestValue(\Illuminate\Http\Request $request, string $key)
+    {
+        return $request->json()->get($key);
+    }
 }

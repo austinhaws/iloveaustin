@@ -8,4 +8,9 @@ class SnapshotService extends BaseService
     {
         return $this->daos->snapshot->selectSnapshotsByToken($accountToken);
     }
+
+    public function deleteSnapshot(string $accountToken, int $snapshotId)
+    {
+        $this->daos->snapshot->deleteSnapshotById($snapshotId, $accountToken);
+    }
 }
