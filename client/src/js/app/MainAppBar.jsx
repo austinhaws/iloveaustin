@@ -63,11 +63,11 @@ class MainAppBar extends React.Component {
 							color="inherit"
 							aria-label="Menu"
 							buttonRef={node => this.anchorEl = node}
+							onClick={this.handleToggle}
 						>
 							<MenuIcon
 								aria-owns={open ? 'menu-list-grow' : undefined}
 								aria-haspopup="true"
-								onClick={this.handleToggle}
 							/>
 						</IconButton>
 						<Popper open={open} anchorEl={this.anchorEl} transition disablePortal>

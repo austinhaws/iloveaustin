@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import green from '@material-ui/core/colors/green';
 import {dispatchField} from "../app/Dispatch";
+import Pages from "../app/Pages";
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
@@ -58,7 +59,10 @@ class Login extends React.Component {
 
 	login = () => {
 		webservice.iloveaustin.login(this.state)
-			.then(token => token && dispatchField('app.postToken', token));
+			.then(token => token ? token : Promise.reject('Invalid login'))
+			.then(token => token && dispatchField('app.postToken', token))
+			.then(() => Pages.iLoveAustin.budget.forward(this.props.history))
+			.catch(alert);
 	};
 
 	render() {
