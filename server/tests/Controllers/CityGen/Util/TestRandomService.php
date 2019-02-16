@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\CityGen\Util;
+namespace App\Http\Controllers\ILoveAustin\Util;
 
-use App\Http\Controllers\CityGen\Services\RandomCity\RandomService;
+use App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomService;
 
 include __DIR__ . '/../../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php';
 

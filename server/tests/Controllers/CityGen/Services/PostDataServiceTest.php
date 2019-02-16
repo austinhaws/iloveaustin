@@ -2,10 +2,10 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Constants\BooleanRandom;
-use App\Http\Controllers\CityGen\Constants\Integration;
-use App\Http\Controllers\CityGen\Constants\PopulationType;
-use App\Http\Controllers\CityGen\Constants\Race;
+use App\Http\Controllers\ILoveAustin\Constants\BooleanRandom;
+use App\Http\Controllers\ILoveAustin\Constants\Integration;
+use App\Http\Controllers\ILoveAustin\Constants\PopulationType;
+use App\Http\Controllers\ILoveAustin\Constants\Race;
 use Test\Controllers\CityGen\Util\BaseTestCase;
 
 final class PostDataServiceTest extends BaseTestCase

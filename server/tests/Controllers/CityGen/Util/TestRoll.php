@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CityGen\Util;
+namespace App\Http\Controllers\ILoveAustin\Util;
 
 class TestRoll
 {

@@ -90,9 +90,7 @@ class MainAppBar extends React.Component {
 						</Popper>
 
 
-						<Typography variant="h6" color="inherit" className={classes.grow}>
-							City Generator <Button color={classes.rpggenerator.color} onClick={() => window.location = 'https://rpggenerator.com'}>by RPG Generator</Button>
-						</Typography>
+						<Typography variant="h6" color="inherit" className={classes.grow}>I Love Austin</Typography>
 						<Button color="inherit" onClick={() => alert('Coming Soon!')}>Login</Button>
 					</Toolbar>
 				</AppBar>

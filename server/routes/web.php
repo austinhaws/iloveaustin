@@ -12,9 +12,8 @@
 */
 
 // citygen
-$router->group(['namespace' => 'CityGen'], function ($router) {
-    $router->get('citygenerator/lists', 'CityGenController@getLists');
-    $router->post('citygenerator/generate', 'CityGenController@generate');
+$router->group(['namespace' => 'ILoveAustin'], function ($router) {
+    $router->post('iloveaustin/login', 'LoginController@login');
 });
 
 $router->get('/', function () use ($router) {

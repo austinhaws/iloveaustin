@@ -2,17 +2,17 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Constants\PopulationType;
-use App\Http\Controllers\CityGen\Models\City\City;
-use App\Http\Controllers\CityGen\Util\RollRatio;
-use App\Http\Controllers\CityGen\Util\TestRoll;
+use App\Http\Controllers\ILoveAustin\Constants\PopulationType;
+use App\Http\Controllers\ILoveAustin\Models\City\City;
+use App\Http\Controllers\ILoveAustin\Util\RollRatio;
+use App\Http\Controllers\ILoveAustin\Util\TestRoll;
 use Test\Controllers\CityGen\Util\BaseTestCase;
 
 final class RandomAcresStructuresServiceTest extends BaseTestCase
 {
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomAcresStructuresService::randomAcres
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomAcresStructuresService::randomAcres
      */
     public function testRandomAcres()
     {
@@ -39,7 +39,7 @@ final class RandomAcresStructuresServiceTest extends BaseTestCase
     }
 
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomAcresStructuresService::randomNumStructures
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomAcresStructuresService::randomNumStructures
      */
     public function testRandomNumStructures()
     {

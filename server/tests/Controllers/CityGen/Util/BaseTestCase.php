@@ -2,7 +2,7 @@
 
 namespace Test\Controllers\CityGen\Util;
 
-use App\Http\Controllers\CityGen\Services\ServicesService;
+use App\Http\Controllers\ILoveAustin\Services\ServicesService;
 use PHPUnit\Framework\TestCase;
 
 class BaseTestCase extends TestCase

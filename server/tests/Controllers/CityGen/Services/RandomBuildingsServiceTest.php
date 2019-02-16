@@ -2,16 +2,16 @@
 
 namespace Test\Controllers\CityGen\Tables;
 
-use App\Http\Controllers\CityGen\Constants\PopulationType;
-use App\Http\Controllers\CityGen\Constants\Ward;
-use App\Http\Controllers\CityGen\Models\City\City;
-use App\Http\Controllers\CityGen\Models\City\CityWard;
+use App\Http\Controllers\ILoveAustin\Constants\PopulationType;
+use App\Http\Controllers\ILoveAustin\Constants\Ward;
+use App\Http\Controllers\ILoveAustin\Models\City\City;
+use App\Http\Controllers\ILoveAustin\Models\City\CityWard;
 use Test\Controllers\CityGen\Util\BaseTestCase;
 
 final class RandomBuildingsServiceTest extends BaseTestCase
 {
     /**
-     * @covers \App\Http\Controllers\CityGen\Services\RandomCity\RandomBuildingsService::generateBuildings
+     * @covers \App\Http\Controllers\ILoveAustin\Services\RandomCity\RandomBuildingsService::generateBuildings
      */
     public function testDetermineWards()
     {
