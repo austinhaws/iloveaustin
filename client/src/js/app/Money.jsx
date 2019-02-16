@@ -1,7 +1,7 @@
 export const toDollarString = amount => amount ? '$' + (parseFloat(amount) / 100.0).toFixed(2) : '$0.00';
 
 export const fromDollarString = amountStr => {
-	let parts = amountStr.split(/\./);
+	let parts = (amountStr || '').split(/\./);
 	if (parts.length === 1) {
 		parts[1] = '00';
 	}

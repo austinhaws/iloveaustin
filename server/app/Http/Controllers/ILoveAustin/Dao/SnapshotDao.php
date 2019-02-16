@@ -29,15 +29,27 @@ class SnapshotDao extends BaseDao
     public function save(Snapshot $snapshot, string $accountToken)
     {
         $accountId = $this->daos->account->selectAccountIdForToken($accountToken)->id;
-        DB::table('snapshot')
-            ->where('id', $snapshot->id)
-            ->where('account_id', $accountId)
-            ->update([
-                'name' => $snapshot->name,
-                'notes' => $snapshot->notes,
-                'amt_goal' => $snapshot->goal,
-                'amt_current' => $snapshot->current,
-                'is_totalable' => $snapshot->isTotalable,
-            ]);
+        if ($snapshot->id) {
+            DB::table('snapshot')
+                ->where('id', $snapshot->id)
+                ->where('account_id', $accountId)
+                ->update([
+                    'name' => $snapshot->name,
+                    'notes' => $snapshot->notes,
+                    'amt_goal' => $snapshot->goal,
+                    'amt_current' => $snapshot->current,
+                    'is_totalable' => $snapshot->isTotalable,
+                ]);
+        } else {
+            DB::table('snapshot')
+                ->insert([
+                    'account_id' => $accountId,
+                    'name' => $snapshot->name,
+                    'notes' => $snapshot->notes,
+                    'amt_goal' => $snapshot->goal,
+                    'amt_current' => $snapshot->current,
+                    'is_totalable' => $snapshot->isTotalable,
+                ]);
+        }
     }
 }
