@@ -105,6 +105,19 @@ class Budget extends React.Component {
 		this.setState({ editSnapshot: editedSnapshot });
 	};
 
+	newSnapshot = () => {
+		this.setState({
+			editSnapshot: {
+				id: undefined,
+					name: '',
+				amt_goal: 0,
+				amt_current: 0,
+				notes: '',
+				is_totalable: 0,
+			}
+		});
+	};
+
 	saveEditSnapshot = () => {
 		// convert $ strings to amount ints
 		const saveSnapshot = { ...this.state.editSnapshot };
@@ -134,7 +147,7 @@ class Budget extends React.Component {
 
 
 				<h3 className={classes.sectionTitle}>Snapshots</h3>
-				<Button variant="outlined" className={classes.addButton}>Add New Snapshot</Button>
+				<Button variant="outlined" className={classes.addButton} onClick={this.newSnapshot}>Add New Snapshot</Button>
 
 				<Paper className={classes.root}>
 					<Table className={classes.table}>
