@@ -16,7 +16,8 @@ export function getDefaultState(path) {
 
 const defaultState = {
 	iLoveAustin: {
-		snapshots: [],
+		snapshots: undefined,
+		snapshotsTotals: undefined,
 	},
 	app: {
 		ajaxSpinnerCount: 0,

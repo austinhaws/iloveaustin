@@ -6,7 +6,14 @@ import {withStyles} from "@material-ui/core";
 import * as PropTypes from "prop-types";
 import webservice, {ajaxStatus} from "../app/Webservice";
 import green from '@material-ui/core/colors/green';
-import {dispatchFieldCurry} from "../app/Dispatch";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import {toDollarString} from "../app/Money";
+import TableFooter from "@material-ui/core/TableFooter";
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
@@ -22,7 +29,6 @@ const styles = theme => ({
 		display: 'flex',
 		flexWrap: 'wrap',
 		flexDirection: 'column',
-		width: '250px',
 		margin: '0 auto',
 	},
 	formControl: {
@@ -43,16 +49,22 @@ const styles = theme => ({
 	slider: {
 		padding: '22px 0px',
 	},
+	table: {
+		minWidth: 700,
+	},
 });
 
 class Budget extends React.Component {
 
 	componentDidMount() {
-		webservice.iLoveAustin.snapshot.list()
-			.then(dispatchFieldCurry('iloveaustin.snapshots'));
+		webservice.iLoveAustin.snapshot.list();
 	};
 
 	render() {
+		if (!this.props.iLoveAustin.snapshots) {
+			return null;
+		}
+
 		const { classes } = this.props;
 		const ajaxing = ajaxStatus.isAjaxing();
 
@@ -66,11 +78,42 @@ class Budget extends React.Component {
 				totals: goal, spent, left
 
 
-				snapshots
-				add new snapshot
-				snapshot table
-					name, goal, current, delete
-				totals row: goal, current
+				<h3>Snapshots</h3>
+				<a href="#">Add new snapshot</a>
+
+				<Paper className={classes.root}>
+					<Table className={classes.table}>
+						<TableHead>
+							<TableRow>
+								<TableCell>Name</TableCell>
+								<TableCell align="right">Goal</TableCell>
+								<TableCell align="right">Current</TableCell>
+								<TableCell></TableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{this.props.iLoveAustin.snapshots.map(snapshot => (
+								<TableRow key={snapshot.id}>
+									<TableCell component="th" scope="row">{snapshot.name}</TableCell>
+									<TableCell align="right">{toDollarString(snapshot.amt_goal)}</TableCell>
+									<TableCell align="right">{toDollarString(snapshot.amt_current)}</TableCell>
+									<TableCell align="right">delete</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+						<TableFooter>
+							<TableRow>
+								<TableCell/>
+								<TableCell align="right">{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</TableCell>
+								<TableCell align="right">{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</TableCell>
+							</TableRow>
+						</TableFooter>
+					</Table>
+				</Paper>
+
+
+
+
 				No Wells Fargo Totals row: ???
 			</div>
 		);

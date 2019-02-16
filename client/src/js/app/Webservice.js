@@ -1,6 +1,6 @@
 import {AjaxStatusCore, WebserviceCore} from "dts-react-common";
 import store from "./ReduxStore";
-import {dispatchField} from "./Dispatch";
+import {createPathActionPayload, dispatchField, dispatchUpdates} from "./Dispatch";
 
 export const ajaxStatus = new AjaxStatusCore();
 ajaxStatus.registerChangedCallback(
@@ -29,7 +29,23 @@ export default {
 	iLoveAustin: {
 		login: credentials => webserviceILoveAustin.post('login', credentials),
 		snapshot: {
-			list: () => webserviceILoveAustin.post('snapshot/list', {token: store.getState().app.postToken}),
+			list: () => webserviceILoveAustin.post('snapshot/list', {token: store.getState().app.postToken})
+				.then(list => {
+					list.sort((a, b) => a.name.localeCompare(b.name));
+					list.forEach(snapshot => {
+						snapshot.amt_goal = Number(snapshot.amt_goal);
+						snapshot.amt_current = Number(snapshot.amt_current);
+					});
+
+					dispatchUpdates([
+						createPathActionPayload('iLoveAustin.snapshots', list),
+						createPathActionPayload('iLoveAustin.snapshotsTotals', list.reduce((carry, snapshot) => {
+							carry.goal += snapshot.amt_goal;
+							carry.current += snapshot.amt_current;
+							return carry;
+						}, { goal: 0, current: 0 })),
+					]);
+				}),
 		}
 	},
 };

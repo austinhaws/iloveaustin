@@ -10,6 +10,7 @@ class SnapshotDao
     public function selectSnapshotsByToken(string $accountToken)
     {
         return DB::table('snapshot')
+            ->select('snapshot.*')
             ->join('account', 'snapshot.account_id', '=', 'account.id')
             ->where('account.token', $accountToken)
             ->get();
