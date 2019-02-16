@@ -7,6 +7,8 @@ use Laravel\Lumen\Routing\Controller;
 
 class ControllerBase extends Controller
 {
+    const TOKEN = 'token';
+
     protected $services;
 
     public function __construct(ServicesService $servicesService)

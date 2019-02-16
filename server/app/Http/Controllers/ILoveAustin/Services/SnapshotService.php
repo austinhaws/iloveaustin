@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\ILoveAustin\Services;
 
+use App\Http\Controllers\ILoveAustin\Models\Snapshot;
+
 class SnapshotService extends BaseService
 {
     public function selectSnapshots(string $accountToken)
@@ -9,8 +11,13 @@ class SnapshotService extends BaseService
         return $this->daos->snapshot->selectSnapshotsByToken($accountToken);
     }
 
-    public function deleteSnapshot(string $accountToken, int $snapshotId)
+    public function deleteSnapshot(int $snapshotId, string $accountToken)
     {
         $this->daos->snapshot->deleteSnapshotById($snapshotId, $accountToken);
+    }
+
+    public function saveSnapshot(Snapshot $snapshot, string $accountToken)
+    {
+        $this->daos->snapshot->save($snapshot, $accountToken);
     }
 }

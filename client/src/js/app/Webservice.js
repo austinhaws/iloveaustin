@@ -31,8 +31,7 @@ const webservice = {
 	iLoveAustin: {
 		login: credentials => webserviceILoveAustin.post('login', credentials),
 		snapshot: {
-			delete: snapshotId => webserviceILoveAustin.post(`snapshot/delete`, { snapshotId, ...postTokenData() })
-				.then(() => webservice.iLoveAustin.snapshot.list()),
+			delete: snapshotId => webserviceILoveAustin.post(`snapshot/delete`, { snapshotId, ...postTokenData() }),
 			list: () => webserviceILoveAustin.post('snapshot/list', postTokenData())
 				.then(list => {
 					list.sort((a, b) => a.name.localeCompare(b.name));
@@ -50,6 +49,7 @@ const webservice = {
 						}, { goal: 0, current: 0 })),
 					]);
 				}),
+			save: snapshot => webserviceILoveAustin.post(`snapshot/save`, { ...snapshot, ...postTokenData() }),
 		}
 	},
 };
