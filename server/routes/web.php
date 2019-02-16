@@ -16,6 +16,7 @@ $router->group(['namespace' => 'ILoveAustin'], function ($router) {
     // == snapshot == //
     $router->post('iloveaustin/snapshot/list', 'SnapshotController@listSnapshots');
     $router->post('iloveaustin/snapshot/delete', 'SnapshotController@deleteSnapshot');
+    $router->post('iloveaustin/snapshot/save', 'SnapshotController@saveSnapshot');
 
     // == login == //
     $router->post('iloveaustin/login', 'LoginController@login');
