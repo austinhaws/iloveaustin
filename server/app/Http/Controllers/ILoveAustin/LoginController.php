@@ -2,20 +2,10 @@
 
 namespace App\Http\Controllers\ILoveAustin;
 
-use App\Http\Controllers\ILoveAustin\Services\LoginService;
-use Laravel\Lumen\Routing\Controller;
-
-class LoginController extends Controller
+class LoginController extends ControllerBase
 {
-    private $loginService;
-
-    public function __construct(LoginService $loginService)
-    {
-        $this->loginService = $loginService;
-    }
-
     public function login(\Illuminate\Http\Request $request)
     {
-        return $this->loginService->login($request, $request->json()->get('username'));
+        return $this->services->login->login($request, $request->json()->get('username'));
     }
 }

@@ -58,7 +58,7 @@ class Login extends React.Component {
 	}
 
 	login = () => {
-		webservice.iloveaustin.login(this.state)
+		webservice.iLoveAustin.login(this.state)
 			.then(token => token ? token : Promise.reject('Invalid login'))
 			.then(token => token && dispatchField('app.postToken', token))
 			.then(() => Pages.iLoveAustin.budget.forward(this.props.history))
@@ -70,36 +70,35 @@ class Login extends React.Component {
 		const ajaxing = ajaxStatus.isAjaxing();
 
 		return (
-			<React.Fragment>
-				<div className={classes.root}>
-					{/* Name */}
-					<FormControl className={classes.formControl}>
-						<TextField
-							label="Username"
-							autoFocus={true}
-							onChange={event => this.setState({ username: event.target.value })}
-							placeholder="Random"
-							value={this.state.username}
-							disabled={ajaxing}
-							inputProps={{ id: 'name', shrink: 'shrink' }}
-						/>
-					</FormControl>
+			<div className={classes.root}>
+				{/* Name */}
+				<FormControl className={classes.formControl}>
+					<TextField
+						label="Username"
+						autoFocus={true}
+						onChange={event => this.setState({ username: event.target.value })}
+						placeholder="Random"
+						value={this.state.username}
+						disabled={ajaxing}
+						inputProps={{ id: 'name', shrink: 'shrink' }}
+						onKeyPress={e => e.key === 'Enter' && this.login()}
+					/>
+				</FormControl>
 
-					{/* Login Button */}
-					<FormControl className={classes.formControl}>
-						<Button
-							variant="contained"
-							color="primary"
-							onClick={this.login}
-							disabled={ajaxing}
-						>
-							Login
-						</Button>
-						{ajaxing && <CircularProgress size={24} className={classes.buttonProgress} />}
-					</FormControl>
-				</div>
-			</React.Fragment>
-	);
+				{/* Login Button */}
+				<FormControl className={classes.formControl}>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={this.login}
+						disabled={ajaxing}
+					>
+						Login
+					</Button>
+					{ajaxing && <CircularProgress size={24} className={classes.buttonProgress} />}
+				</FormControl>
+			</div>
+		);
 	}
 }
 
