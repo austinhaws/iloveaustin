@@ -7,12 +7,15 @@ use App\Http\Controllers\ILoveAustin\Dao\Daos;
 class ServicesService
 {
     /** @var LoginService */
-    public $loginService;
+    public $login;
+    /** @var SnapshotService */
+    public $snapshot;
 
     public function __construct(
         ?Daos $daos = null
     )
     {
-        $this->loginService = new LoginService($this, $daos);
+        $this->login = new LoginService($this, $daos);
+        $this->snapshot = new SnapshotService($this, $daos);
     }
 }

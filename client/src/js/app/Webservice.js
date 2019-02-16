@@ -15,31 +15,21 @@ const rawPromiseCallback = promise => promise
 		return response;
 	})
 	.catch(error => {
-		axiosErrorHandler(error, true);
-		throw error;
+		console.error(error);
+		return error;
 	});
 
-const webserviceCityGen = new WebserviceCore({
+const webserviceILoveAustin = new WebserviceCore({
 	baseUrl: `${globals.webserviceUrlBase}iloveaustin/`,
 	ajaxStatusCore: ajaxStatus,
 	rawPromiseCallback: rawPromiseCallback,
 });
 
-/**
- * An axios catch() error handler
- * Note: Will also need to import showMessage() & app store when used.
- * @param error - Error object from axios.
- * @param displayError {boolean} - show the error to the user?
- */
-export const axiosErrorHandler = (error, displayError) => {
-	alert('Ajax error');
-	console.error(error);
-	throw error;
-};
-
-
 export default {
-	iloveaustin: {
-		login: credentials => webserviceCityGen.post('login', credentials),
+	iLoveAustin: {
+		login: credentials => webserviceILoveAustin.post('login', credentials),
+		snapshot: {
+			list: () => webserviceILoveAustin.post('snapshot/list', {token: store.getState().app.postToken}),
+		}
 	},
 };

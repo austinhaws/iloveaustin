@@ -11,8 +11,12 @@
 |
 */
 
-// citygen
 $router->group(['namespace' => 'ILoveAustin'], function ($router) {
+
+    // == snapshot == //
+    $router->post('iloveaustin/snapshot/list', 'SnapshotController@listSnapshots');
+
+    // == login == //
     $router->post('iloveaustin/login', 'LoginController@login');
 });
 
