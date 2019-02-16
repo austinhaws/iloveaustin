@@ -1,6 +1,5 @@
 import '@babel/polyfill';
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -80,8 +79,7 @@ class MainAppBar extends React.Component {
 									<Paper>
 										<ClickAwayListener onClickAway={this.handleClose}>
 											<MenuList>
-												<MenuItem onClick={this.handleMenuItem('http://rpggenerator.com')}>About Us</MenuItem>
-												<MenuItem onClick={this.handleMenuItem('http://strategerygames.com/centralcasting')}>Character Generator</MenuItem>
+												<MenuItem onClick={this.handleMenuItem('http://rpggenerator.com')}>RPG Generator</MenuItem>
 											</MenuList>
 										</ClickAwayListener>
 									</Paper>
@@ -91,7 +89,6 @@ class MainAppBar extends React.Component {
 
 
 						<Typography variant="h6" color="inherit" className={classes.grow}>I Love Austin</Typography>
-						<Button color="inherit" onClick={() => alert('Coming Soon!')}>Login</Button>
 					</Toolbar>
 				</AppBar>
 			</div>
