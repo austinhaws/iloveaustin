@@ -16,6 +16,11 @@ export function getDefaultState(path) {
 
 const defaultState = {
 	iLoveAustin: {
+		monthlies: {
+			list: undefined,
+			totals: undefined,
+		},
+		periods: undefined,
 		snapshots: undefined,
 		snapshotsTotals: undefined,
 		snapshotsTotalsNoWells: undefined,

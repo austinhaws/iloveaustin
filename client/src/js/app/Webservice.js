@@ -1,6 +1,6 @@
 import {AjaxStatusCore, WebserviceCore} from "dts-react-common";
 import store from "./ReduxStore";
-import {createPathActionPayload, dispatchField, dispatchUpdates} from "./Dispatch";
+import {createPathActionPayload, dispatchField, dispatchFieldCurry, dispatchUpdates} from "./Dispatch";
 
 export const ajaxStatus = new AjaxStatusCore();
 ajaxStatus.registerChangedCallback(
@@ -30,6 +30,17 @@ const postTokenData = () => ({ token: store.getState().app.postToken });
 const webservice = {
 	iLoveAustin: {
 		login: credentials => webserviceILoveAustin.post('login', credentials),
+
+		monthly: {
+			list: period => webserviceILoveAustin.post(`monthly/list`, { ...postTokenData(), period })
+				.then(list => dispatchField('iLoveAustin.monthly.list', list)),
+		},
+
+		period: {
+			get: (month, year) => webserviceILoveAustin.get(month ? `period/get/${month || ''}/${year || ''}` : `period/get`)
+				.then(dispatchFieldCurry('iLoveAustin.periods')),
+		},
+
 		snapshot: {
 			delete: snapshotId => webserviceILoveAustin.post(`snapshot/delete`, { snapshotId, ...postTokenData() }),
 			list: () => webserviceILoveAustin.post('snapshot/list', postTokenData())

@@ -23,6 +23,7 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Monthly from "./monthly/Monthly";
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
@@ -138,7 +139,7 @@ class Budget extends React.Component {
 		const {classes} = this.props;
 		return (
 			<div className={classes.root}>
-				month picker and arrows
+				<Monthly {...this.props} />
 				Wells Fargo Balance = $5892.00
 				add new monthly
 				monthlies table
