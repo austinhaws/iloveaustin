@@ -16,9 +16,9 @@ export default {
 		},
 
 		budget: {
-			path: '/budget',
-			component: () => isLoggedIn() ? <Budget/> : <Login/>,
-			forward: history => history.push(`/budget`),
+			path: '/budget/:month?/:year?',
+			component: props => isLoggedIn() ? <Budget month={props.match.params.month} year={props.match.params.year}/> : <Login/>,
+			forward: (history, month, year) => month ? history.push(`/budget/${month}/${year}`) : history.push(`/budget`),
 		},
 
 		savings: {

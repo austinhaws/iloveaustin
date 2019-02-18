@@ -8,6 +8,10 @@ class ServicesService
 {
     /** @var LoginService */
     public $login;
+    /** @var MonthlyService */
+    public $monthly;
+    /** @var PeriodService  */
+    public $period;
     /** @var SnapshotService */
     public $snapshot;
 
@@ -17,5 +21,7 @@ class ServicesService
     {
         $this->login = new LoginService($this, $daos);
         $this->snapshot = new SnapshotService($this, $daos);
+        $this->monthly = new MonthlyService($this, $daos);
+        $this->period = new PeriodService($this, $daos);
     }
 }
