@@ -17,6 +17,7 @@ use GraphQL\Type\Definition\NonNull;
 use GraphQL\Type\Definition\Type;
 use ILoveAustin\Type\AccountType;
 use ILoveAustin\Type\QueryType;
+use ILoveAustin\Type\SnapshotType;
 
 /**
  * Class Types
@@ -36,12 +37,25 @@ class Types
     private static $comment;
     private static $image;
     private static $query;
+    /** @var AccountType */
     private static $account;
+    /** @var SnapshotType */
+    private static $snapshot;
 
     public static function account()
 	{
 		return self::$account ?: (self::$account = new AccountType());
 	}
+
+	public static function snapshot()
+	{
+		return self::$snapshot ?: (self::$snapshot = new SnapshotType());
+	}
+
+
+
+
+
     /**
      * @return UserType
      */
