@@ -1,26 +1,38 @@
 <?php
 namespace ILoveAustin\Type;
 
-use DB;
 use GraphQL\Examples\Blog\Data\DataSource;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use ILoveAustin\AppContext;
+use ILoveAustin\Context\Context;
 use ILoveAustin\Types;
 
 class QueryType extends ObjectType
 {
+	/** @var Context */
+	private $context;
+
     public function __construct()
     {
+		$this->context = new Context();
+
         $config = [
             'name' => 'Query',
             'fields' => [
             	'accounts' => [
-            		'type' => Types::listOf(Types::Account()),
+            		'type' => Types::listOf(Types::account()),
 					'description' => 'Returns accounts',
-					'args' => []
+					'args' => [],
+				],
+				'snapshots' => [
+					'type' => Types::listOf(Types::snapshot()),
+					'description' => 'Returns account snapshots',
+					'args' => [],
 				],
 
+
+//todo dead below here
                 'user' => [
                     'type' => Types::user(),
                     'description' => 'Returns user by id (in range of 1-5)',
@@ -61,9 +73,19 @@ class QueryType extends ObjectType
 
     public function accounts($rootValue, $args)
 	{
-		return DB::query("SELECT * FROM account");
+		return $this->context->services->account->selectAccounts($rootValue, $args);
 	}
 
+    public function snapshots($rootValue, $args)
+	{
+		return $this->context->services->snapshot->selectSnapshots($rootValue, $args);
+	}
+
+
+
+
+
+// todo: Dead below here
     public function user($rootValue, $args)
     {
         return DataSource::findUser($args['id']);
