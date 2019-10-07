@@ -25,6 +25,11 @@ class QueryType extends ObjectType
 					'description' => 'Returns accounts',
 					'args' => [],
 				],
+				'savings' => [
+					'type' => Types::listOf(Types::savings()),
+					'description' => 'Returns account savings',
+					'args' => [],
+				],
 				'snapshots' => [
 					'type' => Types::listOf(Types::snapshot()),
 					'description' => 'Returns account snapshots',
@@ -74,6 +79,11 @@ class QueryType extends ObjectType
     public function accounts($rootValue, $args)
 	{
 		return $this->context->services->account->selectAccounts($rootValue, $args);
+	}
+
+    public function savings($rootValue, $args)
+	{
+		return $this->context->services->savings->selectSavings($rootValue, $args);
 	}
 
     public function snapshots($rootValue, $args)
