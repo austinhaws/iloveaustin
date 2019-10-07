@@ -32,7 +32,7 @@ const webservice = {
 		login: credentials => webserviceILoveAustin.post('login', credentials),
 
 		monthly: {
-			list: period => webserviceILoveAustin.post(`monthly/list`, { ...postTokenData(), period })
+			list: period => webserviceILoveAustin.post(`monthly/list/${period.month}/${period.year}`, { ...postTokenData(), period })
 				.then(list => dispatchField('iLoveAustin.monthly.list', list)),
 		},
 
