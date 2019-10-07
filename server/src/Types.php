@@ -17,7 +17,6 @@ use GraphQL\Type\Definition\NonNull;
 use GraphQL\Type\Definition\Type;
 use ILoveAustin\Type\AccountType;
 use ILoveAustin\Type\MonthlyType;
-use ILoveAustin\Type\QueryType;
 use ILoveAustin\Type\SavingsType;
 use ILoveAustin\Type\SnapshotType;
 
