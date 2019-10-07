@@ -16,6 +16,7 @@ use GraphQL\Type\Definition\ListOfType;
 use GraphQL\Type\Definition\NonNull;
 use GraphQL\Type\Definition\Type;
 use ILoveAustin\Type\AccountType;
+use ILoveAustin\Type\MonthlyType;
 use ILoveAustin\Type\QueryType;
 use ILoveAustin\Type\SavingsType;
 use ILoveAustin\Type\SnapshotType;
@@ -44,10 +45,17 @@ class Types
     private static $snapshot;
     /** @var SavingsType */
     private static $savings;
+    /** @var MonthlyType */
+    private static $monthly;
 
     public static function account()
 	{
 		return self::$account ?: (self::$account = new AccountType());
+	}
+
+	public static function monthly()
+	{
+		return self::$monthly ?: (self::$monthly = new MonthlyType());
 	}
 
 	public static function savings()
