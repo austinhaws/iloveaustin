@@ -6,6 +6,7 @@ import {withStyles} from "@material-ui/core";
 import * as PropTypes from "prop-types";
 import MonthlyDatePicker from "./MonthlyDatePicker";
 import Styles from "../../app/Styles";
+import MonthlyList from "./MonthlyList";
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
@@ -69,6 +70,11 @@ class Monthly extends React.Component {
 		return (
 			<div className={classes.root}>
 				<MonthlyDatePicker/>
+				<MonthlyList
+					deleteMonthly={this.deleteMonthly}
+					editMonthly={this.editMonthly}
+					history={this.props.history}
+				/>
 
 				{/*<h3 className={classes.sectionTitle}>*/}
 					{/*Wells Fargo Balance = $5892.00*/}
