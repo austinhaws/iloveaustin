@@ -1,7 +1,7 @@
 <?php
-namespace GraphQL\Examples\Blog\Type\Field;
+namespace ILoveAustin\Type\Field;
 
-use GraphQL\Examples\Blog\Type\Enum\ContentFormatEnum;
+use ILoveAustin\Type\Enum\ContentFormatEnum;
 use ILoveAustin\Types;
 
 class HtmlField

@@ -1,8 +1,8 @@
 <?php
-namespace GraphQL\Examples\Blog\Type\Enum;
+namespace ILoveAustin\Type\Enum;
 
-use GraphQL\Examples\Blog\Data\Image;
 use GraphQL\Type\Definition\EnumType;
+use ILoveAustin\Data\Image;
 
 class ImageSizeEnumType extends EnumType
 {

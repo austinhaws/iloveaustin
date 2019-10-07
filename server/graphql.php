@@ -3,14 +3,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use GraphQL\Error\Debug;
 use GraphQL\Error\FormattedError;
-use GraphQL\Examples\Blog\Data\DataSource;
 use GraphQL\GraphQL;
 use GraphQL\Type\Schema;
 use ILoveAustin\AppContext;
 use ILoveAustin\Types;
 
 // Disable default PHP error reporting - we have better one for debug mode (see below)
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 
 
 $debug = false;
@@ -27,12 +26,9 @@ try {
 	DB::$password = 'root';
 	DB::$dbName = 'iloveaustin';
 
-	// Initialize our fake data source
-	DataSource::init();
-
 	// Prepare context that will be available in all field resolvers (as 3rd argument):
 	$appContext = new AppContext();
-	$appContext->viewer = DataSource::findUser('1'); // simulated "currently logged-in user"
+	$appContext->viewer = null;
 	$appContext->rootUrl = 'http://localhost:8080';
 	$appContext->request = $_REQUEST;
 
@@ -45,10 +41,6 @@ try {
 	}
 
 	$data += ['query' => null, 'variables' => null];
-
-	if (null === $data['query']) {
-		$data['query'] = '{hello}';
-	}
 
 	// GraphQL schema to be passed to query executor:
 	$schema = new Schema([

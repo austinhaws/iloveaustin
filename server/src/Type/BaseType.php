@@ -3,7 +3,6 @@ namespace ILoveAustin\Type;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
-use ILoveAustin\Types;
 
 abstract class BaseType extends ObjectType
 {
@@ -18,7 +17,7 @@ abstract class BaseType extends ObjectType
 	public function __construct(array $config)
     {
     	$this->config[self::FIELD_CONVERSIONS] = $config[self::FIELD_CONVERSIONS] ?? null;
-    	$config[self::INTERFACES] = $config[self::INTERFACES] ?? [Types::node()];
+    	$config[self::INTERFACES] = $config[self::INTERFACES] ?? null;
 
     	$config[self::RESOLVE_FIELD] = function ($record, $args, $context, ResolveInfo $info)
 		{
