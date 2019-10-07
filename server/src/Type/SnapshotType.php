@@ -8,7 +8,6 @@ use ILoveAustin\Types;
 class SnapshotType extends ObjectType
 {
 	private static $fieldConversion = [
-		'accountId' => 'account_id',
 		'amountGoal' => 'amt_goal',
 		'amountCurrent' => 'amt_current',
 		'isTotalable' => 'is_totalable',
@@ -22,7 +21,6 @@ class SnapshotType extends ObjectType
             'fields' => function() {
                 return [
                     'id' => Types::id(),
-                    'accountId' => Types::id(),
 					'name' => Types::string(),
 					'notes' => Types::string(),
 					'amountGoal' => Types::int(),

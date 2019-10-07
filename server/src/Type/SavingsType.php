@@ -5,32 +5,27 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use ILoveAustin\Types;
 
-class AccountType extends ObjectType
+class SavingsType extends ObjectType
 {
 	private static $fieldConversion = [
-		'receiveEmails' => 'receive_emails',
-		'weeksRemaining' => 'weeks_remaining',
-		'lastBackup' => 'last_backup',
+		'amountGoal' => 'amt_goal',
+		'amountCurrent' => 'amt_current',
+		'dueDate' => 'due_date',
 	];
 
-
-	public function __construct()
+    public function __construct()
     {
         $config = [
-            'name' => 'Account',
-            'description' => 'Logged in user account',
+            'name' => 'Savings',
+            'description' => 'Savings goals',
             'fields' => function() {
                 return [
-                    'openid' => Types::string(),
-					'role' => Types::string(),
-					'email' => Types::string(),
-					'nickname' => Types::string(),
-					'receiveEmails' => Types::string(),
-					'username' => Types::string(),
-					'password' => Types::string(),
-					'weeksRemaining' => Types::string(),
-					'lastBackup' => Types::string(),
-					'token' => Types::string(),
+                    'id' => Types::id(),
+					'amountGoal' => Types::string(),
+					'amountCurrent' => Types::string(),
+					'name' => Types::string(),
+					'dueDate' => Types::string(),
+					'notes' => Types::string(),
                 ];
             },
             'interfaces' => [
@@ -41,7 +36,7 @@ class AccountType extends ObjectType
                 if (method_exists($this, $method)) {
                     return $this->{$method}($record, $args, $context, $info);
                 } else {
-					return $record[self::$fieldConversion[$info->fieldName] ?? $info->fieldName];
+                    return $record[self::$fieldConversion[$info->fieldName] ?? $info->fieldName];
                 }
             }
         ];
