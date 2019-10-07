@@ -1,42 +1,30 @@
 <?php
 namespace ILoveAustin;
 
-use GraphQL\Examples\Blog\Type\CommentType;
 use GraphQL\Examples\Blog\Type\Enum\ContentFormatEnum;
-use GraphQL\Examples\Blog\Type\Enum\ImageSizeEnumType;
-use GraphQL\Examples\Blog\Type\Field\HtmlField;
-use GraphQL\Examples\Blog\Type\ImageType;
-use GraphQL\Examples\Blog\Type\NodeType;
-use GraphQL\Examples\Blog\Type\Scalar\EmailType;
-use GraphQL\Examples\Blog\Type\Scalar\UrlType;
-use GraphQL\Examples\Blog\Type\SearchResultType;
-use GraphQL\Examples\Blog\Type\StoryType;
-use GraphQL\Examples\Blog\Type\UserType;
+use GraphQL\Type\Definition\FloatType;
+use GraphQL\Type\Definition\IDType;
+use GraphQL\Type\Definition\IntType;
 use GraphQL\Type\Definition\ListOfType;
 use GraphQL\Type\Definition\NonNull;
+use GraphQL\Type\Definition\StringType;
 use GraphQL\Type\Definition\Type;
 use ILoveAustin\Type\AccountType;
+use ILoveAustin\Type\Enum\ImageSizeEnumType;
+use ILoveAustin\Type\Field\HtmlField;
+use ILoveAustin\Type\ImageType;
 use ILoveAustin\Type\MonthlyType;
+use ILoveAustin\Type\NodeType;
 use ILoveAustin\Type\SavingsType;
+use ILoveAustin\Type\Scalar\EmailType;
+use ILoveAustin\Type\Scalar\UrlType;
 use ILoveAustin\Type\SnapshotType;
 
-/**
- * Class Types
- *
- * Acts as a registry and factory for your types.
- *
- * As simplistic as possible for the sake of clarity of this example.
- * Your own may be more dynamic (or even code-generated).
- *
- * @package GraphQL\Examples\Blog
- */
 class Types
 {
-    // Object types:
-    private static $user;
-    private static $story;
-    private static $comment;
+	/** @var ImageType */
     private static $image;
+    /** @var QueryType */
     private static $query;
     /** @var AccountType */
     private static $account;
@@ -67,34 +55,6 @@ class Types
 		return self::$snapshot ?: (self::$snapshot = new SnapshotType());
 	}
 
-
-
-
-
-    /**
-     * @return UserType
-     */
-    public static function user()
-    {
-        return self::$user ?: (self::$user = new UserType());
-    }
-
-    /**
-     * @return StoryType
-     */
-    public static function story()
-    {
-        return self::$story ?: (self::$story = new StoryType());
-    }
-
-    /**
-     * @return CommentType
-     */
-    public static function comment()
-    {
-        return self::$comment ?: (self::$comment = new CommentType());
-    }
-
     /**
      * @return ImageType
      */
@@ -110,31 +70,6 @@ class Types
     {
         return self::$query ?: (self::$query = new QueryType());
     }
-
-
-    // Interface types
-    private static $node;
-
-    /**
-     * @return NodeType
-     */
-    public static function node()
-    {
-        return self::$node ?: (self::$node = new NodeType());
-    }
-
-
-    // Unions types:
-    private static $mention;
-
-    /**
-     * @return SearchResultType
-     */
-    public static function mention()
-    {
-        return self::$mention ?: (self::$mention = new SearchResultType());
-    }
-
 
     // Enum types
     private static $imageSizeEnum;
@@ -193,7 +128,7 @@ class Types
     }
 
     /**
-     * @return \GraphQL\Type\Definition\FloatType
+     * @return FloatType
      */
     public static function float()
     {
@@ -201,7 +136,7 @@ class Types
     }
 
     /**
-     * @return \GraphQL\Type\Definition\IDType
+     * @return IDType
      */
     public static function id()
     {
@@ -209,7 +144,7 @@ class Types
     }
 
     /**
-     * @return \GraphQL\Type\Definition\IntType
+     * @return IntType
      */
     public static function int()
     {
@@ -217,7 +152,7 @@ class Types
     }
 
     /**
-     * @return \GraphQL\Type\Definition\StringType
+     * @return StringType
      */
     public static function string()
     {

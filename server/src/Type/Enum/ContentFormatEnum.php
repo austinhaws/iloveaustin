@@ -1,5 +1,5 @@
 <?php
-namespace GraphQL\Examples\Blog\Type\Enum;
+namespace ILoveAustin\Type\Enum;
 
 use GraphQL\Type\Definition\EnumType;
 

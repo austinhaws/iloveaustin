@@ -3,7 +3,8 @@
 	"description": "GraphQL endpoint for iloveaustin",
 	"require": {
 		"sergeytsalkov/meekrodb": "*",
-		"webonyx/graphql-php": "^0.13.8"
+		"webonyx/graphql-php": "^0.13.8",
+		"ext-json": "*"
 	},
 	"config": {
 		"optimize-autoloader": true

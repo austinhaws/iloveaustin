@@ -1,13 +1,13 @@
 <?php
 namespace ILoveAustin;
 
-use GraphQL\Examples\Blog\Data\User;
+use ILoveAustin\Data\User;
 
 /**
  * Class AppContext
  * Instance available in all GraphQL resolvers as 3rd argument
  *
- * @package GraphQL\Examples\Blog
+ * @package ILoveAustin
  */
 class AppContext
 {

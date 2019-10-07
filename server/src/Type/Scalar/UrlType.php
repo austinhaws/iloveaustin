@@ -1,5 +1,5 @@
 <?php
-namespace GraphQL\Examples\Blog\Type\Scalar;
+namespace ILoveAustin\Type\Scalar;
 
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\Node;
