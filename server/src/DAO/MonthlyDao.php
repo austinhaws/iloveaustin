@@ -23,4 +23,20 @@ class MonthlyDao
 	{
 		DB::delete('monthly', 'id=%i', $monthlyId);
 	}
+
+	public function copyForwardMonthliesForAccountIdPeriod(int $accountId, string $prevPeriod, string $nextPeriod)
+	{
+		DB::query("
+			INSERT INTO monthly (account_id, period, name, notes, amt_goal, amt_spent) 
+				SELECT 
+					%i account_id,
+					%s period,
+					name,
+					'' notes,
+					amt_goal,
+					'000' amt_spent
+				FROM monthly
+				WHERE account_id = %i AND period = %s
+		", $accountId, $nextPeriod, $accountId, $prevPeriod);
+	}
 }
