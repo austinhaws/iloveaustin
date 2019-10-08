@@ -6,6 +6,7 @@ use GraphQL\Error\FormattedError;
 use GraphQL\GraphQL;
 use GraphQL\Type\Schema;
 use ILoveAustin\AppContext;
+use ILoveAustin\Context\Context;
 use ILoveAustin\Types;
 
 // Disable default PHP error reporting - we have better one for debug mode (see below)
@@ -43,8 +44,10 @@ try {
 	$data += ['query' => null, 'variables' => null];
 
 	// GraphQL schema to be passed to query executor:
+	$context = new Context();
 	$schema = new Schema([
-		'query' => Types::query()
+		'query' => Types::query($context),
+		'mutation' => Types::mutation($context),
 	]);
 
 	$result = GraphQL::executeQuery(
