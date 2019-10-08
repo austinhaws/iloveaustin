@@ -17,6 +17,7 @@ class MutationType extends ObjectType
         $config = [
             'name' => 'Mutation',
             'fields' => [
+            	// ---- Monthly ---- //
             	'deleteMonthly' => [
 					'type' => Types::id(),
 					'args' => [
@@ -35,6 +36,26 @@ class MutationType extends ObjectType
 						return $this->context->services->monthly->saveMonthly($rootValue, $args, Types::monthlyInput()->convertFieldsToDB($args['monthly']));
 					},
 				],
+				// ---- Snapshot ---- //
+				'deleteSnapshot' => [
+					'type' => Types::id(),
+					'args' => [
+						'id' => ['type' => Types::nonNull(Types::id())],
+					],
+					'resolve' => function ($rootValue, $args) {
+						return $this->context->services->snapshot->deleteSnapshot($rootValue, $args, $args['id']);
+					},
+				],
+				'saveSnapshot' => [
+					'type' => Types::snapshot(),
+					'args' => [
+						'snapshot' => ['type' => Types::snapshotInput()],
+					],
+					'resolve' => function ($rootValue, $args) {
+						return $this->context->services->snapshot->saveSnapshot($rootValue, $args, Types::snapshotInput()->convertFieldsToDB($args['snapshot']));
+					},
+
+				],
             ],
 
             'resolveField' => function($rootValue, $args, $context, ResolveInfo $info) {
@@ -45,9 +66,4 @@ exit('If this never gets called then remove it!');
         ];
         parent::__construct($config);
     }
-
-    public function saveMonthly($rootValue, $args)
-	{
-		return $this->context->services->monthly->selectMonthlies($rootValue, $args)[0];
-	}
 }
