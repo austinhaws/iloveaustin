@@ -9,12 +9,13 @@ use GraphQL\Type\Definition\ListOfType;
 use GraphQL\Type\Definition\NonNull;
 use GraphQL\Type\Definition\StringType;
 use GraphQL\Type\Definition\Type;
+use ILoveAustin\Context\Context;
 use ILoveAustin\Type\AccountType;
 use ILoveAustin\Type\Enum\ImageSizeEnumType;
 use ILoveAustin\Type\Field\HtmlField;
 use ILoveAustin\Type\ImageType;
+use ILoveAustin\Type\Input\MonthlyInputType;
 use ILoveAustin\Type\MonthlyType;
-use ILoveAustin\Type\NodeType;
 use ILoveAustin\Type\SavingsType;
 use ILoveAustin\Type\Scalar\EmailType;
 use ILoveAustin\Type\Scalar\UrlType;
@@ -26,6 +27,8 @@ class Types
     private static $image;
     /** @var QueryType */
     private static $query;
+    /** @var MutationType */
+    private static $mutation;
     /** @var AccountType */
     private static $account;
     /** @var SnapshotType */
@@ -34,6 +37,8 @@ class Types
     private static $savings;
     /** @var MonthlyType */
     private static $monthly;
+    /** @var MonthlyInputType */
+    private static $monthlyInput;
 
     public static function account()
 	{
@@ -43,6 +48,11 @@ class Types
 	public static function monthly()
 	{
 		return self::$monthly ?: (self::$monthly = new MonthlyType());
+	}
+
+	public static function monthlyInput()
+	{
+		return self::$monthlyInput ?: (self::$monthlyInput = new MonthlyInputType());
 	}
 
 	public static function savings()
@@ -63,13 +73,23 @@ class Types
         return self::$image ?: (self::$image = new ImageType());
     }
 
-    /**
-     * @return QueryType
-     */
-    public static function query()
+	/**
+	 * @param Context $context
+	 * @return QueryType
+	 */
+    public static function query(Context $context)
     {
-        return self::$query ?: (self::$query = new QueryType());
+        return self::$query ?: (self::$query = new QueryType($context));
     }
+
+	/**
+	 * @param Context $context
+	 * @return MutationType
+	 */
+    public static function mutation(Context $context)
+	{
+		return self::$mutation ?: (self::$mutation = new MutationType($context));
+	}
 
     // Enum types
     private static $imageSizeEnum;

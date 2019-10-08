@@ -10,9 +10,9 @@ class QueryType extends ObjectType
 	/** @var Context */
 	private $context;
 
-    public function __construct()
+    public function __construct(Context $context)
     {
-		$this->context = new Context();
+		$this->context = $context;
 
         $config = [
             'name' => 'Query',
