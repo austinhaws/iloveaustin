@@ -18,6 +18,7 @@ use ILoveAustin\Type\Input\MonthlyInputType;
 use ILoveAustin\Type\Input\SavingsInputType;
 use ILoveAustin\Type\Input\SnapshotInputType;
 use ILoveAustin\Type\MonthlyType;
+use ILoveAustin\Type\PeriodType;
 use ILoveAustin\Type\SavingsType;
 use ILoveAustin\Type\Scalar\EmailType;
 use ILoveAustin\Type\Scalar\UrlType;
@@ -33,6 +34,12 @@ class Types
     private static $mutation;
     /** @var AccountType */
     private static $account;
+    /** @var MonthlyType */
+    private static $monthly;
+	/** @var MonthlyInputType */
+	private static $monthlyInput;
+	/** @var PeriodType */
+	private static $period;
     /** @var SnapshotType */
     private static $snapshot;
     /** @var SnapshotInputType */
@@ -41,10 +48,6 @@ class Types
     private static $savings;
     /** @var SavingsInputType */
     private static $savingsInput;
-    /** @var MonthlyType */
-    private static $monthly;
-    /** @var MonthlyInputType */
-    private static $monthlyInput;
 
     public static function account()
 	{
@@ -81,7 +84,12 @@ class Types
 		return self::$snapshotInput ?: (self::$snapshotInput = new SnapshotInputType());
 	}
 
-    /**
+	public static function period()
+	{
+		return self::$period ?: (self::$period = new PeriodType());
+	}
+
+	/**
      * @return ImageType
      */
     public static function image()

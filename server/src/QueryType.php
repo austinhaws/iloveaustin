@@ -29,6 +29,20 @@ class QueryType extends ObjectType
 						'period' => Types::nonNull(Types::string())
 					],
 				],
+				'period' => [
+					'type' => Types::nonNull(Types::period()),
+					'description' => 'Returns monthlies for a period',
+					'args' => [
+						'period' => Types::string(),
+					],
+				],
+				'getPreviousPeriod' => [
+					'type' => Types::nonNull(Types::period()),
+					'description' => 'Returns monthlies for the previous period',
+					'args' => [
+						'period' => Types::string(),
+					],
+				],
 				'savings' => [
 					'type' => Types::listOf(Types::savings()),
 					'description' => 'Returns account savings',
@@ -55,6 +69,16 @@ class QueryType extends ObjectType
     public function monthlies($rootValue, $args)
 	{
 		return $this->context->services->monthly->selectMonthlies($rootValue, $args);
+	}
+
+	public function period($rootValue, $args)
+	{
+		return $this->context->services->period->getPeriod($rootValue, $args);
+	}
+
+	public function getPreviousPeriod($rootValue, $args)
+	{
+		return $this->context->services->period->getPreviousPeriod($rootValue, $args);
 	}
 
     public function savings($rootValue, $args)

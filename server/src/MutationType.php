@@ -37,6 +37,17 @@ class MutationType extends ObjectType
 					},
 				],
 
+				// ---- Period ---- //
+				'getNextPeriod' => [
+					'type' => Types::period(),
+					'args' => [
+						'period' => ['type' => Types::nonNull(Types::string())],
+					],
+					'resolve' => function ($rootValue, $args) {
+						return $this->context->services->period->getNextPeriod($rootValue, $args);
+					},
+				],
+
 				// ---- Savings ---- //
 				'deleteSavings' => [
 					'type' => Types::id(),
