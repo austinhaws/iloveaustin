@@ -36,6 +36,27 @@ class MutationType extends ObjectType
 						return $this->context->services->monthly->saveMonthly($rootValue, $args, Types::monthlyInput()->convertFieldsToDB($args['monthly']));
 					},
 				],
+
+				// ---- Savings ---- //
+				'deleteSavings' => [
+					'type' => Types::id(),
+					'args' => [
+						'id' => ['type' => Types::nonNull(Types::id())],
+					],
+					'resolve' => function ($rootValue, $args) {
+						return $this->context->services->savings->deleteSavings($rootValue, $args, $args['id']);
+					},
+				],
+				'saveSavings' => [
+					'type' => Types::savings(),
+					'args' => [
+						'savings' => ['type' => Types::savingsInput()],
+					],
+					'resolve' => function ($rootValue, $args) {
+						return $this->context->services->savings->saveSavings($rootValue, $args, Types::savingsInput()->convertFieldsToDB($args['savings']));
+					},
+				],
+
 				// ---- Snapshot ---- //
 				'deleteSnapshot' => [
 					'type' => Types::id(),
@@ -54,7 +75,6 @@ class MutationType extends ObjectType
 					'resolve' => function ($rootValue, $args) {
 						return $this->context->services->snapshot->saveSnapshot($rootValue, $args, Types::snapshotInput()->convertFieldsToDB($args['snapshot']));
 					},
-
 				],
             ],
 

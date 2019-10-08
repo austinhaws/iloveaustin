@@ -15,6 +15,7 @@ use ILoveAustin\Type\Enum\ImageSizeEnumType;
 use ILoveAustin\Type\Field\HtmlField;
 use ILoveAustin\Type\ImageType;
 use ILoveAustin\Type\Input\MonthlyInputType;
+use ILoveAustin\Type\Input\SavingsInputType;
 use ILoveAustin\Type\Input\SnapshotInputType;
 use ILoveAustin\Type\MonthlyType;
 use ILoveAustin\Type\SavingsType;
@@ -38,6 +39,8 @@ class Types
     private static $snapshotInput;
     /** @var SavingsType */
     private static $savings;
+    /** @var SavingsInputType */
+    private static $savingsInput;
     /** @var MonthlyType */
     private static $monthly;
     /** @var MonthlyInputType */
@@ -61,6 +64,11 @@ class Types
 	public static function savings()
 	{
 		return self::$savings ?: (self::$savings = new SavingsType());
+	}
+
+	public static function savingsInput()
+	{
+		return self::$savingsInput ?: (self::$savingsInput = new SavingsInputType());
 	}
 
 	public static function snapshot()
