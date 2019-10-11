@@ -24,7 +24,16 @@ class MutationType extends ObjectType
 						'id' => ['type' => Types::nonNull(Types::id())],
 					],
 					'resolve' => function ($rootValue, $args) {
-						return $this->context->services->monthly->deleteMonthly($rootValue, $args, $args['id']);
+						return $this->context->services->monthly->deleteMonthly($rootValue, $args);
+					},
+				],
+				'login' => [
+					'type' => Types::account(),
+					'args' => [
+						'authorization' => Types::nonNull(Types::string()),
+					],
+					'resolve' => function ($rootValue, $args) {
+						return $this->context->services->account->login($rootValue, $args);
 					},
 				],
 				'saveMonthly' => [
@@ -33,7 +42,7 @@ class MutationType extends ObjectType
 						'monthly' => ['type' => Types::monthlyInput()],
 					],
 					'resolve' => function ($rootValue, $args) {
-						return $this->context->services->monthly->saveMonthly($rootValue, $args, Types::monthlyInput()->convertFieldsToDB($args['monthly']));
+						return $this->context->services->monthly->saveMonthly($rootValue, $args);
 					},
 				],
 

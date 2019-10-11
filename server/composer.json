@@ -4,7 +4,8 @@
 	"require": {
 		"sergeytsalkov/meekrodb": "*",
 		"webonyx/graphql-php": "^0.13.8",
-		"ext-json": "*"
+		"ext-json": "*",
+		"google/apiclient": "^2.0"
 	},
 	"config": {
 		"optimize-autoloader": true
