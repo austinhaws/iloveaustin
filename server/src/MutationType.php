@@ -51,6 +51,7 @@ class MutationType extends ObjectType
 					'type' => Types::period(),
 					'args' => [
 						'period' => ['type' => Types::nonNull(Types::string())],
+						'copyForward' => ['type' => Types::nonNull(Types::boolean())],
 					],
 					'resolve' => function ($rootValue, $args) {
 						return $this->context->services->period->getNextPeriod($rootValue, $args);
