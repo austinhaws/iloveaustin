@@ -3,7 +3,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
-import * as PropTypes from "prop-types";
 import webservice from "../../app/webservice/Webservice";
 import {fromDollarString, toDollarString} from "../../app/Money";
 import Button from "@material-ui/core/Button";
@@ -11,9 +10,7 @@ import SnapshotEdit from "./SnapshotEdit";
 import styles from "../../app/Styles";
 import SnapshotList from "./SnapshotList";
 
-const propTypes = {
-	history: PropTypes.object.isRequired,
-};
+const propTypes = {};
 const defaultProps = {};
 const mapStateToProps = state => ({
 	app: state.app,

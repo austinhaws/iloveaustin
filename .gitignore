@@ -10,3 +10,4 @@ npm-debug.log
 /node_modules
 /vendor
 client_secret.json
+/serverOLD/storage/logs/

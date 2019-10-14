@@ -1,7 +1,8 @@
 import React from "react";
-import store from "./ReduxStore";
 import Budget from "../iloveaustin/Budget";
+import History from "../app/history/History";
 import Home from "../iloveaustin/Home";
+import store from "./ReduxStore";
 
 function isLoggedIn() {
 	return !!store.getState().app.account;
@@ -12,19 +13,19 @@ export default {
 		budget: {
 			path: '/budget/:month?/:year?',
 			component: props => isLoggedIn() ? <Budget month={props.match.params.month} year={props.match.params.year}/> : <Home/>,
-			forward: (history, month, year) => month ? history.push(`/budget/${month}/${year}`) : history.push(`/budget`),
+			forward: (month, year) => month ? History.get().push(`/budget/${month}/${year}`) : History.get().push(`/budget`),
 		},
 
 		savings: {
 			path: '/savings',
 			component: () => <Home/>,
-			forward: history => history.push(`/savings`),
+			forward: () => History.get().push(`/savings`),
 		},
 
 		home: {
 			path: '/',
 			component: () => <Home/>,
-			forward: history => history.push(`/`),
+			forward: () => History.get().push(`/`),
 		},
 	},
 };

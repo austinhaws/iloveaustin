@@ -16,7 +16,6 @@ import styles from "../../app/Styles";
 
 const propTypes = {
 	cancelSnapshotEdit: PropTypes.func.isRequired,
-	history: PropTypes.object.isRequired,
 	saveSnapshot: PropTypes.func.isRequired,
 	snapshot: PropTypes.object.isRequired,
 };

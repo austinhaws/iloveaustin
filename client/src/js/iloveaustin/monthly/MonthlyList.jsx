@@ -20,7 +20,6 @@ import {handleEvent} from "dts-react-common";
 import {comparePeriod, Periods} from "../../app/Period";
 
 const propTypes = {
-	history: PropTypes.object.isRequired,
 	editMonthly: PropTypes.func.isRequired,
 	deleteMonthly: PropTypes.func.isRequired,
 	periods: PropTypes.object,
