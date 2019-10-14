@@ -1,6 +1,19 @@
 import {objectAtPathReducer} from "dts-react-common";
 import reducers from "../app/Reducers";
 import store from "../app/ReduxStore";
+import reducer from "./Reducers";
+
+/**
+ * Generic redux dispatcher
+ * @param payload object
+ * @param payload.path string Path to the field to modify
+ * @param payload.field string Field that you need to modify
+ * @param payload.value any Value of the field
+ */
+export const dispatchUpdateData = payload => store.dispatch({
+	type: reducer.ACTION_TYPES.UPDATE_DATA,
+	payload: payload
+});
 
 /**
  * export one or more object at path payloads

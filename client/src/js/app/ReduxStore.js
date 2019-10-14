@@ -1,7 +1,7 @@
 import {createStore} from 'redux';
 import reducers from './Reducers';
 import {objectAtPath} from "dts-react-common";
-import {dispatchUpdateData} from "./Shared";
+import {dispatchUpdateData} from "./Dispatch";
 
 export function dispatchDefaultState(paths) {
 	_.castArray(paths).forEach(path => dispatchUpdateData({
@@ -26,7 +26,10 @@ const defaultState = {
 		snapshotsTotalsNoWells: undefined,
 	},
 	app: {
+		// account after logged in
+		account: undefined,
 		ajaxSpinnerCount: 0,
+		// token used for authentication
 		googleTokenId: undefined,
 	},
 };

@@ -1,4 +1,19 @@
 <?php
+$origin = $_SERVER['HTTP_ORIGIN'];
+// var_dump($origin);
+$allowed_domains = [
+	'http://localhost:9000',
+	'https://rpggenerator.com',
+];
+
+if (in_array($origin, $allowed_domains)) {
+	header('Access-Control-Allow-Origin: ' . $origin);
+	header('Access-Control-Allow-Headers: *');
+}
+if($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
+	exit(0);
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use GraphQL\Error\Debug;

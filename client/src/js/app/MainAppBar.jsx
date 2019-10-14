@@ -16,11 +16,21 @@ import Pages from "./Pages";
 import Button from "@material-ui/core/Button";
 import {withRouter} from "react-router-dom";
 import * as PropTypes from "prop-types";
+import GoogleLogin from "react-google-login";
+import {connect} from "react-redux";
+import {createPathActionPayload, dispatchUpdates} from "./Dispatch";
+import LocalStorage from "./localstorage/LocalStorage";
+import webservice from "./webservice/Webservice";
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
+	app: PropTypes.object,
 };
-const defaultProps = {};
+const defaultProps = {
+	app: undefined,
+};
+
+const mapStateToProps = state => ({app: state.app});
 
 const styles = {
 	root: {
@@ -39,11 +49,25 @@ const styles = {
 	rpggenerator: {
 		color: 'black',
 	},
+	loggedInUserContent: {
+		float: 'right',
+	},
 };
 
 class MainAppBar extends React.Component {
 	state = {
 		open: false,
+	};
+
+	componentDidMount() {
+		const tokenId = LocalStorage.googleTokenId.get();
+		tokenId && this.loginWithTokenId(tokenId);
+	}
+
+	loginWithTokenId = tokenId => {
+		webservice.app.googleLogin({tokenId})
+			.then(() => LocalStorage.googleTokenId.set(tokenId))
+			.then(() => Pages.iLoveAustin.budget.forward(this.props.history));
 	};
 
 	handleToggle = () => {
@@ -60,6 +84,18 @@ class MainAppBar extends React.Component {
 			window.location = url;
 		};
 	};
+
+	responseGoogle = googleResponse => googleResponse.tokenId && this.loginWithTokenId(googleResponse.tokenId);
+
+	signOut = () => {
+		LocalStorage.googleTokenId.remove();
+		dispatchUpdates([
+			createPathActionPayload('app.account', undefined),
+			createPathActionPayload('app.googleTokenId', undefined)
+		]);
+		Pages.iLoveAustin.home.forward(this.props.history);
+	};
+
 
 	render() {
 		const { classes } = this.props;
@@ -101,6 +137,21 @@ class MainAppBar extends React.Component {
 
 
 						<Typography variant="h6" color="inherit" className={classes.grow}>I Love Austin</Typography>
+						{this.props.app.account ?
+							<div className={classes.loggedInUserContent}>
+								Welcome, {this.props.app.account.nickname}
+								<Button className={classes.signOutButton} onClick={this.signOut}>Sign Out</Button>
+							</div>
+							:
+							<GoogleLogin
+								clientId="306725008311-l4rt8a9edu84ru378h285msmtmtgn9k1.apps.googleusercontent.com"
+								buttonText="Sign In"
+								onSuccess={this.responseGoogle}
+								onFailure={this.responseGoogle}
+								cookiePolicy={'single_host_origin'}
+							/>
+						}
+
 					</Toolbar>
 					<Toolbar className={classes.navMenu}>
 						<Button onClick={() => Pages.iLoveAustin.budget.forward(this.props.history)}>Budget</Button>
@@ -115,4 +166,4 @@ class MainAppBar extends React.Component {
 MainAppBar.propTypes = propTypes;
 MainAppBar.defaultProps = defaultProps;
 
-export default withRouter(withStyles(styles)(MainAppBar));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(MainAppBar)));

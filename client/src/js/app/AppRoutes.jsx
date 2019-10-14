@@ -6,9 +6,7 @@ class AppRoutes extends React.Component {
 	render() {
 		return (
 			<Switch>
-				<Route path={Pages.iLoveAustin.savings.path} component={Pages.iLoveAustin.savings.component}/>
-				<Route path={Pages.iLoveAustin.budget.path} component={Pages.iLoveAustin.budget.component}/>
-				<Route path={Pages.iLoveAustin.login.path} component={Pages.iLoveAustin.login.component}/>
+				{Object.values(Pages.iLoveAustin).map(page => <Route key={page.path} path={page.path} component={page.component}/>)}
 			</Switch>
 		);
 	}
