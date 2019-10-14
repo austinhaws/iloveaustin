@@ -5,7 +5,6 @@ class PeriodService extends BaseService
 {
 	public function getPeriod($rootValue, $args)
 	{
-		// todo: use logged in account id
 		if (isset($args['period'])) {
 			$period = $args['period'];
 		} else {
@@ -14,20 +13,18 @@ class PeriodService extends BaseService
 		return [
 			'period' => $period,
 			// todo: move this to a conditinal select if the fields are requested (GraphQL library should have a way to do this naturally)
-			'monthlies' => $this->context->daos->monthly->selectMonthliesForAccountIdPeriod(2, $period),
+			'monthlies' => $this->context->daos->monthly->selectMonthliesForAccountIdPeriod($this->context->getAccount()->id, $period),
 		];
 	}
 
 	public function getNextPeriod($rootValue, $args)
 	{
-		// todo: use logged in account id
 		$period = $args['period'];
 		$nextPeriod = $this->movePeriod($period, 1);
 		$result = $this->getPeriod($rootValue, ['period' => $nextPeriod]);
 
-		if (!$result['monthlies']) {
-			// todo: use logged in account id
-			$this->context->daos->monthly->copyForwardMonthliesForAccountIdPeriod(2, $period, $nextPeriod);
+		if (!$result['monthlies'] && $args['copyForward']) {
+			$this->context->daos->monthly->copyForwardMonthliesForAccountIdPeriod($this->context->getAccount()->id, $period, $nextPeriod);
 			$result = $this->getPeriod($rootValue, ['period' => $nextPeriod]);
 		}
 
