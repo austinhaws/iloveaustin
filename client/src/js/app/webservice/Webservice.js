@@ -6,6 +6,7 @@ import currentContext from "./WebserviceContext";
 import GraphQLCore from "./graphQLCore";
 import loginMutation from "./graphql/mutation/loginMutation";
 import periodQuery from "./graphql/query/periodQuery";
+import monthlyQuery from "./graphql/query/monthlyQuery";
 
 export const ajaxStatus = new AjaxStatusCore();
 ajaxStatus.registerChangedCallback(
@@ -53,15 +54,14 @@ const webservice = {
 			})
 	},
 	iLoveAustin: {
-
 		monthly: {
-			list: period => webserviceILoveAustin.post(`monthly/list/${period.month}/${period.year}`, { ...postTokenData(), period })
-				.then(list => dispatchField('iLoveAustin.monthly.list', list)),
+			list: period => graphQlWebservice.query(monthlyQuery(period), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.MONTHLY)
+				.then(response => dispatchField('iLoveAustin.monthly.list', response.data.monthlies)),
 		},
 
 		period: {
 			// month year can be blank to get current period
-			get: (month, year, includeMonthlies) => graphQlWebservice.query(periodQuery(month, year, includeMonthlies))
+			get: (includeMonthlies, month, year) => graphQlWebservice.query(periodQuery(month, year, includeMonthlies))
 				.then(result => result.data.period),
 		},
 
