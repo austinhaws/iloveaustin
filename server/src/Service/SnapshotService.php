@@ -1,26 +1,38 @@
 <?php
 namespace ILoveAustin\Service;
 
+use ILoveAustin\Exception\SecurityException;
+
 class SnapshotService extends BaseService
 {
 	public function selectSnapshots($rootValue, $args)
 	{
-		//todo get currently logged in user (from token passed in token?) and get the account id from that
-		return $this->context->daos->snapshot->selectSnapshotsByAccountId(2);
+		return $this->context->daos->snapshot->selectSnapshotsByAccountId($this->context->getAccount()->id);
 	}
 
 	public function saveSnapshot($rootValue, $args, array $snapshot)
 	{
-		// todo: if has id then unset account_id - make sure that unset account_id doesn't update to null
-		// todo: if no id then set to current account id
-		$snapshot['account_id'] = 2;
+		if (isset($snapshot['id'])) {
+			$this->testSnapshotBelongsToAccount($snapshot['id']);
+		}
+		$snapshot['account_id'] = $this->context->getAccount()->id;
 		return $this->context->daos->snapshot->saveSnapshot($snapshot);
 	}
 
 	public function deleteSnapshot($rootValue, $args, int $snapshotId)
 	{
-		// todo: select monthly and make sure the account id is the current account id
+		$this->testSnapshotBelongsToAccount($snapshotId);
 		$this->context->daos->snapshot->deleteSnapshot($snapshotId);
 		return $snapshotId;
 	}
+
+	private function testSnapshotBelongsToAccount(int $snapshotId)
+	{
+		$account = $this->context->getAccount();
+		$oldSnapshot = $this->context->daos->snapshot->selectSnapshotById($snapshotId);
+		if ($oldSnapshot['account_id'] !== $account->id) {
+			throw new SecurityException('Snapshot does not belong to this account');
+		}
+	}
+
 }
