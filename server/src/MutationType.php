@@ -2,7 +2,6 @@
 namespace ILoveAustin;
 
 use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\ResolveInfo;
 use ILoveAustin\Context\Context;
 
 class MutationType extends ObjectType
@@ -98,13 +97,7 @@ class MutationType extends ObjectType
 					},
 				],
             ],
-
-            'resolveField' => function($rootValue, $args, $context, ResolveInfo $info) {
-        	// todo: remove this? no mutation ever calls it?
-exit('If this never gets called then remove it!');
-                return $this->{$info->fieldName}($rootValue, $args, $context, $info);
-            }
-        ];
+		];
         parent::__construct($config);
     }
 }
