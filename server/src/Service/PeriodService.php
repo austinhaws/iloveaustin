@@ -13,6 +13,7 @@ class PeriodService extends BaseService
 		}
 		return [
 			'period' => $period,
+			// todo: move this to a conditinal select if the fields are requested (GraphQL library should have a way to do this naturally)
 			'monthlies' => $this->context->daos->monthly->selectMonthliesForAccountIdPeriod(2, $period),
 		];
 	}

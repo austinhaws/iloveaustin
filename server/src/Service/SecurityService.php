@@ -6,8 +6,7 @@ class SecurityService extends BaseService
 	public function getAccountIdFromGoogleHeader($rootValue, $args)
 	{
 		// taken from Authorization parameter or from Authorization header with precedence to parameter for login
-		$googleTokenId = $args['Authorization'] ?? $_SERVER['HTTP_AUTHENTICATION'];
-
+		$googleTokenId = $args['Authorization'] ?? $_SERVER['HTTP_AUTHORIZATION'] ?? null;
 		$client = new \Google_Client();
 		$client->setAuthConfig(dirname(__DIR__).'/Resources/client_secret.json');
 		$client->setAccessType('offline');
