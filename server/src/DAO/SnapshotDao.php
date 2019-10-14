@@ -23,4 +23,9 @@ class SnapshotDao
 	{
 		DB::delete('snapshot', 'id=%i', $snapshotId);
 	}
+
+	public function selectSnapshotById(int $id)
+	{
+		return DB::queryFirstRow("SELECT * FROM snapshot WHERE id = %i", $id);
+	}
 }

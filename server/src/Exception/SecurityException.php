@@ -2,7 +2,7 @@
 
 namespace ILoveAustin\Exception;
 
-use Mockery\Exception;
+use Mockery\Exception\RuntimeException;
 
 /**
  * Class SecurityException
@@ -11,6 +11,6 @@ use Mockery\Exception;
  *
  * @package ILoveAustin\Exception
  */
-class SecurityException extends Exception
+class SecurityException extends RuntimeException
 {
 }
