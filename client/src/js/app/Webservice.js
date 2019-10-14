@@ -1,6 +1,11 @@
 import {AjaxStatusCore, WebserviceCore} from "dts-react-common";
 import store from "./ReduxStore";
-import {createPathActionPayload, dispatchField, dispatchFieldCurry, dispatchUpdates} from "./Dispatch";
+import {createPathActionPayload, dispatchField, dispatchUpdates} from "./Dispatch";
+import WEBSERVICE_AJAX_IDS from "./WebserviceAjaxIds";
+import currentContext from "./WebserviceContext";
+import GraphQLCore from "./graphQLCore";
+import loginMutation from "./graphql/mutation/loginMutation";
+import periodQuery from "./graphql/query/periodQuery";
 
 export const ajaxStatus = new AjaxStatusCore();
 ajaxStatus.registerChangedCallback(
@@ -25,11 +30,29 @@ const webserviceILoveAustin = new WebserviceCore({
 	rawPromiseCallback: rawPromiseCallback,
 });
 
+
+export const ajaxStatusCore = new AjaxStatusCore();
+const graphQlWebservice = new GraphQLCore({
+	graphQLUrl: currentContext,
+	ajaxStatusCore: ajaxStatusCore,
+	jsLogging: undefined,
+	loadDefaultsCallback: defaults => defaults.headers.common['Authorization'] = store.getState().app.googleTokenId,
+});
+
+
 const postTokenData = () => ({ token: store.getState().app.postToken });
 
 const webservice = {
+	app: {
+		googleLogin: googleResponse => graphQlWebservice.mutation(loginMutation(googleResponse), WEBSERVICE_AJAX_IDS.APP.GOOGLE_LOGIN)
+			.then(response => {
+				const account = response.data.login;
+				dispatchField('app.account', account);
+				dispatchField('app.googleTokenId', googleResponse.tokenId);
+				return account;
+			})
+	},
 	iLoveAustin: {
-		login: credentials => webserviceILoveAustin.post('login', credentials),
 
 		monthly: {
 			list: period => webserviceILoveAustin.post(`monthly/list/${period.month}/${period.year}`, { ...postTokenData(), period })
@@ -37,8 +60,9 @@ const webservice = {
 		},
 
 		period: {
-			get: (month, year) => webserviceILoveAustin.get(month ? `period/get/${month || ''}/${year || ''}` : `period/get`)
-				.then(dispatchFieldCurry('iLoveAustin.periods')),
+			// month year can be blank to get current period
+			get: (month, year, includeMonthlies) => graphQlWebservice.query(periodQuery(month, year, includeMonthlies))
+				.then(result => result.data.period),
 		},
 
 		snapshot: {

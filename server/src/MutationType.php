@@ -30,7 +30,7 @@ class MutationType extends ObjectType
 				'login' => [
 					'type' => Types::account(),
 					'args' => [
-						'authorization' => Types::nonNull(Types::string()),
+						'Authorization' => Types::nonNull(Types::string()),
 					],
 					'resolve' => function ($rootValue, $args) {
 						return $this->context->services->account->login($rootValue, $args);

@@ -6,7 +6,11 @@ class PeriodService extends BaseService
 	public function getPeriod($rootValue, $args)
 	{
 		// todo: use logged in account id
-		$period = $args['period'];
+		if (isset($args['period'])) {
+			$period = $args['period'];
+		} else {
+			$period = date('n/Y');
+		}
 		return [
 			'period' => $period,
 			'monthlies' => $this->context->daos->monthly->selectMonthliesForAccountIdPeriod(2, $period),
