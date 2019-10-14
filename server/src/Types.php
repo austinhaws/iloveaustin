@@ -14,6 +14,7 @@ use ILoveAustin\Type\AccountType;
 use ILoveAustin\Type\Enum\ImageSizeEnumType;
 use ILoveAustin\Type\Field\HtmlField;
 use ILoveAustin\Type\ImageType;
+use ILoveAustin\Type\Input\ISODateType;
 use ILoveAustin\Type\Input\MonthlyInputType;
 use ILoveAustin\Type\Input\SavingsInputType;
 use ILoveAustin\Type\Input\SnapshotInputType;
@@ -34,6 +35,8 @@ class Types
     private static $mutation;
     /** @var AccountType */
     private static $account;
+    /** @var ISODateType */
+    private static $isoDate;
     /** @var MonthlyType */
     private static $monthly;
 	/** @var MonthlyInputType */
@@ -87,6 +90,11 @@ class Types
 	public static function period()
 	{
 		return self::$period ?: (self::$period = new PeriodType());
+	}
+
+	public static function ISODate()
+	{
+    	return self::$isoDate ?: (self::$isoDate = new ISODateType());
 	}
 
 	/**

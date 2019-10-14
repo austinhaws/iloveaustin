@@ -16,7 +16,6 @@ class SavingsInputType extends BaseInputType
 					'amountGoal' => Types::string(),
 					'amountCurrent' => Types::string(),
 					'name' => Types::string(),
-					// todo: use ISO dates by adding a Types::date()
 					'dueDate' => Types::string(),
 					'notes' => Types::string(),
 				];
