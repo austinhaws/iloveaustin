@@ -39,4 +39,9 @@ class MonthlyDao
 				WHERE account_id = %i AND period = %s
 		", $accountId, $nextPeriod, $accountId, $prevPeriod);
 	}
+
+	public function selectMonthlyById($id)
+	{
+		return DB::queryFirstRow("SELECT * FROM monthly WHERE id = %i", $id);
+	}
 }
