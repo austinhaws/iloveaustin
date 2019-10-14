@@ -6,6 +6,7 @@ use GraphQL\Examples\Blog\Data\Image;
 use GraphQL\Examples\Blog\Types;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\ObjectType;
+use ILoveAustin\Exception\FieldException;
 
 class ImageType extends ObjectType
 {
@@ -33,13 +34,13 @@ class ImageType extends ObjectType
                 'fieldWithError' => [
                     'type' => Types::string(),
                     'resolve' => function() {
-                        throw new \Exception("Field with exception");
+                        throw new FieldException("Field with exception");
                     }
                 ],
                 'nonNullFieldWithError' => [
                     'type' => Types::nonNull(Types::string()),
                     'resolve' => function() {
-                        throw new \Exception("Non-null field with exception");
+                        throw new FieldException("Non-null field with exception");
                     }
                 ]
             ]
