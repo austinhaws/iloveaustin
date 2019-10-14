@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ILoveAustin\Services;
 
 use App\Http\Controllers\ILoveAustin\Dao\Daos;
+use ILoveAustin\Service\SecurityService;
 
 class ServicesService
 {
@@ -12,6 +13,8 @@ class ServicesService
     public $monthly;
     /** @var PeriodService  */
     public $period;
+    /** @var SecurityService */
+    public $security;
     /** @var SnapshotService */
     public $snapshot;
 
@@ -20,8 +23,9 @@ class ServicesService
     )
     {
         $this->login = new LoginService($this, $daos);
-        $this->snapshot = new SnapshotService($this, $daos);
         $this->monthly = new MonthlyService($this, $daos);
         $this->period = new PeriodService($this, $daos);
+        $this->security = new SecurityService($this, $daos);
+        $this->snapshot = new SnapshotService($this, $daos);
     }
 }

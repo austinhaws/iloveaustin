@@ -7,4 +7,9 @@ class AccountService extends BaseService
 	{
 		return $this->context->daos->account->selectAccounts();
 	}
+
+	public function login($rootValue, $args)
+	{
+		return $this->context->services->security->getAccountIdFromGoogleHeader($rootValue, $args);
+	}
 }

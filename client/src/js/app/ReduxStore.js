@@ -27,7 +27,7 @@ const defaultState = {
 	},
 	app: {
 		ajaxSpinnerCount: 0,
-		postToken: undefined,
+		googleTokenId: undefined,
 	},
 };
 
