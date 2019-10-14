@@ -1,6 +1,6 @@
 import {AjaxStatusCore, WebserviceCore} from "dts-react-common";
-import store from "./ReduxStore";
-import {createPathActionPayload, dispatchField, dispatchUpdates} from "./Dispatch";
+import store from "../ReduxStore";
+import {createPathActionPayload, dispatchField, dispatchUpdates} from "../Dispatch";
 import WEBSERVICE_AJAX_IDS from "./WebserviceAjaxIds";
 import currentContext from "./WebserviceContext";
 import GraphQLCore from "./graphQLCore";

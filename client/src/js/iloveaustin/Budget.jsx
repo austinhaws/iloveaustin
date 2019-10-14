@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 import * as PropTypes from "prop-types";
-import Monthly from "./monthly/Monthly";
-import Snapshot from "./snapshot/Snapshot";
 import styles from "../app/Styles";
 
 const propTypes = {
@@ -23,14 +21,14 @@ class Budget extends React.Component {
 		const {classes} = this.props;
 		return (
 			<div className={classes.root}>
-				<Monthly {...this.props} />
+				{/*<Monthly {...this.props} />*/}
 				Wells Fargo Balance = $5892.00
 				add new monthly
 				monthlies table
 				name, goal, spent, left, weeks remaining, weekly allotment, delete
 				totals: goal, spent, left
 
-				<Snapshot {...this.props} />
+				{/*<Snapshot {...this.props} />*/}
 			</div>
 		);
 	}
