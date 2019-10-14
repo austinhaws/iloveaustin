@@ -34,9 +34,6 @@ class MonthlyService extends BaseService
 		return $monthlyId;
 	}
 
-	/**
-	 * @param int $monthlyId
-	 */
 	private function testMonthlyBelongsToAccount($monthlyId)
 	{
 		$account = $this->context->getAccount();
