@@ -138,10 +138,12 @@ class MainAppBar extends React.Component {
 						}
 
 					</Toolbar>
-					<Toolbar className={classes.navMenu}>
-						<Button onClick={Pages.iLoveAustin.budget.forward}>Budget</Button>
-						<Button onClick={Pages.iLoveAustin.savings.forward}>Savings</Button>
-					</Toolbar>
+					{this.props.app.account ?
+						<Toolbar className={classes.navMenu}>
+							<Button onClick={Pages.iLoveAustin.budget.forward}>Budget</Button>
+							<Button onClick={Pages.iLoveAustin.savings.forward}>Savings</Button>
+						</Toolbar>
+					: undefined}
 				</AppBar>
 			</div>
 		);
