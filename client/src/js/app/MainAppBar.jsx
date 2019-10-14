@@ -18,12 +18,10 @@ import {withRouter} from "react-router-dom";
 import * as PropTypes from "prop-types";
 import GoogleLogin from "react-google-login";
 import {connect} from "react-redux";
-import {createPathActionPayload, dispatchUpdates} from "./Dispatch";
 import LocalStorage from "./localstorage/LocalStorage";
-import webservice from "./webservice/Webservice";
+import Account from "./account/Account";
 
 const propTypes = {
-	history: PropTypes.object.isRequired,
 	app: PropTypes.object,
 };
 const defaultProps = {
@@ -61,14 +59,11 @@ class MainAppBar extends React.Component {
 
 	componentDidMount() {
 		const tokenId = LocalStorage.googleTokenId.get();
-		tokenId && this.loginWithTokenId(tokenId);
+		tokenId && this.signInWithTokenId(tokenId);
 	}
 
-	loginWithTokenId = tokenId => {
-		webservice.app.googleLogin({tokenId})
-			.then(() => LocalStorage.googleTokenId.set(tokenId))
-			.then(() => Pages.iLoveAustin.budget.forward(this.props.history));
-	};
+	signInWithTokenId = tokenId => Account.signIn(tokenId)
+		.then(Pages.iLoveAustin.budget.forward);
 
 	handleToggle = () => {
 		this.setState(state => ({ open: !state.open }));
@@ -85,17 +80,7 @@ class MainAppBar extends React.Component {
 		};
 	};
 
-	responseGoogle = googleResponse => googleResponse.tokenId && this.loginWithTokenId(googleResponse.tokenId);
-
-	signOut = () => {
-		LocalStorage.googleTokenId.remove();
-		dispatchUpdates([
-			createPathActionPayload('app.account', undefined),
-			createPathActionPayload('app.googleTokenId', undefined)
-		]);
-		Pages.iLoveAustin.home.forward(this.props.history);
-	};
-
+	responseGoogle = googleResponse => googleResponse.tokenId && this.signInWithTokenId(googleResponse.tokenId);
 
 	render() {
 		const { classes } = this.props;
@@ -140,22 +125,22 @@ class MainAppBar extends React.Component {
 						{this.props.app.account ?
 							<div className={classes.loggedInUserContent}>
 								Welcome, {this.props.app.account.nickname}
-								<Button className={classes.signOutButton} onClick={this.signOut}>Sign Out</Button>
+								<Button className={classes.signOutButton} onClick={Account.signOut}>Sign Out</Button>
 							</div>
 							:
 							<GoogleLogin
 								clientId="306725008311-l4rt8a9edu84ru378h285msmtmtgn9k1.apps.googleusercontent.com"
 								buttonText="Sign In"
 								onSuccess={this.responseGoogle}
-								onFailure={this.responseGoogle}
+								onFailure={console.error}
 								cookiePolicy={'single_host_origin'}
 							/>
 						}
 
 					</Toolbar>
 					<Toolbar className={classes.navMenu}>
-						<Button onClick={() => Pages.iLoveAustin.budget.forward(this.props.history)}>Budget</Button>
-						<Button onClick={() => Pages.iLoveAustin.savings.forward(this.props.history)}>Savings</Button>
+						<Button onClick={Pages.iLoveAustin.budget.forward}>Budget</Button>
+						<Button onClick={Pages.iLoveAustin.savings.forward}>Savings</Button>
 					</Toolbar>
 				</AppBar>
 			</div>

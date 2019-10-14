@@ -12,7 +12,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {formatPeriod, Periods} from "../../app/Period";
 
 const propTypes = {
-	history: PropTypes.object.isRequired,
 	month: PropTypes.string,
 	year: PropTypes.string,
 };

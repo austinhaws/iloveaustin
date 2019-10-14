@@ -3,12 +3,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
-import * as PropTypes from "prop-types";
 import green from '@material-ui/core/colors/green';
 
-const propTypes = {
-	history: PropTypes.object.isRequired,
-};
+const propTypes = {};
 const defaultProps = {};
 const mapStateToProps = state => ({
 	app: state.app,

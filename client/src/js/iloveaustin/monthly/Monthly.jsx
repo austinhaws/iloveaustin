@@ -9,7 +9,6 @@ import Styles from "../../app/Styles";
 import MonthlyList from "./MonthlyList";
 
 const propTypes = {
-	history: PropTypes.object.isRequired,
 	month: PropTypes.string,
 	year: PropTypes.string,
 };
@@ -73,7 +72,6 @@ class Monthly extends React.Component {
 				<MonthlyList
 					deleteMonthly={this.deleteMonthly}
 					editMonthly={this.editMonthly}
-					history={this.props.history}
 				/>
 
 				{/*<h3 className={classes.sectionTitle}>*/}

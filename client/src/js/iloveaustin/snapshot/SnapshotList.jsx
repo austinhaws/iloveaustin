@@ -19,7 +19,6 @@ import styles from "../../app/Styles";
 import {handleEvent} from "dts-react-common";
 
 const propTypes = {
-	history: PropTypes.object.isRequired,
 	editSnapshot: PropTypes.func.isRequired,
 	deleteSnapshot: PropTypes.func.isRequired,
 };
