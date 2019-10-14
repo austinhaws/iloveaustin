@@ -7,9 +7,7 @@ class MonthlyService extends BaseService
 {
 	public function selectMonthlies($rootValue, $args)
 	{
-		// todo: use logged in account id
-		// todo: use passed arg period
-		return $this->context->daos->monthly->selectMonthliesForAccountIdPeriod(2, '10/2010');
+		return $this->context->daos->monthly->selectMonthliesForAccountIdPeriod($this->context->getAccount()->id, $args['period']);
 	}
 
 	public function saveMonthly($rootValue, $args)
