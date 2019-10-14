@@ -2,26 +2,37 @@
 
 namespace ILoveAustin\Service;
 
+use ILoveAustin\Exception\SecurityException;
+
 class SavingsService extends BaseService
 {
 	public function selectSavings($rootValue, $args)
 	{
-		//todo: use real account id/token from args
-		return $this->context->daos->savings->selectSavingsByAccountId(2);
+		return $this->context->daos->savings->selectSavingsByAccountId($this->context->getAccount()->id);
 	}
 
 	public function saveSavings($rootValue, $args, array $savings)
 	{
-		// todo: if has id then unset account_id - make sure that unset account_id doesn't update to null
-		// todo: if no id then set to current account id
-		$savings['account_id'] = 2;
+		if (isset($savings['id'])) {
+			$this->testSavingsBelongsToAccount($savings['id']);
+		}
+		$savings['account_id'] = $this->context->getAccount()->id;
 		return $this->context->daos->savings->saveSavings($savings);
 	}
 
 	public function deleteSavings($rootValue, $args, int $savingsId)
 	{
-		// todo: select record and make sure the account id is the current account id
+		$this->testSavingsBelongsToAccount($savingsId);
 		$this->context->daos->savings->deleteSavings($savingsId);
 		return $savingsId;
+	}
+
+	private function testSavingsBelongsToAccount(int $savingsId)
+	{
+		$account = $this->context->getAccount();
+		$oldSavings = $this->context->daos->savings->selectSavingsById($savingsId);
+		if ($oldSavings['account_id'] !== $account->id) {
+			throw new SecurityException('Savings does not belong to this account');
+		}
 	}
 }
