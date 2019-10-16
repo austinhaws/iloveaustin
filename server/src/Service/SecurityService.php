@@ -36,16 +36,18 @@ class SecurityService extends BaseService
 		$token = $client->verifyIdToken($googleTokenId);
 		$googleAccountId = $token['sub'];
 
+		// update/insert account information based on google information
 		$account = $this->context->daos->account->selectAccountByGoogleId($googleAccountId);
-		if (!$account) {
-			$account = [
-				'email' => $token['email'],
-				'nickname' => $token['name'],
-				'google_sub' => $token['sub'],
-			];
-			$this->context->daos->account->saveAccount($account);
-			$account = $this->context->daos->account->selectAccountByGoogleId($googleAccountId);
+		$accountDB = [
+			'email' => $token['email'],
+			'nickname' => $token['name'],
+			'google_sub' => $token['sub'],
+		];
+		if ($account) {
+			$accountDB['id'] = $account['id'];
 		}
-		return $account;
+		$this->context->daos->account->saveAccount($accountDB);
+
+		return $this->context->daos->account->selectAccountByGoogleId($googleAccountId);
 	}
 }

@@ -9,38 +9,24 @@ import Button from "@material-ui/core/Button";
 import Styles from "../../app/Styles";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {formatPeriod, Periods} from "../../app/Period";
+import {dispatchField} from "../../app/Dispatch";
 
 const propTypes = {
-	month: PropTypes.string,
-	year: PropTypes.string,
+	iLoveAustin: PropTypes.object.isRequired,
 };
-const defaultProps = {
-	month: undefined,
-	year: undefined,
-};
+const defaultProps = {};
 const mapStateToProps = state => ({
-	app: state.app,
 	iLoveAustin: state.iLoveAustin,
 });
 
 class MonthlyDatePicker extends React.Component {
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			editSnapshot: undefined,
-		};
-	}
-
-	componentDidMount() {
-		webservice.iLoveAustin.period.get(this.props.month, this.props.year);
-	};
-
-	goToPeriod = periodName => {
-		const period = this.props.iLoveAustin.periods[periodName];
-		webservice.iLoveAustin.period.get(period.month, period.year);
+	goToPeriod = newPeriod => {
+		webservice.iLoveAustin.period.get(true, newPeriod)
+			.then(period => {
+				dispatchField('iLoveAustin.periods', {period: period.period, nextPeriod: period.nextPeriod, previousPeriod: period.previousPeriod});
+				dispatchField('iLoveAustin.monthlies.list', period.monthlies || []);
+			});
 	};
 
 	render() {
@@ -51,9 +37,9 @@ class MonthlyDatePicker extends React.Component {
 		return (
 			<div className={classes.root}>
 				<h3 className={classes.sectionTitle}>
-					<Button onClick={() => this.goToPeriod(Periods.LAST)}><ChevronLeftIcon fontSize="small"/></Button>
-					{formatPeriod(Periods.USE)}
-					<Button onClick={() => this.goToPeriod(Periods.NEXT)}><ChevronRightIcon fontSize="small"/></Button>
+					<Button onClick={() => this.goToPeriod(this.props.iLoveAustin.periods.previousPeriod)}><ChevronLeftIcon fontSize="small"/></Button>
+					{this.props.iLoveAustin.periods.period}
+					<Button onClick={() => this.goToPeriod(this.props.iLoveAustin.periods.nextPeriod)}><ChevronRightIcon fontSize="small"/></Button>
 				</h3>
 			</div>
 		);

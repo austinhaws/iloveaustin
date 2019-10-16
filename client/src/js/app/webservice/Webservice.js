@@ -55,13 +55,12 @@ const webservice = {
 	},
 	iLoveAustin: {
 		monthly: {
-			list: period => graphQlWebservice.query(monthlyQuery(period), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.MONTHLY)
-				.then(response => dispatchField('iLoveAustin.monthly.list', response.data.monthlies)),
+			list: period => graphQlWebservice.query(monthlyQuery(period), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.MONTHLY),
 		},
 
 		period: {
 			// month year can be blank to get current period
-			get: (includeMonthlies, month, year) => graphQlWebservice.query(periodQuery(month, year, includeMonthlies))
+			get: (includeMonthlies, period) => graphQlWebservice.query(periodQuery(period, includeMonthlies))
 				.then(result => result.data.period),
 		},
 

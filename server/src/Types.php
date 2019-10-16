@@ -10,20 +10,20 @@ use GraphQL\Type\Definition\NonNull;
 use GraphQL\Type\Definition\StringType;
 use GraphQL\Type\Definition\Type;
 use ILoveAustin\Context\Context;
-use ILoveAustin\Type\AccountType;
 use ILoveAustin\Type\Enum\ImageSizeEnumType;
 use ILoveAustin\Type\Field\HtmlField;
-use ILoveAustin\Type\ImageType;
 use ILoveAustin\Type\Input\ISODateType;
 use ILoveAustin\Type\Input\MonthlyInputType;
 use ILoveAustin\Type\Input\SavingsInputType;
 use ILoveAustin\Type\Input\SnapshotInputType;
-use ILoveAustin\Type\MonthlyType;
-use ILoveAustin\Type\PeriodType;
-use ILoveAustin\Type\SavingsType;
 use ILoveAustin\Type\Scalar\EmailType;
 use ILoveAustin\Type\Scalar\UrlType;
-use ILoveAustin\Type\SnapshotType;
+use ILoveAustin\Type\Type\AccountType;
+use ILoveAustin\Type\Type\ImageType;
+use ILoveAustin\Type\Type\MonthlyType;
+use ILoveAustin\Type\Type\PeriodType;
+use ILoveAustin\Type\Type\SavingsType;
+use ILoveAustin\Type\Type\SnapshotType;
 
 class Types
 {
