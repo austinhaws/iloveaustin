@@ -3,7 +3,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
-import webservice, {ajaxStatus} from "../../app/webservice/Webservice";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -16,9 +15,6 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from "../../app/Styles";
 import {handleEvent} from "dts-react-common";
-import PropertyCycle from "../../app/PropertyCycle";
-import WebserviceAjaxIds from "../../app/webservice/WebserviceAjaxIds";
-import {dispatchField} from "../../app/Dispatch";
 import MonthlyDatePicker from "./MonthlyDatePicker";
 
 const propTypes = {};
@@ -30,26 +26,7 @@ const mapStateToProps = state => ({
 
 class MonthlyList extends React.Component {
 
-	componentDidMount() {
-		this.checkForUpdates();
-	};
-
-	componentDidUpdate(prevProps, prevState, snapshot) {
-		this.checkForUpdates(prevProps);
-	}
-
-	checkForUpdates = prevProps => {
-		if (
-			!ajaxStatus.isAjaxing(WebserviceAjaxIds.I_LOVE_AUSTIN.MONTHLY) &&
-			(
-				PropertyCycle.propertyChanged(prevProps, this.props, 'iLoveAustin.periods.period') ||
-				this.props.iLoveAustin.monthlies.list === undefined
-			)
-		) {
-			webservice.iLoveAustin.monthly.list(this.props.iLoveAustin.periods.period)
-				.then(response => dispatchField('iLoveAustin.monthlies.list', response.data.monthlies));
-		}
-	};
+	foodWeeksRemainingChange = console.log;
 
 	render() {
 		if (!this.props.iLoveAustin.monthlies.list) {
@@ -85,8 +62,10 @@ class MonthlyList extends React.Component {
 								<TableCell align="right">{toDollarString(monthly.amountGoal)}</TableCell>
 								<TableCell align="right">{toDollarString(monthly.amountSpent)}</TableCell>
 								<TableCell align="right">{toDollarString(Math.max(0, monthly.amountGoal - monthly.amountSpent))}</TableCell>
-								<TableCell align="right">?</TableCell>
-								<TableCell align="right">?</TableCell>
+								<TableCell align="right">{
+									monthly.name === 'Food' ? <input type="text" value={2} onChange={this.foodWeeksRemainingChange}/> : undefined
+								}</TableCell>
+								<TableCell align="right"></TableCell>
 								<TableCell align="right">
 									<Button
 										size="small"

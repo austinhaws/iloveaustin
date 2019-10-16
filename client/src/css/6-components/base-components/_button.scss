@@ -60,10 +60,13 @@ button {
 		background: white;
 		cursor: default;
 
-		&.button--solid {
-			color: $gray05;
-			background: $gray30;
-			border-color: $gray30;
+		&.button--solid,
+		&.button--solid.complementary,
+		&.button--solid.secondary,
+		&.button--solid.neutral {
+				color: $gray05;
+				background: $gray30;
+				border-color: $gray30;
 		}
 	}
 

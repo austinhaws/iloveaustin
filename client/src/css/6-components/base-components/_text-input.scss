@@ -12,6 +12,7 @@ input[type=password] {
 	padding: 0 10px;
 	font-family: $fixedWidthFont;
 	font-weight: $fixedWidthFontBaseWeight;
+	vertical-align: middle;
 
 	.error & {
 		border: $formErrorBorder;

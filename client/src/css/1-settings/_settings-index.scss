@@ -59,16 +59,28 @@ $error: #FF5A36;
 // DROP SHADOW COLOR - see elevation mixin below
 $dsc: rgb(0,0,0);
 
+$alertsDefaultColor: $gray70;
+$alertsSuccessColor: #157d26;
+$alertsWarningColor: #a30000;
+$alertsPrimaryColor: $primaryColor;
+$alertsComplimentaryColor: $complementaryColor;
+$alertsSecondaryColor: $secondaryColor;
+
 // FONT SIZES
 $baseFontSize: 16px;
-$smallFontSize: 0.8rem;
-$vsmallFontSize: 0.7rem;
+$xsmallFontSize: 0.7rem;
+$vsmallFontSize: 0.8rem;
+$smallFontSize: 0.9rem;
+$largeFontSize: 1.5rem;
+$vlargeFontSize: 2.0rem;
+$xlargeFontSize: 2.5rem;
 
 // FONTS
 $normalFont: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
 $normalFontBaseWeight: 400;
 $fixedWidthFont: "Source Code Pro", sans-serif;
 $fixedWidthFontBaseWeight: 400;
+$boldFontWeight: 700;
 
 $global-line-height: 1.5rem;
 
@@ -82,6 +94,9 @@ $formElementHeight: 30px;
 $buttonHeight: $formElementHeight;
 $formColor: $gray80;
 $formColorEmpty: $gray50;
+
+//input focus outline color
+$focusColor: #3B99FC;
 
 // FORM ELEMENT SIZES
 $xsmall: 100px;

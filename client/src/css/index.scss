@@ -1,3 +1,21 @@
+/*
+BEM standard: Block, Element, Modifier
+ 	Block: use dashes to separate words:
+ 		- my-react-component
+ 		- super-list
+ 		- cats-r-great
+	Element: use two underscores for elements
+		Elements are children at any level of the Block:
+		- my-react-component__block
+		- super-list__name
+		- super-list__info
+		- cats-r-great__whiskers
+	Modifier: use two dashes for modifiers
+		- my-react-component--alt
+		- super-list--flat
+		- cats-r-great--black
+ */
+
 // variables and settings
 @import "./1-settings/settings-index";
 
@@ -20,11 +38,11 @@
 // @media for each component should be contained with the component.
 @import "./6-components/components-index";
 
-// overall theme options for the above
-@import "./7-themes/themes-index";
-
 // utility classes
-@import "./8-utilities/utilities-index";
+@import "./7-utilities/utilities-index";
+
+// overall theme options for the above
+@import "./8-super/super-index";
 
 // test css, temporary css,
 // this css should eventually be categorized above

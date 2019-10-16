@@ -93,7 +93,8 @@ $menu-width: 275px;
 		font-size: 1.2em;
 	}
 	& .svg-arrow,
-	& .svg-plus {
+	& .svg-plus,
+	& .svg-minus {
 		font-size: 0.8rem;
 		position: absolute;
 		right: 0;
@@ -101,7 +102,8 @@ $menu-width: 275px;
 		transform: translateY(-50%);
 		fill: $gray40;
 	}
-	& .svg-plus {
+	& .svg-plus,
+	& .svg-minus {
 		font-size: 0.7rem;
 	}
 }

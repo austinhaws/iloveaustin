@@ -8,6 +8,9 @@ $popover-arrow-color: $gray50;
 
 	&__anchor {
 		display: inline-block;
+		.full-width & {
+			width: $fullWidth;
+		}
 	}
 
 	&__popup {

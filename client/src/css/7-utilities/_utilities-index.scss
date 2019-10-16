@@ -3,6 +3,8 @@
 utility classes, atomic css
 */
 
+@import "animation";
+
 /* --------- Flex --------- */
 .flex {
 	display: flex;
@@ -60,23 +62,32 @@ utility classes, atomic css
 	flex: 2 1 0;
 }
 
-/* --------- Utility Classes --------- */
-.center-text, .text-center {
+/* --------- Text Classes --------- */
+.text-center, .center-text {
 	text-align: center;
 }
 
-.text-right {
+.text-right, .right-text {
 	text-align: right;
 }
 
-.text-left {
+.text-left, .left-text {
 	text-align: left;
 }
 
-.text-red {
+.text-red, .red-text {
 	color: $red;
 }
 
+.text-bold, .bold-text {
+	font-weight: $boldFontWeight;
+}
+
+.text-italic, .italic-text {
+	font-style: italic;
+}
+
+/* ---- Foreground and Background Utility Colors ---- */
 .color-primary {
 	color: $primaryColor;
 }
@@ -92,8 +103,33 @@ utility classes, atomic css
 .color-neutral {
 	color: $neutralColor;
 }
+.color-complimentary {
+	color: $complementaryColor;
+}
+.color-white {
+	color: white;
+}
 
+.bg-primary {
+	background-color: $primaryColor;
+}
+.bg-secondary {
+	background-color: $secondaryColor;
+}
+.bg-tertiary {
+	background-color: $tertiaryColor;
+}
+.bg-quaternary {
+	background-color: $quaternaryColor;
+}
+.bg-neutral {
+	background-color: $neutralColor;
+}
+.bg-complimentary {
+	background-color: $complementaryColor;
+}
 
+/* ----- Positioning ---- */
 .hcenter {
 	position: absolute;
 	left: 50%;
@@ -123,6 +159,7 @@ utility classes, atomic css
 	margin: 0 auto;
 }
 
+/* ---- Spacing and Padding --- */
 .mt-spacing {
 	margin-top: $global-spacing-unit;
 }
@@ -136,6 +173,24 @@ utility classes, atomic css
 	margin-left: $global-spacing-unit;
 }
 
+.mt-zero {
+	margin-top: 0;
+}
+.mb-zero {
+	margin-bottom: 0;
+}
+.mr-zero {
+	margin-right: 0;
+}
+.ml-zero {
+	margin-left: 0;
+}
+
+.p-spacing {
+	padding: $global-spacing-unit;
+}
+
+/* ---- Display ---- */
 .visually-hidden {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -147,12 +202,34 @@ utility classes, atomic css
 	width: 1px;
 }
 
+.hidden {
+	display: none;
+}
+
+.block {
+	display: block;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+/* ---- Float ---- */
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
 .clearfix:after {
 	content: "";
 	display: table;
 	clear: both;
 }
 
+/* ---- elevation appearance - drop shadows ---- */
 .elevation {
 	@include elevation;
 }

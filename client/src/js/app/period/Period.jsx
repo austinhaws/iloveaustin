@@ -18,7 +18,7 @@ const Period = {
 					.then(({monthlies, ...period}) =>
 						dispatchUpdates([
 							createPathActionPayload('iLoveAustin.periods', period),
-							createPathActionPayload('iLoveAustin.monthlies.list', monthlies),
+							createPathActionPayload('iLoveAustin.monthlies.list', monthlies || []),
 						])
 					);
 			} else {

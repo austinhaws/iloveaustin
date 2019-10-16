@@ -1,0 +1,10 @@
+.file-input {
+	&--skin {
+		input[type=file] {
+			visibility: hidden;
+		}
+	}
+	&__skin-wrapper {
+		display: inline-block;
+	}
+}
