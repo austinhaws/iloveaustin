@@ -3,7 +3,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
-import * as PropTypes from "prop-types";
 import webservice from "../../app/webservice/Webservice";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -19,18 +18,11 @@ import styles from "../../app/Styles";
 import {handleEvent} from "dts-react-common";
 import {comparePeriod, Periods} from "../../app/Period";
 
-const propTypes = {
-	editMonthly: PropTypes.func.isRequired,
-	deleteMonthly: PropTypes.func.isRequired,
-	periods: PropTypes.object,
-};
-const defaultProps = {
-	periods: undefined,
-};
+const propTypes = {};
+const defaultProps = {};
 const mapStateToProps = state => ({
 	app: state.app,
 	iLoveAustin: state.iLoveAustin,
-	periods: state.periods,
 });
 
 class MonthlyList extends React.Component {
@@ -41,7 +33,9 @@ class MonthlyList extends React.Component {
 	}
 
 	componentDidMount() {
-		webservice.iLoveAustin.monthly.list();
+		if (this.props.iLoveAustin.periods) {
+			webservice.iLoveAustin.monthly.list(this.props.iLoveAustin.periods);
+		}
 	};
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -54,7 +48,7 @@ class MonthlyList extends React.Component {
 	}
 
 	render() {
-		if (!this.props.monthlies.list) {
+		if (!this.props.iLoveAustin.monthlies.list) {
 			return null;
 		}
 

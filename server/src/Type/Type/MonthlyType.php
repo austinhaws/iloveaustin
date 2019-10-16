@@ -1,5 +1,5 @@
 <?php
-namespace ILoveAustin\Type;
+namespace ILoveAustin\Type\Type;
 
 use ILoveAustin\Types;
 

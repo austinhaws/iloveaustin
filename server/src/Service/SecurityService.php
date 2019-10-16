@@ -1,8 +1,28 @@
 <?php
 namespace ILoveAustin\Service;
 
+use ILoveAustin\Model\Account;
+
 class SecurityService extends BaseService
 {
+	/** @var Account the currently logged in account user based on the google tokenid used in the request */
+	private $currentAccount = null;
+
+	/**
+	 * @return Account|null
+	 */
+	public function getAccount()
+	{
+		if (!$this->currentAccount) {
+			// check if maybe on the header it's got account information
+			$account = $this->getAccountIdFromGoogleHeader(null, null);
+			if ($account) {
+				$this->currentAccount = new Account($account);
+			}
+		}
+		return $this->currentAccount;
+	}
+
 	public function getAccountIdFromGoogleHeader($rootValue, $args)
 	{
 		// taken from Authorization parameter or from Authorization header with precedence to parameter for login

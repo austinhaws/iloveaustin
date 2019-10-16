@@ -11,9 +11,9 @@ class PeriodService extends BaseService
 			$period = date('n/Y');
 		}
 		return [
+			'previousPeriod' => $this->movePeriod($period, -1),
 			'period' => $period,
-			// this graphql library doesn't have a true data loader child gatherer, so don't worry about it for now
-			'monthlies' => $this->context->daos->monthly->selectMonthliesForAccountIdPeriod($this->context->getAccount()->id, $period),
+			'nextPeriod' => $this->movePeriod($period, 1),
 		];
 	}
 
@@ -24,7 +24,7 @@ class PeriodService extends BaseService
 		$result = $this->getPeriod($rootValue, ['period' => $nextPeriod]);
 
 		if ((!$result['monthlies']) && $args['copyForward']) {
-			$this->context->daos->monthly->copyForwardMonthliesForAccountIdPeriod($this->context->getAccount()->id, $period, $nextPeriod);
+			$this->context->daos->monthly->copyForwardMonthliesForAccountIdPeriod($this->context->services->security->getAccount()->id, $period, $nextPeriod);
 			$result = $this->getPeriod($rootValue, ['period' => $nextPeriod]);
 		}
 

@@ -1,5 +1,5 @@
 <?php
-namespace ILoveAustin\Type;
+namespace ILoveAustin\Type\Type;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;

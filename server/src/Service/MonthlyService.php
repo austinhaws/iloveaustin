@@ -8,12 +8,12 @@ class MonthlyService extends BaseService
 {
 	public function selectMonthlies($rootValue, $args)
 	{
-		return $this->context->daos->monthly->selectMonthliesForAccountIdPeriod($this->context->getAccount()->id, $args['period']);
+		return $this->context->daos->monthly->selectMonthliesForAccountIdPeriod($this->context->services->security->getAccount()->id, $args['period']);
 	}
 
 	public function saveMonthly($rootValue, $args)
 	{
-		$account = $this->context->getAccount();
+		$account = $this->context->services->security->getAccount();
 
 		$monthly = Types::monthlyInput()->convertFieldsToDB($args['monthly']);
 		if (isset($monthly['id'])) {
@@ -36,10 +36,15 @@ class MonthlyService extends BaseService
 
 	private function testMonthlyBelongsToAccount($monthlyId)
 	{
-		$account = $this->context->getAccount();
+		$account = $this->context->services->security->getAccount();
 		$oldMonthly = $this->context->daos->monthly->selectMonthlyById($monthlyId);
 		if ($oldMonthly['account_id'] !== $account->id) {
 			throw new SecurityException('Monthly does not belong to this account');
 		}
+	}
+
+	public function selectMonthliesForPeriods(array $periods)
+	{
+		return $this->context->daos->monthly->selectMonthliesForAccountIdPeriods($this->context->services->security->getAccount()->id, $periods);
 	}
 }

@@ -2,36 +2,27 @@
 
 namespace ILoveAustin\Context;
 
-use ILoveAustin\Model\Account;
-
 class Context
 {
+	/** @var DataLoaders */
+	public $dataLoaders;
 	/** @var Daos */
 	public $daos;
 	/** @var Services */
 	public $services;
-	/** @var Account the currently logged in account user based on the google tokenid used in the request */
-	private $currentAccount;
+
+	/** @var Context */
+	public static $instance;
 
 	public function __construct()
 	{
+		$this->dataLoaders = new DataLoaders($this);
 		$this->daos = new Daos($this);
 		$this->services = new Services($this);
-		$this->currentAccount = null;
-	}
 
-	/**
-	 * @return Account|null
-	 */
-	public function getAccount()
-	{
-		if (!$this->currentAccount) {
-			// check if maybe on the header it's got account information
-			$account = $this->services->security->getAccountIdFromGoogleHeader(null, null);
-			if ($account) {
-				$this->currentAccount = new Account($account);
-			}
+		if (Context::$instance) {
+			throw new \RuntimeException('Context already created!');
 		}
-		return $this->currentAccount;
+		Context::$instance = $this;
 	}
 }
