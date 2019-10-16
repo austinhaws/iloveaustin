@@ -22,7 +22,41 @@
 		max-width: none;
 		margin: 0;
 	}
+
+	code {
+		white-space: pre-wrap;
+		word-wrap: normal;
+		background: $complementaryColorLight;
+		color: $complementaryColor;
+		border-radius: $formBorderRadius;
+		padding: 2px 4px;
+	}
 }
 p.content {
 	margin: 0 auto $global-spacing-unit;
+}
+
+.json-results, .example-results {
+	background: $gray05;
+	font: $fixedWidthFont;
+	border-radius: $formBorderRadius;
+	padding: $global-spacing-unit-small;
+	color: $primaryColor;
+	max-height: 400px;
+	min-height: 100px;
+	overflow-y: scroll;
+	white-space: pre;
+}
+
+.form-icon-info {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 0 0 $global-spacing-unit-small;
+	svg {
+		font-size: $largeFontSize;
+		fill: $primaryColor;
+		&:hover {
+			fill: $primaryColorDark;
+		}
+	}
 }

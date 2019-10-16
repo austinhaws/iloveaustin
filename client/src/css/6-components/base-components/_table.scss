@@ -14,6 +14,10 @@ table {
 			background: $primaryColor;
 			color: #ffffff;
 		}
+		&.drag-drop-is-over {
+			background: $primaryColor;
+			color: #ffffff;
+		}
 		&.mouse-over a {
 			color: #ffffff;
 		}
@@ -49,7 +53,7 @@ table {
 			&.sortable {
 				position: relative;
 				cursor: pointer;
-				&.headerSortUp, &.headerSortDown {
+				&.sortAscending, &.sortDescending {
 					border-bottom: 4px solid $primaryColor;
 					padding: 0.5rem 1rem 0.5rem 0.5rem;
 					&::after {
@@ -60,15 +64,16 @@ table {
 						height: 6px;
 						border: solid $primaryColor;
 						border-width: 0 2px 2px 0;
-						right: 10px;
-						top: 50%;
-						transform: rotate(45deg) translateY(-50%);
+						top: calc(50% - 4px);
+						right: 5px;
+						transform: rotate(-135deg) translateY(-50%);
 					}
 				}
-				&.headerSortDown {
+				&.sortDescending {
 					&::after {
-						transform: rotate(-135deg) translateY(-50%);
-						right: 5px;
+						top: calc(50% - 3px);
+						right: 10px;
+						transform: rotate(45deg) translateY(-50%);
 					}
 				}
 			}
@@ -89,12 +94,48 @@ table {
 					border-right: none;
 				}
 			}
-			& input[type="text"] {
+
+			div.table-date-filter {
+				div.popover__anchor {
+					width: 100%;
+					div.date-range-filter-placeholder {
+						color: $gray13;
+						font-family: $fixedWidthFont;
+						user-select: none;
+					}
+				}
+				&__current-value {
+					margin: $global-spacing-unit-tiny;
+					text-align: center;
+					font-size: $smallFontSize;
+					color: $primaryColor;
+				}
+				&__from {
+					padding-bottom: $global-spacing-unit-tiny;
+					border-bottom: 1px solid $gray13;
+				}
+				&__to {
+					padding-top: $global-spacing-unit-tiny;
+				}
+			}
+			.react-select__single-value,
+			.react-select__multi-value__label,
+			.filter-input {
+				color: $primaryColor;
+			}
+
+			& svg.filter-icon {
+				fill: $gray13;
+				position: absolute;
+				height: 12px;
+				padding: 9px 4px;
+			}
+			& input[type="text"],
+			div.date-range-filter-placeholder {
 				border: none;
-				padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+				padding: 5px 10px 5px 1.5rem;
 				width: 100%;
-				background: url(../static/img/search-icon.svg) transparent no-repeat center left 0.5rem;
-				background-size: auto 12px;
+				background: transparent;
 				&::placeholder {
 					color: $gray13;
 				}

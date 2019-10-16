@@ -9,8 +9,10 @@ component specific, BEM (Block, Element, Modifier)
 @import "base-components/calendar-input";
 @import "base-components/check-box";
 @import "base-components/collapsible-section";
+@import "base-components/file-input";
 @import "base-components/form-error";
 @import "base-components/input-container";
+@import "base-components/message-popup";
 @import "base-components/pop-over";
 @import "base-components/popup-window";
 @import "base-components/segmented-button";
@@ -25,3 +27,4 @@ component specific, BEM (Block, Element, Modifier)
 @import "project-components/main-menu";
 @import "project-components/markdown-content";
 @import "project-components/formValidationExample";
+@import "project-components/status-message";

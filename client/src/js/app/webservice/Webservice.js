@@ -1,4 +1,4 @@
-import {AjaxStatusCore, WebserviceCore} from "dts-react-common";
+import {AjaxStatusCore, MessagePopupCore, objectAtPath, WebserviceCore} from "dts-react-common";
 import store from "../ReduxStore";
 import {createPathActionPayload, dispatchField, dispatchUpdates} from "../Dispatch";
 import WEBSERVICE_AJAX_IDS from "./WebserviceAjaxIds";
@@ -38,6 +38,14 @@ const graphQlWebservice = new GraphQLCore({
 	ajaxStatusCore: ajaxStatusCore,
 	jsLogging: undefined,
 	loadDefaultsCallback: defaults => defaults.headers.common['Authorization'] = store.getState().app.googleTokenId,
+	rawPromiseCallback: promise => promise.then(data => {
+		const errors = objectAtPath(data, 'data.errors');
+		if (errors) {
+			MessagePopupCore.addMessage({title: 'Webservice Communication Interruption', message: errors[0].message});
+			throw errors[0].message;
+		}
+		return data;
+	}),
 });
 
 

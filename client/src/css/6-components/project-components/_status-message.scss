@@ -1,0 +1,23 @@
+.status-message {
+	margin: 0 0 $global-spacing-unit 0;
+
+	&__label {
+		background: $neutralColorDark;
+		color: white;
+		border-top-left-radius: $formElementHeight;
+		border-bottom-left-radius: $formElementHeight;
+		display: inline-block;
+		padding: $global-spacing-unit-small $global-spacing-unit;
+	}
+	&__info {
+		background: $secondaryColor;
+		color: white;
+		border-top-right-radius: $formElementHeight;
+		border-bottom-right-radius: $formElementHeight;
+		display: inline-block;
+		padding: $global-spacing-unit-small $global-spacing-unit;
+	}
+	&--warning {
+		background: $complementaryColor;
+	}
+}

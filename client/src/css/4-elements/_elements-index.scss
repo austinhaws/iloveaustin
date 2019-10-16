@@ -41,3 +41,9 @@ a {
 	height: 1em;
 	width: 1em;
 }
+
+hr {
+	border: 0;
+	border-top: 1px solid $gray20;
+	margin: 0 0 $global-spacing-unit 0;
+}

@@ -9,6 +9,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import MainAppBar from "./MainAppBar";
 import History from './history/History';
 import * as PropTypes from "prop-types";
+import {MessagePopupCore} from "dts-react-common";
+import "../../css/index.scss";
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
@@ -35,7 +37,8 @@ class AppClass extends React.Component {
 
 				<MainAppBar/>
 
-				{this.props.periods ? <AppRoutes {...this.props}/> : undefined}
+				<AppRoutes/>
+				<MessagePopupCore/>
 			</React.Fragment>
 		);
 	}

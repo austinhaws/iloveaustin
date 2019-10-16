@@ -1,7 +1,7 @@
 .calendar-input__wrapper {
-	&> div {
+	&> .react-datepicker-wrapper {
 		display: inline-block;
-		vertical-align: top;
+		vertical-align: middle;
 		height: $formElementHeight;
 	}
 	&> input[type=text] {
