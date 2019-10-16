@@ -39,11 +39,6 @@ class MonthlyList extends React.Component {
 	}
 
 	checkForUpdates = prevProps => {
-console.log('monthly list: check for updates', {
-	isAjaxing: ajaxStatus.isAjaxing(WebserviceAjaxIds.I_LOVE_AUSTIN.MONTHLY),
-	propertyChanged: PropertyCycle.propertyChanged(prevProps, this.props, 'iLoveAustin.periods.period'),
-	monthlies: this.props.iLoveAustin.monthlies.list,
-});
 		if (
 			!ajaxStatus.isAjaxing(WebserviceAjaxIds.I_LOVE_AUSTIN.MONTHLY) &&
 			(
