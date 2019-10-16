@@ -16,6 +16,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import styles from "../../app/Styles";
 import {handleEvent} from "dts-react-common";
 import MonthlyDatePicker from "./MonthlyDatePicker";
+import LocalStorage from "../../app/localstorage/LocalStorage";
 
 const propTypes = {};
 const defaultProps = {};
@@ -26,7 +27,28 @@ const mapStateToProps = state => ({
 
 class MonthlyList extends React.Component {
 
-	foodWeeksRemainingChange = console.log;
+	constructor(props) {
+		super(props);
+		this.state = {
+			foodWeeksRemaining: LocalStorage.foodWeeksRemaining.get() || 0,
+		};
+	}
+
+	foodWeeksRemainingChange = e => {
+		const newValue = parseInt(e.target.value, 10);
+		LocalStorage.foodWeeksRemaining.set(newValue);
+		this.setState({foodWeeksRemaining: newValue});
+	};
+
+	foodWeekInfo = monthlies => {
+		const foodMonthly = (monthlies || [])
+			.filter(monthly => monthly.name === 'Food')
+			.shift();
+		return {
+			weeksRemaining: this.state.foodWeeksRemaining || 0,
+			weeklyAllotment: Math.max(0, foodMonthly.amountGoal - foodMonthly.amountSpent) / this.state.foodWeeksRemaining,
+		};
+	};
 
 	render() {
 		if (!this.props.iLoveAustin.monthlies.list) {
@@ -35,6 +57,7 @@ class MonthlyList extends React.Component {
 
 		const {classes} = this.props;
 		const monthlies = this.props.iLoveAustin.monthlies.list;
+		const foodWeekInfo = this.foodWeekInfo(this.props.iLoveAustin.monthlies.list);
 		return (
 			<Paper className={classes.root}>
 				<MonthlyDatePicker/>
@@ -63,9 +86,11 @@ class MonthlyList extends React.Component {
 								<TableCell align="right">{toDollarString(monthly.amountSpent)}</TableCell>
 								<TableCell align="right">{toDollarString(Math.max(0, monthly.amountGoal - monthly.amountSpent))}</TableCell>
 								<TableCell align="right">{
-									monthly.name === 'Food' ? <input type="text" value={2} onChange={this.foodWeeksRemainingChange}/> : undefined
+									monthly.name === 'Food' ? <input className={classes.inputSizeSmall} type="text" value={foodWeekInfo.weeksRemaining} onChange={this.foodWeeksRemainingChange}/> : undefined
 								}</TableCell>
-								<TableCell align="right"></TableCell>
+								<TableCell align="right">{
+									monthly.name === 'Food' ? toDollarString(foodWeekInfo.weeklyAllotment) : undefined
+								}</TableCell>
 								<TableCell align="right">
 									<Button
 										size="small"
@@ -81,12 +106,13 @@ class MonthlyList extends React.Component {
 						))}
 					</TableBody>
 					<TableFooter>
-						{/*<TableRow>*/}
-						{/*	<TableCell align="right">Totals:</TableCell>*/}
-						{/*	<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</b></TableCell>*/}
-						{/*	<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</b></TableCell>*/}
-						{/*	<TableCell/>*/}
-						{/*</TableRow>*/}
+						<TableRow>
+							<TableCell align="right">Totals:</TableCell>
+							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.monthlies.totals.amountGoal)}</b></TableCell>
+							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.monthlies.totals.amountSpent)}</b></TableCell>
+							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.monthlies.totals.amountLeft)}</b></TableCell>
+							<TableCell/>
+						</TableRow>
 					</TableFooter>
 				</Table>
 			</Paper>

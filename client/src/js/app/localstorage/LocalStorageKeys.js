@@ -1,4 +1,5 @@
 export default {
-	GOOGLE_TOKEN_ID: 'google-token-id',
 	CURRENT_PERIOD: 'last-seen-period',
+	FOOD_WEEKS_REMAINING: 'food-weeks-remaining',
+	GOOGLE_TOKEN_ID: 'google-token-id',
 };
