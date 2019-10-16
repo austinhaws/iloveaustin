@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 import styles from "../app/Styles";
+import MonthlyList from "./monthly/MonthlyList";
 
 const propTypes = {};
 const defaultProps = {};
@@ -18,7 +19,7 @@ class Budget extends React.Component {
 		const {classes} = this.props;
 		return (
 			<div className={classes.root}>
-				{/*<Monthly {...this.props} />*/}
+				<MonthlyList/>
 				Wells Fargo Balance = $5892.00
 				add new monthly
 				monthlies table

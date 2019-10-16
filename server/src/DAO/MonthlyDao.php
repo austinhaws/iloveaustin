@@ -44,4 +44,9 @@ class MonthlyDao
 	{
 		return DB::queryFirstRow("SELECT * FROM monthly WHERE id = %i", $id);
 	}
+
+	public function selectMonthliesForAccountIdPeriods(int $accountId, array $periods)
+	{
+		return DB::query("SELECT * FROM monthly WHERE account_id = %i AND period IN %ls", $accountId, $periods);
+	}
 }
