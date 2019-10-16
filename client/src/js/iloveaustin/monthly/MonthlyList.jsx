@@ -39,9 +39,17 @@ class MonthlyList extends React.Component {
 	}
 
 	checkForUpdates = prevProps => {
+console.log('monthly list: check for updates', {
+	isAjaxing: ajaxStatus.isAjaxing(WebserviceAjaxIds.I_LOVE_AUSTIN.MONTHLY),
+	propertyChanged: PropertyCycle.propertyChanged(prevProps, this.props, 'iLoveAustin.periods.period'),
+	monthlies: this.props.iLoveAustin.monthlies.list,
+});
 		if (
 			!ajaxStatus.isAjaxing(WebserviceAjaxIds.I_LOVE_AUSTIN.MONTHLY) &&
-			PropertyCycle.propertyChanged(prevProps, this.props, 'iLoveAustin.periods.period')
+			(
+				PropertyCycle.propertyChanged(prevProps, this.props, 'iLoveAustin.periods.period') ||
+				this.props.iLoveAustin.monthlies.list === undefined
+			)
 		) {
 			webservice.iLoveAustin.monthly.list(this.props.iLoveAustin.periods.period)
 				.then(response => dispatchField('iLoveAustin.monthlies.list', response.data.monthlies));
@@ -79,8 +87,9 @@ class MonthlyList extends React.Component {
 								onClick={() => console.log('edit monthly', monthly)}
 							>
 								<TableCell component="th" scope="row">{monthly.name}</TableCell>
-								<TableCell align="right">{toDollarString(monthly.amountGaol)}</TableCell>
+								<TableCell align="right">{toDollarString(monthly.amountGoal)}</TableCell>
 								<TableCell align="right">{toDollarString(monthly.amountSpent)}</TableCell>
+								<TableCell align="right">{toDollarString(Math.max(0, monthly.amountGoal - monthly.amountSpent))}</TableCell>
 								<TableCell align="right">?</TableCell>
 								<TableCell align="right">?</TableCell>
 								<TableCell align="right">
