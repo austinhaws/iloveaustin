@@ -7,6 +7,7 @@ const storageItem = key => ({
 });
 
 export default {
+	foodWeeksRemaining: storageItem(LocalStorageKeys.FOOD_WEEKS_REMAINING),
 	googleTokenId: storageItem(LocalStorageKeys.GOOGLE_TOKEN_ID),
 	period: storageItem(LocalStorageKeys.CURRENT_PERIOD),
 }

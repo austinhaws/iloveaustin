@@ -19,12 +19,9 @@ class Budget extends React.Component {
 		const {classes} = this.props;
 		return (
 			<div className={classes.root}>
+				<div>Wells Fargo Balance = $5_348_3.00</div>
 				<MonthlyList/>
-				Wells Fargo Balance = $5892.00
 				add new monthly
-				monthlies table
-				name, goal, spent, left, weeks remaining, weekly allotment, delete
-				totals: goal, spent, left
 
 				{/*<Snapshot {...this.props} />*/}
 			</div>

@@ -40,4 +40,7 @@ export default theme => ({
 	table: {
 		minWidth: 700,
 	},
+	inputSizeSmall: {
+		width: '50px',
+	},
 });

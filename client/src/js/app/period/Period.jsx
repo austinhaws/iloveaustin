@@ -2,6 +2,7 @@ import reduxStore, {dispatchDefaultState} from "../ReduxStore";
 import webservice from "../webservice/Webservice";
 import LocalStorage from "../localstorage/LocalStorage";
 import {createPathActionPayload, dispatchUpdates} from "../Dispatch";
+import React from "react";
 
 const Period = {
 	/**
@@ -19,6 +20,7 @@ const Period = {
 						dispatchUpdates([
 							createPathActionPayload('iLoveAustin.periods', period),
 							createPathActionPayload('iLoveAustin.monthlies.list', monthlies || []),
+							createPathActionPayload('iLoveAustin.monthlies.totals', Period.totalMonthlies(monthlies)),
 						])
 					);
 			} else {
@@ -44,6 +46,15 @@ const Period = {
 		// reload data using the newly set period
 		Period.current();
 	},
+
+	totalMonthlies: monthlies => (monthlies || []).reduce((totals, monthly) => {
+		const amountGoal = parseInt(monthly.amountGoal, 10) || 0;
+		const amountSpent = parseInt(monthly.amountSpent, 10) || 0;
+		totals.amountGoal += amountGoal;
+		totals.amountSpent += amountSpent;
+		totals.amountLeft += Math.max(0, amountGoal - amountSpent);
+		return totals;
+	}, {amountGoal: 0, amountSpent: 0, amountLeft: 0}),
 };
 
 export default Period;
