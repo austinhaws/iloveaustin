@@ -18,4 +18,6 @@ export default {
 		]);
 		Pages.iLoveAustin.home.forward();
 	},
+
+	isSignedIn: () => !!reduxStore.getState().app.googleTokenId,
 }

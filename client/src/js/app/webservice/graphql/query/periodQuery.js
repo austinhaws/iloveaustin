@@ -1,8 +1,8 @@
 import periodType from "../type/periodType";
 
-export default (month, year, includeMonthlies) => `
+export default (period, includeMonthlies) => `
 {
-  period${(month && year) ? `(${month}/${year})` : ''} {
+  period${period ? `(period: "${period}")` : ''} {
   	${periodType(includeMonthlies)}
   }
 }

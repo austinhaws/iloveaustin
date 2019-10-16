@@ -19,6 +19,7 @@ const propTypes = {
 const defaultProps = {
 	periods: undefined,
 };
+const mapStateToProps = state => ({periods: state.iLoveAustin.periods});
 
 class AppClass extends React.Component {
 
@@ -28,7 +29,7 @@ class AppClass extends React.Component {
 		}
 		History.set(this.props.history);
 
-		webservice.iLoveAustin.period.get(false, undefined, undefined)
+		webservice.iLoveAustin.period.get(false, undefined)
 			.then(dispatchFieldCurry('iLoveAustin.periods'));
 	}
 
@@ -48,10 +49,10 @@ class AppClass extends React.Component {
 AppClass.propTypes = propTypes;
 AppClass.defaultProps = defaultProps;
 
-const App = withRouter(connect()(AppClass));
+const App = withRouter(connect(mapStateToProps)(AppClass));
 
 
-// This will correctly set the basename so router works, if you're using an awesome vhost or not.
+// This will correctly set the basename so router works
 const app = '/';
 const examplePos = window.location.pathname.indexOf(app);
 const baseName = examplePos === -1 ? '/' : window.location.pathname.substr(0, examplePos + app.length);

@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
-import webservice from "../../app/webservice/Webservice";
+import webservice, {ajaxStatus} from "../../app/webservice/Webservice";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -16,7 +16,10 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from "../../app/Styles";
 import {handleEvent} from "dts-react-common";
-import {comparePeriod, Periods} from "../../app/Period";
+import PropertyCycle from "../../app/PropertyCycle";
+import WebserviceAjaxIds from "../../app/webservice/WebserviceAjaxIds";
+import {dispatchField} from "../../app/Dispatch";
+import MonthlyDatePicker from "./MonthlyDatePicker";
 
 const propTypes = {};
 const defaultProps = {};
@@ -27,25 +30,23 @@ const mapStateToProps = state => ({
 
 class MonthlyList extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.fetchingPeriod = undefined;
-	}
-
 	componentDidMount() {
-		if (this.props.iLoveAustin.periods) {
-			webservice.iLoveAustin.monthly.list(this.props.iLoveAustin.periods);
-		}
+		this.checkForUpdates();
 	};
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
-		if (prevProps.periods && this.props.periods &&
-			comparePeriod(prevProps.periods[Periods.USE], this.props.periods[Periods.USE]) &&
-			(!this.fetchingPeriod || comparePeriod(this.fetchingPeriod, this.props.periods[Periods.USE]))) {
-			this.fetchingPeriod = {...this.props.periods[Periods.USE]};
-			webservice.iLoveAustin.monthly.list(this.fetchingPeriod);
-		}
+		this.checkForUpdates(prevProps);
 	}
+
+	checkForUpdates = prevProps => {
+		if (
+			!ajaxStatus.isAjaxing(WebserviceAjaxIds.I_LOVE_AUSTIN.MONTHLY) &&
+			PropertyCycle.propertyChanged(prevProps, this.props, 'iLoveAustin.periods.period')
+		) {
+			webservice.iLoveAustin.monthly.list(this.props.iLoveAustin.periods.period)
+				.then(response => dispatchField('iLoveAustin.monthlies.list', response.data.monthlies));
+		}
+	};
 
 	render() {
 		if (!this.props.iLoveAustin.monthlies.list) {
@@ -53,34 +54,42 @@ class MonthlyList extends React.Component {
 		}
 
 		const {classes} = this.props;
+		const monthlies = this.props.iLoveAustin.monthlies.list;
 		return (
 			<Paper className={classes.root}>
+				<MonthlyDatePicker/>
 				<Table className={classes.table}>
 					<TableHead>
 						<TableRow>
 							<TableCell>Name</TableCell>
 							<TableCell align="right">Goal</TableCell>
-							<TableCell align="right">Current</TableCell>
+							<TableCell align="right">Spent</TableCell>
+							<TableCell align="right">Left</TableCell>
+							<TableCell align="right">Weeks Remaining</TableCell>
+							<TableCell align="right">Weekly Allotment</TableCell>
+							<TableCell align="right"></TableCell>
 							<TableCell/>
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{this.props.iLoveAustin.snapshots.map(snapshot => (
+						{monthlies.map(monthly => (
 							<TableRow
 								className={classes.bodyTableRow}
-								key={snapshot.id}
-								onClick={() => this.props.editSnapshot(snapshot)}
+								key={monthly.id}
+								onClick={() => console.log('edit monthly', monthly)}
 							>
-								<TableCell component="th" scope="row">{snapshot.name}</TableCell>
-								<TableCell align="right">{toDollarString(snapshot.amt_goal)}</TableCell>
-								<TableCell align="right">{toDollarString(snapshot.amt_current)}</TableCell>
+								<TableCell component="th" scope="row">{monthly.name}</TableCell>
+								<TableCell align="right">{toDollarString(monthly.amountGaol)}</TableCell>
+								<TableCell align="right">{toDollarString(monthly.amountSpent)}</TableCell>
+								<TableCell align="right">?</TableCell>
+								<TableCell align="right">?</TableCell>
 								<TableCell align="right">
 									<Button
 										size="small"
 										variant="contained"
 										color="secondary"
 										className={classes.button}
-										onClick={handleEvent(() => this.props.deleteSnapshot(snapshot))}
+										onClick={handleEvent(() => console.log('delete monthly', monthly))}
 									>
 										<DeleteIcon fontSize="small" className={classes.rightIcon}/>
 									</Button>
@@ -89,18 +98,12 @@ class MonthlyList extends React.Component {
 						))}
 					</TableBody>
 					<TableFooter>
-						<TableRow>
-							<TableCell align="right">Totals:</TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</b></TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</b></TableCell>
-							<TableCell/>
-						</TableRow>
-						<TableRow>
-							<TableCell align="right">No Wells Fargo Totals:</TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotalsNoWells.goal)}</b></TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotalsNoWells.current)}</b></TableCell>
-							<TableCell/>
-						</TableRow>
+						{/*<TableRow>*/}
+						{/*	<TableCell align="right">Totals:</TableCell>*/}
+						{/*	<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</b></TableCell>*/}
+						{/*	<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</b></TableCell>*/}
+						{/*	<TableCell/>*/}
+						{/*</TableRow>*/}
 					</TableFooter>
 				</Table>
 			</Paper>

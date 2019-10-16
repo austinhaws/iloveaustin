@@ -66,6 +66,7 @@ class Monthly extends React.Component {
 
 	render() {
 		const {classes} = this.props;
+		return <div>what the heck?!</div>;
 		return (
 			<div className={classes.root}>
 				<MonthlyDatePicker/>
