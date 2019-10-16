@@ -1,9 +1,16 @@
 import LocalStorageKeys from "./LocalStorageKeys";
 
-export default {
-	googleTokenId: {
-		get: () => localStorage.getItem(LocalStorageKeys.GOOGLE_TOKEN_ID),
-		set: tokenId => localStorage.setItem(LocalStorageKeys.GOOGLE_TOKEN_ID, tokenId),
-		remove: () => localStorage.removeItem(LocalStorageKeys.GOOGLE_TOKEN_ID),
+const storageItem = key => ({
+	get: () => {
+		const result = localStorage.getItem(key);
+		console.log('localstorage', {[key]: result});
+		return result;
 	},
+	set: value => localStorage.setItem(key, value),
+	remove: () => localStorage.removeItem(key),
+});
+
+export default {
+	googleTokenId: storageItem(LocalStorageKeys.GOOGLE_TOKEN_ID),
+	period: storageItem(LocalStorageKeys.CURRENT_PERIOD),
 }

@@ -4,12 +4,11 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 import * as PropTypes from "prop-types";
-import webservice from "../../app/webservice/Webservice";
 import Button from "@material-ui/core/Button";
 import Styles from "../../app/Styles";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {dispatchField} from "../../app/Dispatch";
+import Period from "../../app/period/Period";
 
 const propTypes = {
 	iLoveAustin: PropTypes.object.isRequired,
@@ -21,25 +20,18 @@ const mapStateToProps = state => ({
 
 class MonthlyDatePicker extends React.Component {
 
-	goToPeriod = newPeriod => {
-		webservice.iLoveAustin.period.get(true, newPeriod)
-			.then(period => {
-				dispatchField('iLoveAustin.periods', {period: period.period, nextPeriod: period.nextPeriod, previousPeriod: period.previousPeriod});
-				dispatchField('iLoveAustin.monthlies.list', period.monthlies || []);
-			});
-	};
-
 	render() {
 		if (!this.props.iLoveAustin.periods) {
+			Period.current();
 			return null;
 		}
 		const {classes} = this.props;
 		return (
 			<div className={classes.root}>
 				<h3 className={classes.sectionTitle}>
-					<Button onClick={() => this.goToPeriod(this.props.iLoveAustin.periods.previousPeriod)}><ChevronLeftIcon fontSize="small"/></Button>
+					<Button onClick={() => Period.moveToPeriod(this.props.iLoveAustin.periods.previousPeriod)}><ChevronLeftIcon fontSize="small"/></Button>
 					{this.props.iLoveAustin.periods.period}
-					<Button onClick={() => this.goToPeriod(this.props.iLoveAustin.periods.nextPeriod)}><ChevronRightIcon fontSize="small"/></Button>
+					<Button onClick={() => Period.moveToPeriod(this.props.iLoveAustin.periods.nextPeriod)}><ChevronRightIcon fontSize="small"/></Button>
 				</h3>
 			</div>
 		);

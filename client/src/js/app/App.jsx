@@ -9,8 +9,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import MainAppBar from "./MainAppBar";
 import History from './history/History';
 import * as PropTypes from "prop-types";
-import webservice from "./webservice/Webservice";
-import {dispatchFieldCurry} from "./Dispatch";
 
 const propTypes = {
 	history: PropTypes.object.isRequired,
@@ -28,9 +26,6 @@ class AppClass extends React.Component {
 			console.error("history does not exist for app");
 		}
 		History.set(this.props.history);
-
-		webservice.iLoveAustin.period.get(false, undefined)
-			.then(dispatchFieldCurry('iLoveAustin.periods'));
 	}
 
 	render() {
