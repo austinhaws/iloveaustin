@@ -46,7 +46,7 @@ class MonthlyList extends React.Component {
 			.shift();
 		return {
 			weeksRemaining: this.state.foodWeeksRemaining || 0,
-			weeklyAllotment: Math.max(0, foodMonthly.amountGoal - foodMonthly.amountSpent) / this.state.foodWeeksRemaining,
+			weeklyAllotment: foodMonthly ? Math.max(0, foodMonthly.amountGoal - foodMonthly.amountSpent) / this.state.foodWeeksRemaining : 0,
 		};
 	};
 

@@ -43,4 +43,13 @@ export default theme => ({
 	inputSizeSmall: {
 		width: '50px',
 	},
+	inputSizeMedium: {
+		width: '100px',
+	},
+	textAlignCenter: {
+		textAlign: 'center'
+	},
+	dateTimePickerInput: {
+		marginRight: '6px',
+	},
 });
