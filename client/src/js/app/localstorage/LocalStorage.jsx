@@ -1,11 +1,7 @@
 import LocalStorageKeys from "./LocalStorageKeys";
 
 const storageItem = key => ({
-	get: () => {
-		const result = localStorage.getItem(key);
-		console.log('localstorage', {[key]: result});
-		return result;
-	},
+	get: () => localStorage.getItem(key),
 	set: value => localStorage.setItem(key, value),
 	remove: () => localStorage.removeItem(key),
 });
