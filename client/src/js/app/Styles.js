@@ -62,4 +62,10 @@ export default theme => ({
 	toolbarMonthlyDatePicker: {
 		marginTop: '11px',
 	},
+	dialogCloseButton: {
+		position: 'absolute',
+		right: theme.spacing.unit,
+		top: theme.spacing.unit,
+		color: theme.palette.grey[500],
+	},
 });

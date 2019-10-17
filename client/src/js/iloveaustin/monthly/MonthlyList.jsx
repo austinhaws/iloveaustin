@@ -20,6 +20,7 @@ import LocalStorage from "../../app/localstorage/LocalStorage";
 import webservice from "../../app/webservice/Webservice";
 import {dispatchField} from "../../app/Dispatch";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import MonthlyEdit from "./MonthlyEdit";
 
 const propTypes = {};
 const defaultProps = {};
@@ -35,6 +36,7 @@ class MonthlyList extends React.Component {
 		this.state = {
 			foodWeeksRemaining: LocalStorage.foodWeeksRemaining.get() || 0,
 			deletingId: undefined,
+			editingMonthly: undefined,
 		};
 	}
 
@@ -62,6 +64,10 @@ class MonthlyList extends React.Component {
 		} else {
 			this.setState({deletingId: monthly.id});
 		}
+	};
+
+	editMonthly = monthly => {
+		this.setState({editingMonthly: monthly});
 	};
 
 	render() {
@@ -109,7 +115,7 @@ class MonthlyList extends React.Component {
 							<TableRow
 								className={classes.bodyTableRow}
 								key={monthly.id}
-								onClick={() => console.log('edit monthly', monthly)}
+								onClick={() => this.editMonthly(monthly)}
 							>
 								<TableCell component="th" scope="row">{monthly.name}</TableCell>
 								<TableCell align="right">{toDollarString(monthly.amountGoal)}</TableCell>
@@ -149,6 +155,12 @@ class MonthlyList extends React.Component {
 						</TableRow>
 					</TableFooter>
 				</Table>
+				{this.state.editingMonthly ?
+					<MonthlyEdit
+						onCancel={console.log}
+						onSave={console.log}
+						monthly={this.state.editingMonthly}
+					/> : undefined}
 			</Paper>
 		);
 	}
