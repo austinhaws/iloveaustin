@@ -17,6 +17,8 @@ import styles from "../../app/Styles";
 import {handleEvent} from "dts-react-common";
 import MonthlyDatePicker from "./MonthlyDatePicker";
 import LocalStorage from "../../app/localstorage/LocalStorage";
+import webservice from "../../app/webservice/Webservice";
+import {dispatchField} from "../../app/Dispatch";
 
 const propTypes = {};
 const defaultProps = {};
@@ -31,6 +33,7 @@ class MonthlyList extends React.Component {
 		super(props);
 		this.state = {
 			foodWeeksRemaining: LocalStorage.foodWeeksRemaining.get() || 0,
+			deletingId: undefined,
 		};
 	}
 
@@ -48,6 +51,16 @@ class MonthlyList extends React.Component {
 			weeksRemaining: this.state.foodWeeksRemaining || 0,
 			weeklyAllotment: foodMonthly ? Math.max(0, foodMonthly.amountGoal - foodMonthly.amountSpent) / this.state.foodWeeksRemaining : 0,
 		};
+	};
+
+	deleteMonthly = monthly => {
+		if (this.state.deletingId === monthly.id) {
+			this.setState({deletingId: undefined});
+			webservice.iLoveAustin.monthly.delete(monthly.id)
+				.then(() => dispatchField('iLoveAustin.monthlies.list', this.props.iLoveAustin.monthlies.list.filter(filterMonthly => filterMonthly.id !== monthly.id)));
+		} else {
+			this.setState({deletingId: monthly.id});
+		}
 	};
 
 	render() {
@@ -75,7 +88,7 @@ class MonthlyList extends React.Component {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{monthlies.map(monthly => (
+						{monthlies.map((monthly, i) => (
 							<TableRow
 								className={classes.bodyTableRow}
 								key={monthly.id}
@@ -97,9 +110,13 @@ class MonthlyList extends React.Component {
 										variant="contained"
 										color="secondary"
 										className={classes.button}
-										onClick={handleEvent(() => console.log('delete monthly', monthly))}
+										onClick={handleEvent(() => this.deleteMonthly(monthly))}
 									>
-										<DeleteIcon fontSize="small" className={classes.rightIcon}/>
+										{
+											this.state.deletingId === monthly.id ?
+											'Sure?' :
+											<DeleteIcon fontSize="small" className={classes.rightIcon}/>
+										}
 									</Button>
 								</TableCell>
 							</TableRow>
