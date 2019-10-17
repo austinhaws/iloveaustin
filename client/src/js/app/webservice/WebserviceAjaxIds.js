@@ -4,6 +4,7 @@ export default {
 	},
 	I_LOVE_AUSTIN: {
 		MONTHLY: 'monthly',
+		MONTHLY_DELETE: 'monthly-delete',
 	},
 };
 

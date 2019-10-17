@@ -7,6 +7,7 @@ import GraphQLCore from "./graphQLCore";
 import loginMutation from "./graphql/mutation/loginMutation";
 import periodQuery from "./graphql/query/periodQuery";
 import monthlyQuery from "./graphql/query/monthlyQuery";
+import monthlyDeleteMutation from "./graphql/mutation/monthlyDeleteMutation";
 
 export const ajaxStatus = new AjaxStatusCore();
 ajaxStatus.registerChangedCallback(
@@ -64,6 +65,7 @@ const webservice = {
 	iLoveAustin: {
 		monthly: {
 			list: period => graphQlWebservice.query(monthlyQuery(period), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.MONTHLY),
+			delete: monthlyId => graphQlWebservice.mutation(monthlyDeleteMutation(monthlyId), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.MONTHLY_DELETE)
 		},
 
 		period: {
