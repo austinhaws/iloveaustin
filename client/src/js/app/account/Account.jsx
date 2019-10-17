@@ -29,11 +29,5 @@ export default {
 		Pages.iLoveAustin.home.forward();
 	},
 
-	isSignedIn: () => {
-		console.log({
-			token: !!reduxStore.getState().app.googleTokenId,
-			account: !!reduxStore.getState().app.account,
-		});
-		return !!reduxStore.getState().app.googleTokenId && !!reduxStore.getState().app.account;
-	},
+	isSignedIn: () => !!reduxStore.getState().app.googleTokenId && !!reduxStore.getState().app.account,
 }
