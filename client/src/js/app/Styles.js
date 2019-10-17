@@ -52,4 +52,14 @@ export default theme => ({
 	dateTimePickerInput: {
 		marginRight: '6px',
 	},
+	addActionButton: {
+		width: '50%',
+		margin: '7px auto',
+	},
+	spacer: {
+		flex: '1 1 100%',
+	},
+	toolbarMonthlyDatePicker: {
+		marginTop: '11px',
+	},
 });

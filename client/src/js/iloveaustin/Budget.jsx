@@ -21,7 +21,6 @@ class Budget extends React.Component {
 			<div className={classes.root}>
 				<div>Wells Fargo Balance = $5_348_3.00</div>
 				<MonthlyList/>
-				add new monthly
 
 				{/*<Snapshot {...this.props} />*/}
 			</div>
