@@ -55,6 +55,6 @@ class PeriodService extends BaseService
 			$pieces[0] = 1;
 			$pieces[1]++;
 		}
-		return join('/', [str_pad($pieces[0], 2, '0', STR_PAD_LEFT), $pieces[1]]);
+		return join('/', [str_pad($pieces[0], 2, '0', STR_PAD_LEFT), count($pieces) > 1 ? $pieces[1] : '']);
 	}
 }
