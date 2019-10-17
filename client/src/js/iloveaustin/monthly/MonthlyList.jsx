@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {withStyles} from "@material-ui/core";
+import {IconButton, Toolbar, Tooltip, Typography, withStyles} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -14,11 +14,12 @@ import TableFooter from "@material-ui/core/TableFooter";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from "../../app/Styles";
-import {handleEvent} from "dts-react-common";
+import {handleEvent, joinClassNames} from "dts-react-common";
 import MonthlyDatePicker from "./MonthlyDatePicker";
 import LocalStorage from "../../app/localstorage/LocalStorage";
 import webservice from "../../app/webservice/Webservice";
 import {dispatchField} from "../../app/Dispatch";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const propTypes = {};
 const defaultProps = {};
@@ -73,7 +74,23 @@ class MonthlyList extends React.Component {
 		const foodWeekInfo = this.foodWeekInfo(this.props.iLoveAustin.monthlies.list);
 		return (
 			<Paper className={classes.root}>
-				<MonthlyDatePicker/>
+				<Toolbar>
+					<div className={classes.title}>
+						<Typography variant="h6" id="tableTitle">
+							Monthlies
+						</Typography>
+					</div>
+					<div className={joinClassNames(classes.spacer, classes.toolbarMonthlyDatePicker)}>
+						<MonthlyDatePicker/>
+					</div>
+					<div className={classes.actions}>
+						<Tooltip title="Add New Monthly">
+							<IconButton aria-label="add monthly">
+								<AddCircleIcon />
+							</IconButton>
+						</Tooltip>
+					</div>
+				</Toolbar>
 				<Table className={classes.table}>
 					<TableHead>
 						<TableRow>
