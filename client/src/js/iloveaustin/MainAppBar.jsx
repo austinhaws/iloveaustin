@@ -12,14 +12,14 @@ import Paper from "@material-ui/core/Paper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
-import Pages from "./Pages";
+import Pages from "../app/Pages";
 import Button from "@material-ui/core/Button";
 import {withRouter} from "react-router-dom";
 import * as PropTypes from "prop-types";
 import GoogleLogin from "react-google-login";
 import {connect} from "react-redux";
-import LocalStorage from "./localstorage/LocalStorage";
-import Account from "./account/Account";
+import LocalStorage from "../app/localstorage/LocalStorage";
+import Account from "../app/account/Account";
 
 const propTypes = {
 	app: PropTypes.object,

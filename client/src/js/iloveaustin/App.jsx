@@ -7,7 +7,7 @@ import {BrowserRouter, withRouter} from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MainAppBar from "./MainAppBar";
-import History from './history/History';
+import History from '../app/history/History';
 import * as PropTypes from "prop-types";
 import {MessagePopupCore} from "dts-react-common";
 import "../../css/index.scss";
