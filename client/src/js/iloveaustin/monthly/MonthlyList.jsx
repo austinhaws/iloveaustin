@@ -70,6 +70,21 @@ class MonthlyList extends React.Component {
 		this.setState({editingMonthly: monthly});
 	};
 
+	cancelMonthlyEdit = () => this.setState({editingMonthly: undefined});
+
+	saveMonthly = monthlyToSave => {
+		this.cancelMonthlyEdit();
+		webservice.iLoveAustin.monthly.save(monthlyToSave)
+			.then(monthlyResult => {
+				if (this.props.iLoveAustin.monthlies.list.map(monthly => monthly.id).includes(monthlyResult.id)) {
+					dispatchField('iLoveAustin.monthlies.list', this.props.iLoveAustin.monthlies.list
+						.map(monthly => monthly.id === monthlyResult.id ? monthlyResult : monthly));
+				} else {
+					dispatchField('iLoveAustin.monthlies.list', this.props.iLoveAustin.monthlies.list.concat(monthlyResult));
+				}
+			});
+	};
+
 	render() {
 		if (!this.props.iLoveAustin.monthlies.list) {
 			return null;
@@ -115,14 +130,19 @@ class MonthlyList extends React.Component {
 							<TableRow
 								className={classes.bodyTableRow}
 								key={monthly.id}
-								onClick={() => this.editMonthly(monthly)}
+								onClick={e => e.target.tagName !== 'INPUT' && this.editMonthly(monthly)}
 							>
 								<TableCell component="th" scope="row">{monthly.name}</TableCell>
 								<TableCell align="right">{toDollarString(monthly.amountGoal)}</TableCell>
 								<TableCell align="right">{toDollarString(monthly.amountSpent)}</TableCell>
 								<TableCell align="right">{toDollarString(Math.max(0, monthly.amountGoal - monthly.amountSpent))}</TableCell>
 								<TableCell align="right">{
-									monthly.name === 'Food' ? <input className={classes.inputSizeSmall} type="text" value={foodWeekInfo.weeksRemaining} onChange={this.foodWeeksRemainingChange}/> : undefined
+									monthly.name === 'Food' ? <input
+										className={classes.inputSizeSmall}
+										type="text"
+										value={foodWeekInfo.weeksRemaining}
+										onChange={this.foodWeeksRemainingChange}
+									/> : undefined
 								}</TableCell>
 								<TableCell align="right">{
 									monthly.name === 'Food' ? toDollarString(foodWeekInfo.weeklyAllotment) : undefined
@@ -157,8 +177,8 @@ class MonthlyList extends React.Component {
 				</Table>
 				{this.state.editingMonthly ?
 					<MonthlyEdit
-						onCancel={console.log}
-						onSave={console.log}
+						onCancel={this.cancelMonthlyEdit}
+						onSave={this.saveMonthly}
 						monthly={this.state.editingMonthly}
 					/> : undefined}
 			</Paper>
