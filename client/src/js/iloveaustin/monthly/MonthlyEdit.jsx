@@ -72,8 +72,7 @@ class MonthlyEdit extends React.Component {
 		const saveMonthly = {...this.state.editingMonthly};
 		saveMonthly.amountSpent = this.state.amountSpentTotal;
 		this.monthlyMoneyFields.forEach(field => saveMonthly[field] = toPlainMoney(saveMonthly[field]));
-console.error('save monthly', saveMonthly);
-		// this.props.onSave(saveMonthly);
+		this.props.onSave(saveMonthly);
 	};
 
 	render() {

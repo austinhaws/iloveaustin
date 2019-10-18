@@ -3,8 +3,9 @@ export default {
 		GOOGLE_LOGIN: 'google-login',
 	},
 	I_LOVE_AUSTIN: {
-		MONTHLY: 'monthly',
+		MONTHLY_LIST: 'monthly',
 		MONTHLY_DELETE: 'monthly-delete',
+		MONTHLY_SAVE: 'monthly-save',
 	},
 };
 
