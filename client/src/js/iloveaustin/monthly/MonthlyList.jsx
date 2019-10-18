@@ -66,9 +66,9 @@ class MonthlyList extends React.Component {
 		}
 	};
 
-	editMonthly = monthly => {
-		this.setState({editingMonthly: monthly});
-	};
+	addNewMonthly = () => this.setState({editingMonthly: {period: this.props.iLoveAustin.periods.period}});
+
+	editMonthly = monthly => this.setState({editingMonthly: monthly});
 
 	cancelMonthlyEdit = () => this.setState({editingMonthly: undefined});
 
@@ -104,7 +104,7 @@ class MonthlyList extends React.Component {
 					<div className={joinClassNames(classes.spacer, classes.toolbarMonthlyDatePicker)}>
 						<MonthlyDatePicker/>
 					</div>
-					<div className={classes.actions}>
+					<div className={classes.actions} onClick={this.addNewMonthly}>
 						<Tooltip title="Add New Monthly">
 							<IconButton aria-label="add monthly">
 								<AddCircleIcon />

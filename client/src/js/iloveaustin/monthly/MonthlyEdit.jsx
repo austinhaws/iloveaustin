@@ -97,7 +97,7 @@ class MonthlyEdit extends React.Component {
 							id="name"
 							label="Name"
 							fullWidth
-							value={this.state.editingMonthly.name}
+							value={this.state.editingMonthly.name || ''}
 							onChange={this.onFieldChange('name')}
 						/>
 						<TextField
@@ -147,7 +147,7 @@ class MonthlyEdit extends React.Component {
 							id="notes"
 							label="Notes"
 							fullWidth
-							value={this.state.editingMonthly.notes}
+							value={this.state.editingMonthly.notes || ''}
 							onChange={this.onFieldChange('notes')}
 							multiline={true}
 						/>
