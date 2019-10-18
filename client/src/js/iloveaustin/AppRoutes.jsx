@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import Pages from "./Pages";
+import Pages from "../app/Pages";
 import {connect} from "react-redux";
 import * as PropTypes from "prop-types";
-import Account from "./account/Account";
+import Account from "../app/account/Account";
 
 const propTypes = {
 	app: PropTypes.object.isRequired,

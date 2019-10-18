@@ -7,6 +7,9 @@ import * as PropTypes from "prop-types";
 import Styles from "../../app/Styles";
 import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
+import MaskedInput from "react-text-mask";
+import Masks from "../../app/masks/Masks";
+import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/Money";
 
 const propTypes = {
 	monthly: PropTypes.object.isRequired,
@@ -20,20 +23,58 @@ const mapStateToProps = state => ({
 	iLoveAustin: state.iLoveAustin,
 });
 
+const NumberMaskInput = props => {
+	// getting errors about inputRef not being valid
+	const {inputRef, ...rest} = props;
+	return <MaskedInput mask={Masks.moneyMask} {...rest}/>;
+};
+
 class MonthlyEdit extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.monthlyMoneyFields = [
+			'amountGoal',
+			'amountSpent'
+		];
+
+		const editingMonthly = {...this.props.monthly};
+
+		this.monthlyMoneyFields.forEach(field => editingMonthly[field] = toDirtyMoney(editingMonthly[field]));
+
 		this.state = {
-			originalMonthly: this.props.monthly,
-			editingMonthly: {...this.props.monthly},
-			amountSpentAdd: undefined,
+			editingMonthly,
+			amountSpentAdd: '$0.00',
+			amountSpentTotal: editingMonthly['amountSpent'],
 		}
 	}
 
-	onFieldChange = field => e => this.setState({ editingMonthly: { ...this.state.editingMonthly, [field]: e.target.value }});
+	onFieldChange = field => e => {
+		if (field === 'amountSpent') {
+			this.calculateAmountSpentWithAdd(e.target.value, this.state.amountSpentAdd);
+		}
+		this.setState({ editingMonthly: { ...this.state.editingMonthly, [field]: e.target.value }});
+	};
 
-	onAmountSpentAddChange = e => this.setState({amountSpentAdd: e.target.value});
+	onAmountSpentAddChange = e => {
+		this.calculateAmountSpentWithAdd(this.state.editingMonthly.amountSpent, e.target.value);
+		this.setState({amountSpentAdd: e.target.value})
+	};
+
+	calculateAmountSpentWithAdd = (amountSpent, amountSpentAdd) => this.setState({
+		amountSpentTotal: toDirtyMoney(addPlainMoney(
+			toPlainMoney(amountSpent),
+			toPlainMoney(amountSpentAdd)
+		))
+	});
+
+	save = () => {
+		const saveMonthly = {...this.state.editingMonthly};
+		saveMonthly.amountSpent = this.state.amountSpentTotal;
+		this.monthlyMoneyFields.forEach(field => saveMonthly[field] = toPlainMoney(saveMonthly[field]));
+console.error('save monthly', saveMonthly);
+		// this.props.onSave(saveMonthly);
+	};
 
 	render() {
 		const {classes} = this.props;
@@ -65,24 +106,42 @@ class MonthlyEdit extends React.Component {
 							id="goal"
 							label="Goal"
 							fullWidth
-							value={this.state.editingMonthly.amountGoal}
-							onChange={this.onFieldChange('amountGoal')}
+							InputProps={{
+								inputComponent: NumberMaskInput,
+								value: this.state.editingMonthly.amountGoal || "$0.00",
+								onChange: this.onFieldChange('amountGoal'),
+							}}
 						/>
+
 						<TextField
 							margin="dense"
 							id="spent"
 							label="Spent"
 							fullWidth
-							value={this.state.editingMonthly.amountSpent}
-							onChange={this.onFieldChange('amountSpent')}
+							InputProps={{
+								inputComponent: NumberMaskInput,
+								value: this.state.editingMonthly.amountSpent || "$0.00",
+								onChange: this.onFieldChange('amountSpent'),
+							}}
 						/>
 						<TextField
 							margin="dense"
 							id="add-spent"
 							label="Add to Spent"
 							fullWidth
-							value={this.state.amountSpentAdd || "$0.00"}
-							onChange={this.onAmountSpentAddChange}
+							InputProps={{
+								inputComponent: NumberMaskInput,
+								value: this.state.editingMonthly.amountSpentAdd || "$0.00",
+								onChange: this.onAmountSpentAddChange,
+							}}
+						/>
+						<TextField
+							margin="dense"
+							id="total-spent"
+							label="Total Spent"
+							fullWidth
+							value={this.state.amountSpentTotal || "$0.00"}
+							disabled={true}
 						/>
 						<TextField
 							margin="dense"
@@ -98,7 +157,7 @@ class MonthlyEdit extends React.Component {
 						<Button onClick={this.props.onCancel} color="primary">
 							Cancel
 						</Button>
-						<Button onClick={() => this.props.onSave(this.state.editingMonthly)} color="primary">
+						<Button onClick={this.save} color="primary">
 							Save
 						</Button>
 					</DialogActions>

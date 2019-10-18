@@ -28,7 +28,7 @@ const copyStatic = new CopyWebpackPlugin([
 // tell it what file to starting compiling on and what to call it when done
 const config = {
 	entry: {
-		examples: APP_DIR + '/app/App.jsx',
+		examples: APP_DIR + '/iloveaustin/App.jsx',
 	},
 	output: {
 		path: BUILD_DIR,
