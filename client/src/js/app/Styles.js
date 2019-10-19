@@ -89,4 +89,7 @@ export default theme => ({
 	textFieldSelect: {
 		marginTop: '23px',
 	},
+	redColor: {
+		color: 'red !important',
+	},
 });

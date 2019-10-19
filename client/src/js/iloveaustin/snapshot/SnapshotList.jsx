@@ -111,7 +111,7 @@ class SnapshotList extends React.Component {
 								key={snapshot.id}
 								onClick={e => e.target.tagName !== 'INPUT' && this.editSnapshot(snapshot)}
 							>
-								<TableCell>
+								<TableCell className={!snapshot.isTotalable && classes.redColor}>
 									<Grid container direction="row" alignItems="center">
 										<Grid item>
 											{snapshot.name}
@@ -158,8 +158,8 @@ class SnapshotList extends React.Component {
 									</Grid>
 
 								</TableCell>
-								<TableCell align="right">{toDollarString(snapshot.amountGoal)}</TableCell>
-								<TableCell align="right">{toDollarString(snapshot.amountCurrent)}</TableCell>
+								<TableCell align="right" className={!snapshot.isTotalable && classes.redColor}>{toDollarString(snapshot.amountGoal)}</TableCell>
+								<TableCell align="right" className={!snapshot.isTotalable && classes.redColor}>{toDollarString(snapshot.amountCurrent)}</TableCell>
 								<TableCell align="right">
 									<Button
 										size="small"
