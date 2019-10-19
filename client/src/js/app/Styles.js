@@ -92,4 +92,9 @@ export default theme => ({
 	redColor: {
 		color: 'red !important',
 	},
+	bankBalanceTitle: {
+		textAlign: 'center',
+		fontSize: '1.5em',
+		padding: '25px 0',
+	},
 });

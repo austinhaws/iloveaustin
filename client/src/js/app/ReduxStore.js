@@ -25,8 +25,7 @@ const defaultState = {
 			list: undefined,
 			totals: undefined,
 		},
-		snapshotsTotals: undefined,
-		snapshotsTotalsNoWells: undefined,
+		budgetBankTotal: undefined,
 	},
 	app: {
 		// account after logged in

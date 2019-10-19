@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import MaskedInput from "react-text-mask";
 import Masks from "../../app/masks/Masks";
-import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/Money";
+import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/money/Money";
 
 const propTypes = {
 	monthly: PropTypes.object.isRequired,
