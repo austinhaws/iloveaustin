@@ -3,7 +3,6 @@ import webservice from "../webservice/Webservice";
 import LocalStorage from "../localstorage/LocalStorage";
 import {createPathActionPayload, dispatchUpdates} from "../Dispatch";
 import React from "react";
-import Snapshot from "../snapshot/Snapshot";
 
 const Period = {
 	/**
@@ -27,7 +26,6 @@ const Period = {
 							createPathActionPayload('iLoveAustin.monthlies.totals', Period.totalMonthlies(monthlies)),
 
 							createPathActionPayload('iLoveAustin.snapshots.list', snapshots || []),
-							createPathActionPayload('iLoveAustin.snapshots.totals', Snapshot.totalSnapshots(snapshots)),
 						]);
 					});
 			} else {

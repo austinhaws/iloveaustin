@@ -9,8 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import {toDollarString} from "../../app/Money";
-import TableFooter from "@material-ui/core/TableFooter";
+import {toDollarString} from "../../app/money/Money";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import MessageIcon from '@material-ui/icons/Message';
@@ -111,7 +110,7 @@ class SnapshotList extends React.Component {
 								key={snapshot.id}
 								onClick={e => e.target.tagName !== 'INPUT' && this.editSnapshot(snapshot)}
 							>
-								<TableCell className={!snapshot.isTotalable && classes.redColor}>
+								<TableCell className={!snapshot.isTotalable ? classes.redColor : undefined}>
 									<Grid container direction="row" alignItems="center">
 										<Grid item>
 											{snapshot.name}
@@ -158,8 +157,8 @@ class SnapshotList extends React.Component {
 									</Grid>
 
 								</TableCell>
-								<TableCell align="right" className={!snapshot.isTotalable && classes.redColor}>{toDollarString(snapshot.amountGoal)}</TableCell>
-								<TableCell align="right" className={!snapshot.isTotalable && classes.redColor}>{toDollarString(snapshot.amountCurrent)}</TableCell>
+								<TableCell align="right" className={!snapshot.isTotalable ? classes.redColor : undefined}>{toDollarString(snapshot.amountGoal)}</TableCell>
+								<TableCell align="right" className={!snapshot.isTotalable ? classes.redColor : undefined}>{toDollarString(snapshot.amountCurrent)}</TableCell>
 								<TableCell align="right">
 									<Button
 										size="small"
@@ -178,14 +177,6 @@ class SnapshotList extends React.Component {
 							</TableRow>
 						))}
 					</TableBody>
-					<TableFooter>
-						<TableRow>
-							<TableCell align="right">Totals:</TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshots.totals.amountGoal)}</b></TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshots.totals.amountCurrent)}</b></TableCell>
-							<TableCell/>
-						</TableRow>
-					</TableFooter>
 				</Table>
 				{this.state.editingSnapshot ?
 					<SnapshotEdit

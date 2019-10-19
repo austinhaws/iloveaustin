@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 import webservice from "../../app/webservice/Webservice";
-import {fromDollarString, toDollarString} from "../../app/Money";
+import {fromDollarString, toDollarString} from "../../app/money/Money";
 import Button from "@material-ui/core/Button";
 import SnapshotEdit from "./SnapshotEdit";
 import styles from "../../app/Styles";
