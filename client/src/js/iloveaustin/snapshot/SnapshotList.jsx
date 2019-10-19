@@ -2,9 +2,7 @@ import '@babel/polyfill';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {withStyles} from "@material-ui/core";
-import * as PropTypes from "prop-types";
-import webservice from "../../app/webservice/Webservice";
+import {Grid, IconButton, Popover, Toolbar, Tooltip, Typography, withStyles} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -15,13 +13,15 @@ import {toDollarString} from "../../app/Money";
 import TableFooter from "@material-ui/core/TableFooter";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
+import MessageIcon from '@material-ui/icons/Message';
 import styles from "../../app/Styles";
 import {handleEvent} from "dts-react-common";
+import webservice from "../../app/webservice/Webservice";
+import {dispatchField} from "../../app/Dispatch";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import SnapshotEdit from "./SnapshotEdit";
 
-const propTypes = {
-	editSnapshot: PropTypes.func.isRequired,
-	deleteSnapshot: PropTypes.func.isRequired,
-};
+const propTypes = {};
 const defaultProps = {};
 const mapStateToProps = state => ({
 	app: state.app,
@@ -30,46 +30,149 @@ const mapStateToProps = state => ({
 
 class SnapshotList extends React.Component {
 
-	componentDidMount() {
-		webservice.iLoveAustin.snapshot.list();
+	constructor(props) {
+		super(props);
+		this.state = {
+			deletingId: undefined,
+			editingSnapshot: undefined,
+			popOverDetail: undefined,
+		};
+	}
+
+	deleteSnapshot = snapshot => {
+		if (this.state.deletingId === snapshot.id) {
+			this.setState({deletingId: undefined});
+			webservice.iLoveAustin.snapshot.delete(snapshot.id)
+				.then(() => dispatchField('iLoveAustin.snapshots.list', this.props.iLoveAustin.snapshots.list.filter(filterSnapshot => filterSnapshot.id !== snapshot.id)));
+		} else {
+			this.setState({deletingId: snapshot.id});
+		}
 	};
 
+	addNewSnapshot = () => this.setState({editingSnapshot: {}});
+
+	editSnapshot = editingSnapshot => this.setState({editingSnapshot});
+
+	cancelSnapshotEdit = () => this.setState({editingSnapshot: undefined});
+
+	saveSnapshot = snapshotToSave => {
+		this.cancelSnapshotEdit();
+		webservice.iLoveAustin.snapshot.save(snapshotToSave)
+			.then(snapshotResult => {
+				if (this.props.iLoveAustin.snapshots.list.map(snapshot => snapshot.id).includes(snapshotResult.id)) {
+					dispatchField('iLoveAustin.snapshots.list', this.props.iLoveAustin.snapshots.list
+						.map(snapshot => snapshot.id === snapshotResult.id ? snapshotResult : snapshot));
+				} else {
+					dispatchField('iLoveAustin.snapshots.list', this.props.iLoveAustin.snapshots.list.concat(snapshotResult));
+				}
+			});
+	};
+
+	closeNotePopover = () => this.setState({popOverDetail: undefined});
+	openNotePopover = (anchorEl, notes) => this.setState({popOverDetail: {anchorEl, notes}});
+
 	render() {
-		if (!this.props.iLoveAustin.snapshots) {
+		if (!this.props.iLoveAustin.snapshots.list) {
 			return null;
 		}
 
 		const {classes} = this.props;
+		const snapshots = this.props.iLoveAustin.snapshots.list;
 		return (
 			<Paper className={classes.root}>
+				<Toolbar>
+					<div className={classes.title}>
+						<Typography variant="h6" id="tableTitle">
+							Snapshots
+						</Typography>
+					</div>
+					<div className={classes.spacer}/>
+					<div className={classes.actions} onClick={this.addNewSnapshot}>
+						<Tooltip title="Add New Snapshot">
+							<IconButton aria-label="add snapshot">
+								<AddCircleIcon />
+							</IconButton>
+						</Tooltip>
+					</div>
+				</Toolbar>
 				<Table className={classes.table}>
 					<TableHead>
 						<TableRow>
 							<TableCell>Name</TableCell>
 							<TableCell align="right">Goal</TableCell>
 							<TableCell align="right">Current</TableCell>
-							<TableCell/>
+							<TableCell align="right"></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{this.props.iLoveAustin.snapshots.map(snapshot => (
+						{snapshots.map((snapshot, i) => (
 							<TableRow
 								className={classes.bodyTableRow}
 								key={snapshot.id}
-								onClick={() => this.props.editSnapshot(snapshot)}
+								onClick={e => e.target.tagName !== 'INPUT' && this.editSnapshot(snapshot)}
 							>
-								<TableCell component="th" scope="row">{snapshot.name}</TableCell>
-								<TableCell align="right">{toDollarString(snapshot.amt_goal)}</TableCell>
-								<TableCell align="right">{toDollarString(snapshot.amt_current)}</TableCell>
+								<TableCell>
+									<Grid container direction="row" alignItems="center">
+										<Grid item>
+											{snapshot.name}
+										</Grid>
+										{
+											snapshot.notes ?
+												<Grid item>
+													<Typography
+														aria-owns={this.state.popOverDetail ? 'mouse-over-popover' : undefined}
+														aria-haspopup="true"
+														onMouseEnter={e => this.openNotePopover(e.currentTarget, snapshot.notes)}
+														onMouseLeave={this.closeNotePopover}
+													>
+														<MessageIcon className={classes.tableCellTextIcon}/>
+													</Typography>
+													<Popover
+														id="mouse-over-popover"
+														className={classes.popover}
+														classes={{
+															paper: classes.popoverPaper,
+														}}
+														open={!!this.state.popOverDetail}
+														anchorEl={this.state.popOverDetail && this.state.popOverDetail.anchorEl}
+														anchorOrigin={{
+															vertical: 'bottom',
+															horizontal: 'left',
+														}}
+														transformOrigin={{
+															vertical: 'top',
+															horizontal: 'left',
+														}}
+														onClose={this.closeNotePopover}
+														disableRestoreFocus
+													>
+														<div className={classes.renderLineBreaks}>
+															<Typography>
+																{this.state.popOverDetail && this.state.popOverDetail.notes}
+															</Typography>
+														</div>
+													</Popover>
+												</Grid>
+												: undefined
+										}
+									</Grid>
+
+								</TableCell>
+								<TableCell align="right">{toDollarString(snapshot.amountGoal)}</TableCell>
+								<TableCell align="right">{toDollarString(snapshot.amountCurrent)}</TableCell>
 								<TableCell align="right">
 									<Button
 										size="small"
 										variant="contained"
 										color="secondary"
 										className={classes.button}
-										onClick={handleEvent(() => this.props.deleteSnapshot(snapshot))}
+										onClick={handleEvent(() => this.deleteSnapshot(snapshot))}
 									>
-										<DeleteIcon fontSize="small" className={classes.rightIcon}/>
+										{
+											this.state.deletingId === snapshot.id ?
+											'Sure?' :
+											<DeleteIcon fontSize="small" className={classes.rightIcon}/>
+										}
 									</Button>
 								</TableCell>
 							</TableRow>
@@ -78,18 +181,18 @@ class SnapshotList extends React.Component {
 					<TableFooter>
 						<TableRow>
 							<TableCell align="right">Totals:</TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.goal)}</b></TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotals.current)}</b></TableCell>
-							<TableCell/>
-						</TableRow>
-						<TableRow>
-							<TableCell align="right">No Wells Fargo Totals:</TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotalsNoWells.goal)}</b></TableCell>
-							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshotsTotalsNoWells.current)}</b></TableCell>
+							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshots.totals.amountGoal)}</b></TableCell>
+							<TableCell align="right"><b>{toDollarString(this.props.iLoveAustin.snapshots.totals.amountCurrent)}</b></TableCell>
 							<TableCell/>
 						</TableRow>
 					</TableFooter>
 				</Table>
+				{this.state.editingSnapshot ?
+					<SnapshotEdit
+						onCancel={this.cancelSnapshotEdit}
+						onSave={this.saveSnapshot}
+						snapshot={this.state.editingSnapshot}
+					/> : undefined}
 			</Paper>
 		);
 	}

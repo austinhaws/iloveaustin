@@ -2,7 +2,6 @@ import includeIfNotUndefined from "../util/includeIfNotUndefined";
 import monthlyType from "../type/monthlyType";
 
 export default monthly => `
-{ 
 	saveMonthly (monthly: {
 		${includeIfNotUndefined('id', monthly.id)}
 		${includeIfNotUndefined('period', monthly.period)}
@@ -13,5 +12,4 @@ export default monthly => `
 	}) {
 		${monthlyType()}
 	}
-}
 `;

@@ -1,6 +1,6 @@
-import {AjaxStatusCore, MessagePopupCore, objectAtPath, WebserviceCore} from "dts-react-common";
+import {AjaxStatusCore, MessagePopupCore, objectAtPath} from "dts-react-common";
 import store from "../ReduxStore";
-import {createPathActionPayload, dispatchField, dispatchUpdates} from "../Dispatch";
+import {dispatchField} from "../Dispatch";
 import WEBSERVICE_AJAX_IDS from "./WebserviceAjaxIds";
 import currentContext from "./WebserviceContext";
 import GraphQLCore from "./graphQLCore";
@@ -9,6 +9,8 @@ import periodQuery from "./graphql/query/periodQuery";
 import monthlyQuery from "./graphql/query/monthlyQuery";
 import monthlyDeleteMutation from "./graphql/mutation/monthlyDeleteMutation";
 import monthlySaveMutation from "./graphql/mutation/monthlySaveMutation";
+import spanshotDeleteMutation from "./graphql/mutation/spanshotDeleteMutation";
+import snapshotSaveMutation from "./graphql/mutation/snapshotSaveMutation";
 
 export const ajaxStatus = new AjaxStatusCore();
 ajaxStatus.registerChangedCallback(
@@ -26,13 +28,6 @@ const rawPromiseCallback = promise => promise
 		console.error(error);
 		return error;
 	});
-
-const webserviceILoveAustin = new WebserviceCore({
-	baseUrl: `${globals.webserviceUrlBase}iloveaustin/`,
-	ajaxStatusCore: ajaxStatus,
-	rawPromiseCallback: rawPromiseCallback,
-});
-
 
 export const ajaxStatusCore = new AjaxStatusCore();
 const graphQlWebservice = new GraphQLCore({
@@ -55,9 +50,6 @@ const graphQlWebservice = new GraphQLCore({
 	}),
 });
 
-
-const postTokenData = () => ({ token: store.getState().app.postToken });
-
 const webservice = {
 	app: {
 		googleLogin: googleResponse => graphQlWebservice.mutation(loginMutation(googleResponse), WEBSERVICE_AJAX_IDS.APP.GOOGLE_LOGIN)
@@ -79,36 +71,13 @@ const webservice = {
 		period: {
 			// month year can be blank to get current period
 			get: (includeMonthlies, period) => graphQlWebservice.query(periodQuery(period, includeMonthlies))
-				.then(result => result.data.period),
+				.then(result => result.data),
 		},
 
 		snapshot: {
-			delete: snapshotId => webserviceILoveAustin.post(`snapshot/delete`, { snapshotId, ...postTokenData() }),
-			list: () => webserviceILoveAustin.post('snapshot/list', postTokenData())
-				.then(list => {
-					list.sort((a, b) => a.name.localeCompare(b.name));
-					list.forEach(snapshot => {
-						snapshot.amt_goal = Number(snapshot.amt_goal);
-						snapshot.amt_current = Number(snapshot.amt_current);
-					});
-
-					dispatchUpdates([
-						createPathActionPayload('iLoveAustin.snapshots', list),
-						createPathActionPayload('iLoveAustin.snapshotsTotals', list.reduce((carry, snapshot) => {
-							carry.goal += snapshot.amt_goal;
-							carry.current += snapshot.amt_current;
-							return carry;
-						}, { goal: 0, current: 0 })),
-						createPathActionPayload('iLoveAustin.snapshotsTotalsNoWells', list.filter(snapshot => snapshot.is_totalable === 0)
-							.reduce((carry, snapshot) => {
-								carry.goal += snapshot.amt_goal;
-								carry.current += snapshot.amt_current;
-								return carry;
-							}, { goal: 0, current: 0 })
-						),
-					]);
-				}),
-			save: snapshot => webserviceILoveAustin.post(`snapshot/save`, { ...snapshot, ...postTokenData() }),
+			delete: snapshotId => graphQlWebservice.mutation(spanshotDeleteMutation(snapshotId), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.SNAPSHOT_DELETE),
+			save: snapshot => graphQlWebservice.mutation(snapshotSaveMutation(snapshot), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.SNAPSHOT_SAVE)
+				.then(result => result.data.saveSnapshot),
 		}
 	},
 };

@@ -43,14 +43,14 @@ export default class GraphQLCore {
 	 * @param ajaxId ID for ajax status core
 	 * @return {*}
 	 */
-	query = (query, ajaxId) => this.requestWithData('post', {query: `query ${query}`}, ajaxId);
+	query = (query, ajaxId) => this.requestWithData('post', {query: `query { ${query} }`}, ajaxId);
 
 	/**
 	 * @param mutation mutation for graphql call
 	 * @param ajaxId ID for ajax status core
 	 * @return {*}
 	 */
-	mutation = (mutation, ajaxId) => this.requestWithData('post', {query: `mutation ${mutation}`}, ajaxId);
+	mutation = (mutation, ajaxId) => this.requestWithData('post', {query: `mutation { ${mutation} }`}, ajaxId);
 
 	/**
 	 * before the endpoint is available, the webservice can "mock" a call

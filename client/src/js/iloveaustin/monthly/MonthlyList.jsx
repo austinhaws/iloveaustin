@@ -127,7 +127,6 @@ class MonthlyList extends React.Component {
 							<TableCell align="right">Weeks Remaining</TableCell>
 							<TableCell align="right">Weekly Allotment</TableCell>
 							<TableCell align="right"></TableCell>
-							<TableCell/>
 						</TableRow>
 					</TableHead>
 					<TableBody>
