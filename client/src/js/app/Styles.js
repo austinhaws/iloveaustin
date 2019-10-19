@@ -68,4 +68,19 @@ export default theme => ({
 		top: theme.spacing.unit,
 		color: theme.palette.grey[500],
 	},
+	popover: {
+		pointerEvents: 'none',
+	},
+	popoverPaper: {
+		padding: theme.spacing.unit,
+	},
+	renderLineBreaks: {
+		whiteSpace: 'pre-line',
+	},
+	tableCellTextIcon: {
+		width: '.75em',
+		position: 'relative',
+		top: '-7px',
+		left: '5px',
+	},
 });

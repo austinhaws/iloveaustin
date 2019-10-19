@@ -43,8 +43,13 @@ const graphQlWebservice = new GraphQLCore({
 	rawPromiseCallback: promise => promise.then(data => {
 		const errors = objectAtPath(data, 'data.errors');
 		if (errors) {
-			MessagePopupCore.addMessage({title: 'Webservice Communication Interruption', message: errors[0].message});
-			throw errors[0].message;
+			const error = errors[0].message;
+			if (error === 'Internal server error') {
+				MessagePopupCore.addMessage({title: 'Signed Out', message: 'You have been signed out for inactivity. Please sign in and try again.'});
+			} else {
+				MessagePopupCore.addMessage({title: 'Webservice Communication Interruption', message: message});
+			}
+			throw message;
 		}
 		return data;
 	}),
