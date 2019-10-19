@@ -3,6 +3,7 @@ import webservice from "../webservice/Webservice";
 import LocalStorage from "../localstorage/LocalStorage";
 import {createPathActionPayload, dispatchUpdates} from "../Dispatch";
 import React from "react";
+import Snapshot from "../snapshot/Snapshot";
 
 const Period = {
 	/**
@@ -16,21 +17,27 @@ const Period = {
 			if (returnValue) {
 				// have a period, but it doesn't match store, so fetch details for this new period
 				webservice.iLoveAustin.period.get(true, returnValue)
-					.then(({monthlies, ...period}) =>
+					.then(data => {
+						const {monthlies, ...period} = data.period;
+						const snapshots = data.snapshots;
 						dispatchUpdates([
 							createPathActionPayload('iLoveAustin.periods', period),
+
 							createPathActionPayload('iLoveAustin.monthlies.list', monthlies || []),
 							createPathActionPayload('iLoveAustin.monthlies.totals', Period.totalMonthlies(monthlies)),
-						])
-					);
+
+							createPathActionPayload('iLoveAustin.snapshots.list', snapshots || []),
+							createPathActionPayload('iLoveAustin.snapshots.totals', Snapshot.totalSnapshots(snapshots)),
+						]);
+					});
 			} else {
 				if (reduxStore.getState().iLoveAustin.periods) {
 					dispatchDefaultState(['iLoveAustin.periods', 'iLoveAustin.monthlies.list']);
 				}
 				// don't have a period, so go to the current period
 				webservice.iLoveAustin.period.get(false, undefined)
-					.then(period => {
-						LocalStorage.period.set(period.period);
+					.then(data => {
+						LocalStorage.period.set(data.period.period);
 						Period.current();
 					});
 			}

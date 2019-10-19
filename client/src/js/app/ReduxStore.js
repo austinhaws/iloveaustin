@@ -21,7 +21,10 @@ const defaultState = {
 			totals: undefined,
 		},
 		periods: undefined,
-		snapshots: undefined,
+		snapshots: {
+			list: undefined,
+			totals: undefined,
+		},
 		snapshotsTotals: undefined,
 		snapshotsTotalsNoWells: undefined,
 	},

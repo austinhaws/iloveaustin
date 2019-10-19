@@ -2,111 +2,183 @@ import '@babel/polyfill';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {withStyles} from "@material-ui/core";
+import {Dialog, DialogActions, DialogContent, DialogTitle, IconButton, MenuItem, Select, TextField, Typography, withStyles} from "@material-ui/core";
 import * as PropTypes from "prop-types";
+import Styles from "../../app/Styles";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import TextField from "@material-ui/core/TextField";
-import DialogActions from "@material-ui/core/DialogActions";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import styles from "../../app/Styles";
+import CloseIcon from '@material-ui/icons/Close';
+import MaskedInput from "react-text-mask";
+import Masks from "../../app/masks/Masks";
+import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/Money";
 
 const propTypes = {
-	cancelSnapshotEdit: PropTypes.func.isRequired,
-	saveSnapshot: PropTypes.func.isRequired,
 	snapshot: PropTypes.object.isRequired,
+	onCancel: PropTypes.func.isRequired,
+	onSave: PropTypes.func.isRequired,
 };
 const defaultProps = {};
 const mapStateToProps = state => ({
+//todo: does it really need the whole state?!
 	app: state.app,
 	iLoveAustin: state.iLoveAustin,
 });
+
+const NumberMaskInput = props => {
+	// getting errors about inputRef not being valid
+	const {inputRef, ...rest} = props;
+	return <MaskedInput mask={Masks.moneyMask} {...rest}/>;
+};
 
 class SnapshotEdit extends React.Component {
 
 	constructor(props) {
 		super(props);
-console.log(props);
+		this.snapshotMoneyFields = [
+			'amountGoal',
+			'amountCurrent'
+		];
+
+		const editingSnapshot = {...this.props.snapshot};
+
+		this.snapshotMoneyFields.forEach(field => editingSnapshot[field] = toDirtyMoney(editingSnapshot[field]));
+
 		this.state = {
-			editSnapshot: {...props.snapshot},
-		};
+			editingSnapshot,
+			amountCurrentAdd: '$0.00',
+			amountCurrentTotal: editingSnapshot['amountCurrent'],
+		}
 	}
 
+	onFieldChange = field => e => {
+		if (field === 'amountCurrent') {
+			this.calculateAmountCurrentWithAdd(e.target.value, this.state.amountCurrentAdd);
+		}
+		this.setState({ editingSnapshot: { ...this.state.editingSnapshot, [field]: e.target.value }});
+	};
+
+	onAmountCurrentAddChange = e => {
+		this.calculateAmountCurrentWithAdd(this.state.editingSnapshot.amountCurrent, e.target.value);
+		this.setState({amountCurrentAdd: e.target.value})
+	};
+
+	calculateAmountCurrentWithAdd = (amountCurrent, amountCurrentAdd) => this.setState({
+		amountCurrentTotal: toDirtyMoney(addPlainMoney(
+			toPlainMoney(amountCurrent),
+			toPlainMoney(amountCurrentAdd)
+		))
+	});
+
+	save = () => {
+		const saveSnapshot = {...this.state.editingSnapshot};
+		saveSnapshot.amountCurrent = this.state.amountCurrentTotal;
+		this.snapshotMoneyFields.forEach(field => saveSnapshot[field] = toPlainMoney(saveSnapshot[field]));
+		this.props.onSave(saveSnapshot);
+	};
+
 	render() {
+		const {classes} = this.props;
 		return (
-			<Dialog
-				open={!!this.state.editSnapshot}
-				onClose={() => this.setState({ editSnapshot: undefined })}
-				aria-labelledby="form-dialog-title"
-			>
-				<DialogTitle id="form-dialog-title">Edit Snapshot</DialogTitle>
-				<DialogContent>
-					<TextField
-						autoFocus
-						margin="dense"
-						id="name"
-						label="Name"
-						fullWidth
-						value={this.state.editSnapshot.name}
-						onChange={e => this.setState({ editSnapshot: { ...this.state.editSnapshot, name: e.target.value }})}
-					/>
-					<FormControlLabel
-						control={
-							<Checkbox
-								margin="dense"
-								id="isWellsFargo"
-								checked={this.state.editSnapshot.is_totalable === 1}
-								onChange={e => this.setState({ editSnapshot: { ...this.state.editSnapshot, is_totalable: e.target.checked ? 1 : 0}})}
-							/>
-						}
-						label="Does this add to the Well's Fargo total?"
-					/>
-					<TextField
-						margin="dense"
-						id="goal"
-						label="Goal"
-						fullWidth
-						value={this.state.editSnapshot.amt_goal}
-						onChange={e => this.setState({ editSnapshot: { ...this.state.editSnapshot, amt_goal: e.target.value }})}
-					/>
-					<TextField
-						margin="dense"
-						id="current"
-						label="Current"
-						fullWidth
-						value={this.state.editSnapshot.amt_current}
-						onChange={e => this.setState({ editSnapshot: { ...this.state.editSnapshot, amt_current: e.target.value }})}
-					/>
-					<TextField
-						margin="dense"
-						id="current"
-						label="Add to Current"
-						fullWidth
-						value={this.state.editSnapshot.add_current === undefined ? "$0.00" : this.state.editSnapshot.add_current}
-						onChange={e => this.setState({ editSnapshot: { ...this.state.editSnapshot, add_current: e.target.value }})}
-					/>
-					<TextField
-						margin="dense"
-						id="notes"
-						label="Notes"
-						fullWidth
-						value={this.state.editSnapshot.notes}
-						onChange={e => this.setState({ editSnapshot: { ...this.state.editSnapshot, notes: e.target.value }})}
-						multiline={true}
-					/>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={this.props.cancelSnapshotEdit} color="primary">
-						Cancel
-					</Button>
-					<Button onClick={() => this.props.saveSnapshot(this.state.editSnapshot)} color="primary">
-						Save
-					</Button>
-				</DialogActions>
-			</Dialog>
+			<div className={classes.root}>
+				<Dialog
+					open={true}
+					onClose={this.props.onCancel}
+					aria-labelledby="form-dialog-title"
+				>
+					<DialogTitle id="form-dialog-title">
+						<Typography>{this.state.editingSnapshot.id ? 'Edit' : 'Add'} Snapshot</Typography>
+						<IconButton aria-label="close" className={classes.dialogCloseButton} onClick={this.props.onCancel}>
+							<CloseIcon />
+						</IconButton>
+					</DialogTitle>
+					<DialogContent>
+						<TextField
+							autoFocus
+							margin="dense"
+							id="name"
+							label="Name"
+							fullWidth
+							value={this.state.editingSnapshot.name || ''}
+							onChange={this.onFieldChange('name')}
+						/>
+						<TextField
+							autoFocus
+							margin="dense"
+							id="isTotalable"
+							label="Add to the Well's Fargo total"
+							fullWidth
+							InputProps={{
+								inputComponent: () => <Select
+									className={classes.textFieldSelect}
+									value={this.state.editingSnapshot.isTotalable || 0}
+									onChange={this.onFieldChange('isTotalable')}
+								>
+									<MenuItem value={1}>Yes</MenuItem>
+									<MenuItem value={0}>No</MenuItem>
+								</Select>,
+							}}
+						/>
+						<TextField
+							margin="dense"
+							id="goal"
+							label="Goal"
+							fullWidth
+							InputProps={{
+								inputComponent: NumberMaskInput,
+								value: this.state.editingSnapshot.amountGoal || "$0.00",
+								onChange: this.onFieldChange('amountGoal'),
+							}}
+						/>
+
+						<TextField
+							margin="dense"
+							id="current"
+							label="Current"
+							fullWidth
+							InputProps={{
+								inputComponent: NumberMaskInput,
+								value: this.state.editingSnapshot.amountCurrent || "$0.00",
+								onChange: this.onFieldChange('amountCurrent'),
+							}}
+						/>
+						<TextField
+							margin="dense"
+							id="add-current"
+							label="Add to Current"
+							fullWidth
+							InputProps={{
+								inputComponent: NumberMaskInput,
+								value: this.state.editingSnapshot.amountCurrentAdd || "$0.00",
+								onChange: this.onAmountCurrentAddChange,
+							}}
+						/>
+						<TextField
+							margin="dense"
+							id="total-current"
+							label="Total Current"
+							fullWidth
+							value={this.state.amountCurrentTotal || "$0.00"}
+							disabled={true}
+						/>
+						<TextField
+							margin="dense"
+							id="notes"
+							label="Notes"
+							fullWidth
+							value={this.state.editingSnapshot.notes || ''}
+							onChange={this.onFieldChange('notes')}
+							multiline={true}
+						/>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={this.props.onCancel} color="primary">
+							Cancel
+						</Button>
+						<Button onClick={this.save} color="primary">
+							Save
+						</Button>
+					</DialogActions>
+				</Dialog>
+			</div>
 		);
 	}
 }
@@ -114,4 +186,4 @@ console.log(props);
 SnapshotEdit.propTypes = propTypes;
 SnapshotEdit.defaultProps = defaultProps;
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(SnapshotEdit)));
+export default withRouter(connect(mapStateToProps)(withStyles(Styles)(SnapshotEdit)));

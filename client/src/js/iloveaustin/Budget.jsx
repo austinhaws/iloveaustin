@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 import styles from "../app/Styles";
 import MonthlyList from "./monthly/MonthlyList";
+import SnapshotList from "./snapshot/SnapshotList";
 
 const propTypes = {};
 const defaultProps = {};
@@ -21,8 +22,8 @@ class Budget extends React.Component {
 			<div className={classes.root}>
 				<div>Wells Fargo Balance = $5_348_3.00</div>
 				<MonthlyList/>
-
-				{/*<Snapshot {...this.props} />*/}
+				<div className={classes.tableSpacer}/>
+				<SnapshotList/>
 			</div>
 		);
 	}

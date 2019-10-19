@@ -83,4 +83,10 @@ export default theme => ({
 		top: '-7px',
 		left: '5px',
 	},
+	tableSpacer: {
+		height: '50px',
+	},
+	textFieldSelect: {
+		marginTop: '23px',
+	},
 });

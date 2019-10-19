@@ -44,7 +44,8 @@ export const toPlainMoney = dirtyMoney => {
 
 export const toDirtyMoney = money => {
 	// make sure plain money has all its digits
-	const plainMoney = ((money && money.length < 3) ? _.padStart(money, 3, '0') : money) || '000';
+	const moneyStr = `${money}`;
+	const plainMoney = ((moneyStr && moneyStr.length < 3) ? _.padStart(moneyStr, 3, '0') : moneyStr) || '000';
 	// convert to $ decimal string
 	return '$' + plainMoney.substr(0, plainMoney.length - 2) + '.' + plainMoney.substr(plainMoney.length - 2);
 };
