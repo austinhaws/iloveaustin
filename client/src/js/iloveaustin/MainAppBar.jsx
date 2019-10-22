@@ -20,6 +20,7 @@ import GoogleLogin from "react-google-login";
 import {connect} from "react-redux";
 import LocalStorage from "../app/localstorage/LocalStorage";
 import Account from "../app/account/Account";
+import History from "../app/history/History";
 
 const propTypes = {
 	app: PropTypes.object,
@@ -63,7 +64,7 @@ class MainAppBar extends React.Component {
 	}
 
 	signInWithTokenId = tokenId => Account.signIn(tokenId)
-		.then(Pages.iLoveAustin.budget.forward);
+		.then(() => History.forward(LocalStorage.path.get('/')));
 
 	handleToggle = () => {
 		this.setState(state => ({ open: !state.open }));

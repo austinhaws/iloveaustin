@@ -11,6 +11,8 @@ import monthlyDeleteMutation from "./graphql/mutation/monthlyDeleteMutation";
 import monthlySaveMutation from "./graphql/mutation/monthlySaveMutation";
 import spanshotDeleteMutation from "./graphql/mutation/spanshotDeleteMutation";
 import snapshotSaveMutation from "./graphql/mutation/snapshotSaveMutation";
+import savingsSaveMutation from "./graphql/mutation/savingsSaveMutation";
+import savingsDeleteMutation from "./graphql/mutation/savingsDeleteMutation";
 
 export const ajaxStatus = new AjaxStatusCore();
 ajaxStatus.registerChangedCallback(
@@ -72,6 +74,12 @@ const webservice = {
 			// month year can be blank to get current period
 			get: (includeMonthlies, period) => graphQlWebservice.query(periodQuery(period, includeMonthlies))
 				.then(result => result.data),
+		},
+
+		savings: {
+			delete: savingsId => graphQlWebservice.mutation(savingsDeleteMutation(savingsId), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.SAVINGS_DELETE),
+			save: savings => graphQlWebservice.mutation(savingsSaveMutation(savings), WEBSERVICE_AJAX_IDS.I_LOVE_AUSTIN.SAVINGS_SAVE)
+				.then(result => result.data.saveSavings),
 		},
 
 		snapshot: {

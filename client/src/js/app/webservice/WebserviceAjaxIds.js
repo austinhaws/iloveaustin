@@ -6,6 +6,7 @@ export default {
 		MONTHLY_LIST: 'monthly',
 		MONTHLY_DELETE: 'monthly-delete',
 		MONTHLY_SAVE: 'monthly-save',
+		SAVINGS_DELETE: 'savings-delete',
 		SNAPSHOT_DELETE: 'snapshot-delete',
 		SNAPSHOT_SAVE: 'snapshot-save',
 	},

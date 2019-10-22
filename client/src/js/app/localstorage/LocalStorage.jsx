@@ -15,7 +15,7 @@ const storageItem = (key, accountBased) => {
 	};
 
 	return {
-		get: () => localStorage.getItem(accountKey()),
+		get: defaultValue => localStorage.getItem(accountKey() || defaultValue),
 		set: value => localStorage.setItem(accountKey(), value),
 		remove: () => localStorage.removeItem(accountKey()),
 	};
@@ -24,5 +24,6 @@ const storageItem = (key, accountBased) => {
 export default {
 	foodWeeksRemaining: storageItem(LocalStorageKeys.FOOD_WEEKS_REMAINING, true),
 	googleTokenId: storageItem(LocalStorageKeys.GOOGLE_TOKEN_ID, false),
+	path: storageItem(LocalStorageKeys.HISTORY_PATH, true),
 	period: storageItem(LocalStorageKeys.CURRENT_PERIOD, true),
 }

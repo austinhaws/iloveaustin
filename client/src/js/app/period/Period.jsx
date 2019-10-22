@@ -18,7 +18,7 @@ const Period = {
 				webservice.iLoveAustin.period.get(true, returnValue)
 					.then(data => {
 						const {monthlies, ...period} = data.period;
-						const snapshots = data.snapshots;
+						const {snapshots, savings} = data;
 						dispatchUpdates([
 							createPathActionPayload('iLoveAustin.periods', period),
 
@@ -26,6 +26,8 @@ const Period = {
 							createPathActionPayload('iLoveAustin.monthlies.totals', Period.totalMonthlies(monthlies)),
 
 							createPathActionPayload('iLoveAustin.snapshots.list', snapshots || []),
+
+							createPathActionPayload('iLoveAustin.savings.list', savings || []),
 						]);
 					});
 			} else {

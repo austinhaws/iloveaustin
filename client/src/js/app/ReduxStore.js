@@ -21,6 +21,10 @@ const defaultState = {
 			totals: undefined,
 		},
 		periods: undefined,
+		savings: {
+			list: undefined,
+			totals: undefined,
+		},
 		snapshots: {
 			list: undefined,
 			totals: undefined,
@@ -31,6 +35,7 @@ const defaultState = {
 		// account after logged in
 		account: undefined,
 		ajaxSpinnerCount: 0,
+		historyPath: undefined,
 		// token used for authentication
 		googleTokenId: undefined,
 	},

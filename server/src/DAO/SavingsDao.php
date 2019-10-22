@@ -11,6 +11,11 @@ class SavingsDao
 		return DB::query("SELECT * FROM savings WHERE account_id = %i", $accountId);
 	}
 
+	public function selectSavingsById($savingsId)
+	{
+		return DB::queryFirstRow("SELECT * FROM savings WHERE id = %i", $savingsId);
+	}
+
 	public function saveSavings(array $savings)
 	{
 		DB::insertUpdate('savings', $savings);
