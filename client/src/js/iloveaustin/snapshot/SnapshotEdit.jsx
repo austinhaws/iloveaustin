@@ -11,16 +11,13 @@ import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/money/Money";
 import MoneyMaskInput from "../masks/MoneyMaskInput";
 
 const propTypes = {
-	snapshot: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired,
 	onCancel: PropTypes.func.isRequired,
 	onSave: PropTypes.func.isRequired,
+	snapshot: PropTypes.object.isRequired,
 };
 const defaultProps = {};
-const mapStateToProps = state => ({
-//todo: does it really need the whole state?!
-	app: state.app,
-	iLoveAustin: state.iLoveAustin,
-});
+const mapStateToProps = state => ({});
 
 class SnapshotEdit extends React.Component {
 

@@ -14,16 +14,13 @@ import DateValidation from "../../app/date/DateValidation";
 import {MessagePopupCore} from "dts-react-common";
 
 const propTypes = {
-	savings: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired,
 	onCancel: PropTypes.func.isRequired,
 	onSave: PropTypes.func.isRequired,
+	savings: PropTypes.object.isRequired,
 };
 const defaultProps = {};
-const mapStateToProps = state => ({
-//todo: does it really need the whole state?!
-	app: state.app,
-	iLoveAustin: state.iLoveAustin,
-});
+const mapStateToProps = state => ({});
 
 class SavingsEdit extends React.Component {
 
