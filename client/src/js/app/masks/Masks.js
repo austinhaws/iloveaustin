@@ -6,4 +6,5 @@ export default {
 		allowDecimal: true,
 		requireDecimal: true,
 	}),
+	dateMask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
 };

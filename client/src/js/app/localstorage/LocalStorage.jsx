@@ -9,6 +9,7 @@ const storageItem = (key, accountBased) => {
 		if (accountBased && !email) {
 			// this is a programmer flow error!
 			MessagePopupCore.addMessage({title: 'Missing Account', message: 'Email required for account based local storage keys'});
+			console.error(`storage key: ${key}`);
 			return undefined;
 		}
 		return [accountBased && email, key].filter(i => i).join('-');

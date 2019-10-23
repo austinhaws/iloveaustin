@@ -11,7 +11,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Period from "../../app/period/Period";
 import MaskedInput from 'react-text-mask';
 import {joinClassNames} from "dts-react-common";
-import moment from "moment";
+import DateValidation from '../../app/date/DateValidation';
 
 const propTypes = {
 	app: PropTypes.object.isRequired,
@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
 class MonthlyDatePicker extends React.Component {
 
 	changePeriod = e => e.target.value.replace('_', '').length === 7 &&
-		moment(e.target.value, 'MM/YYYY').isValid() &&
+		DateValidation.isValidMonthYear(e.target.value) &&
 		Period.moveToPeriod(e.target.value);
 
 	render() {

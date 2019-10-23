@@ -7,9 +7,8 @@ import * as PropTypes from "prop-types";
 import Styles from "../../app/Styles";
 import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
-import MaskedInput from "react-text-mask";
-import Masks from "../../app/masks/Masks";
 import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/money/Money";
+import MoneyMaskInput from "../masks/MoneyMaskInput";
 
 const propTypes = {
 	snapshot: PropTypes.object.isRequired,
@@ -22,12 +21,6 @@ const mapStateToProps = state => ({
 	app: state.app,
 	iLoveAustin: state.iLoveAustin,
 });
-
-const NumberMaskInput = props => {
-	// getting errors about inputRef not being valid
-	const {inputRef, ...rest} = props;
-	return <MaskedInput mask={Masks.moneyMask} {...rest}/>;
-};
 
 class SnapshotEdit extends React.Component {
 
@@ -123,7 +116,7 @@ class SnapshotEdit extends React.Component {
 							label="Goal"
 							fullWidth
 							InputProps={{
-								inputComponent: NumberMaskInput,
+								inputComponent: MoneyMaskInput,
 								value: this.state.editingSnapshot.amountGoal || "$0.00",
 								onChange: this.onFieldChange('amountGoal'),
 							}}
@@ -135,7 +128,7 @@ class SnapshotEdit extends React.Component {
 							label="Current"
 							fullWidth
 							InputProps={{
-								inputComponent: NumberMaskInput,
+								inputComponent: MoneyMaskInput,
 								value: this.state.editingSnapshot.amountCurrent || "$0.00",
 								onChange: this.onFieldChange('amountCurrent'),
 							}}
@@ -146,7 +139,7 @@ class SnapshotEdit extends React.Component {
 							label="Add to Current"
 							fullWidth
 							InputProps={{
-								inputComponent: NumberMaskInput,
+								inputComponent: MoneyMaskInput,
 								value: this.state.editingSnapshot.amountCurrentAdd || "$0.00",
 								onChange: this.onAmountCurrentAddChange,
 							}}
