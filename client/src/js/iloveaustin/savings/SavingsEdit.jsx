@@ -7,9 +7,11 @@ import * as PropTypes from "prop-types";
 import Styles from "../../app/Styles";
 import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
-import MaskedInput from "react-text-mask";
-import Masks from "../../app/masks/Masks";
 import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/money/Money";
+import MoneyMaskInput from "../masks/MoneyMaskInput";
+import DateMaskInput from "../masks/DateMaskInput";
+import DateValidation from "../../app/date/DateValidation";
+import {MessagePopupCore} from "dts-react-common";
 
 const propTypes = {
 	savings: PropTypes.object.isRequired,
@@ -22,12 +24,6 @@ const mapStateToProps = state => ({
 	app: state.app,
 	iLoveAustin: state.iLoveAustin,
 });
-
-const NumberMaskInput = props => {
-	// getting errors about inputRef not being valid
-	const {inputRef, ...rest} = props;
-	return <MaskedInput mask={Masks.moneyMask} {...rest}/>;
-};
 
 class SavingsEdit extends React.Component {
 
@@ -46,7 +42,7 @@ class SavingsEdit extends React.Component {
 			editingSavings,
 			amountCurrentAdd: '$0.00',
 			amountCurrentTotal: editingSavings['amountCurrent'],
-		}
+		};
 	}
 
 	onFieldChange = field => e => {
@@ -70,9 +66,13 @@ class SavingsEdit extends React.Component {
 
 	save = () => {
 		const saveSavings = {...this.state.editingSavings};
-		saveSavings.amountCurrent = this.state.amountCurrentTotal;
-		this.savingsMoneyFields.forEach(field => saveSavings[field] = toPlainMoney(saveSavings[field]));
-		this.props.onSave(saveSavings);
+		if (DateValidation.isValidDate(this.state.editingSavings.dueDate)) {
+			saveSavings.amountCurrent = this.state.amountCurrentTotal;
+			this.savingsMoneyFields.forEach(field => saveSavings[field] = toPlainMoney(saveSavings[field]));
+			this.props.onSave(saveSavings);
+		} else {
+			MessagePopupCore.addMessage({title: 'Cannot Save', message: `The Due Date entered is not a valid date: ${saveSavings.dueDate}`});
+		}
 	};
 
 	render() {
@@ -105,9 +105,10 @@ class SavingsEdit extends React.Component {
 							id="due-date"
 							label="Due Date"
 							fullWidth
+							error = {!DateValidation.isValidDate(this.state.editingSavings.dueDate)}
 							InputProps={{
-								inputComponent: NumberMaskInput,
-								value: this.state.editingSavings.amountGoal || "$0.00",
+								inputComponent: DateMaskInput,
+								value: this.state.editingSavings.dueDate || '',
 								onChange: this.onFieldChange('dueDate'),
 							}}
 						/>
@@ -117,7 +118,7 @@ class SavingsEdit extends React.Component {
 							label="Goal"
 							fullWidth
 							InputProps={{
-								inputComponent: NumberMaskInput,
+								inputComponent: MoneyMaskInput,
 								value: this.state.editingSavings.amountGoal || "$0.00",
 								onChange: this.onFieldChange('amountGoal'),
 							}}
@@ -129,7 +130,7 @@ class SavingsEdit extends React.Component {
 							label="Current"
 							fullWidth
 							InputProps={{
-								inputComponent: NumberMaskInput,
+								inputComponent: MoneyMaskInput,
 								value: this.state.editingSavings.amountCurrent || "$0.00",
 								onChange: this.onFieldChange('amountCurrent'),
 							}}
@@ -140,7 +141,7 @@ class SavingsEdit extends React.Component {
 							label="Add to Current"
 							fullWidth
 							InputProps={{
-								inputComponent: NumberMaskInput,
+								inputComponent: MoneyMaskInput,
 								value: this.state.editingSavings.amountCurrentAdd || "$0.00",
 								onChange: this.onAmountCurrentAddChange,
 							}}
