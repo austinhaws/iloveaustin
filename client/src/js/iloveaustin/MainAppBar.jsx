@@ -103,7 +103,7 @@ class MainAppBar extends React.Component {
 								aria-haspopup="true"
 							/>
 						</IconButton>
-						<Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
+						<Popper open={open} anchorEl={this.anchorEl} transition>
 							{({ TransitionProps, placement }) => (
 								<Grow
 									{...TransitionProps}
@@ -140,7 +140,7 @@ class MainAppBar extends React.Component {
 
 					</Toolbar>
 					{this.props.app.account ?
-						<Toolbar className={classes.navMenu}>
+						<Toolbar className={classes.navMenu} zIndex="500">
 							<Button onClick={Pages.iLoveAustin.budget.forward}>Budget</Button>
 							<Button onClick={Pages.iLoveAustin.savings.forward}>Savings</Button>
 						</Toolbar>
