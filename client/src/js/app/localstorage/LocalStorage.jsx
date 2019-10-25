@@ -1,18 +1,12 @@
 import LocalStorageKeys from "./LocalStorageKeys";
 import reduxStore from "../ReduxStore";
-import {MessagePopupCore, objectAtPath} from "dts-react-common";
+import {objectAtPath} from "dts-react-common";
 
 const storageItem = (key, accountBased) => {
 	// store keys with account prefix so that different users have different settings
 	const accountKey = () => {
 		const email = accountBased && objectAtPath(reduxStore.getState(), 'app.account.email');
-		if (accountBased && !email) {
-			// this is a programmer flow error!
-			MessagePopupCore.addMessage({title: 'Missing Account', message: 'Email required for account based local storage keys'});
-			console.error(`storage key: ${key}`);
-			return undefined;
-		}
-		return [accountBased && email, key].filter(i => i).join('-');
+		return (accountBased && email) ? [email, key].filter(i => i).join('-') : undefined;
 	};
 
 	return {

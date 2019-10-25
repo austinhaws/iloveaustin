@@ -29,7 +29,6 @@ const defaultState = {
 			list: undefined,
 			totals: undefined,
 		},
-		budgetBankTotal: undefined,
 	},
 	app: {
 		// account after logged in

@@ -23,9 +23,12 @@ class PeriodService extends BaseService
 		$nextPeriod = $this->movePeriod($period, 1);
 		$result = $this->getPeriod($rootValue, ['period' => $nextPeriod]);
 
-		if ((!$result['monthlies']) && $args['copyForward']) {
-			$this->context->daos->monthly->copyForwardMonthliesForAccountIdPeriod($this->context->services->security->getAccount()->id, $period, $nextPeriod);
-			$result = $this->getPeriod($rootValue, ['period' => $nextPeriod]);
+		if ($args['copyForward']) {
+			$accountId = $this->context->services->security->getAccount()->id;
+			$existingMonthlies = $this->context->daos->monthly->selectMonthliesForAccountIdPeriod($accountId, $nextPeriod);
+			if (!$existingMonthlies) {
+				$this->context->daos->monthly->copyForwardMonthliesForAccountIdPeriod($accountId, $period, $nextPeriod);
+			}
 		}
 
 		return $result;
