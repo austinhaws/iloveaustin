@@ -29,6 +29,7 @@ class QueryType extends ObjectType
 					'description' => 'Returns monthlies for a period',
 					'args' => [
 						'period' => Types::string(),
+						'copyForward' => ['type' => Types::boolean()],
 					],
 				],
 				'getPreviousPeriod' => [
@@ -63,7 +64,11 @@ class QueryType extends ObjectType
 
 	public function period($rootValue, $args)
 	{
-		return $this->context->services->period->getPeriod($rootValue, $args);
+		$period = $this->context->services->period->getPeriod($rootValue, $args);
+		if ($args['copyForward'] ?? false) {
+			$this->context->services->monthly->copyMonthliesForward($period);
+		}
+		return $period;
 	}
 
 	public function getPreviousPeriod($rootValue, $args)

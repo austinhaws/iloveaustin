@@ -47,4 +47,9 @@ class MonthlyService extends BaseService
 	{
 		return $this->context->daos->monthly->selectMonthliesForAccountIdPeriods($this->context->services->security->getAccount()->id, $periods);
 	}
+
+	public function copyMonthliesForward($periods)
+	{
+		$this->context->daos->monthly->copyForwardMonthliesForAccountIdPeriod($this->context->services->security->getAccount()->id, $periods['previousPeriod'], $periods['period']);
+	}
 }

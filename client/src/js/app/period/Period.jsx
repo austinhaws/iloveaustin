@@ -49,7 +49,7 @@ const Period = {
 		// update local storage to track last viewed period
 		LocalStorage.period.set(newPeriod);
 		// change state so it forces a reload of period data from localstorage
-		dispatchDefaultState(['iLoveAustin.periods', 'iLoveAustin.monthlies.list']);
+		dispatchDefaultState(['iLoveAustin.periods', 'iLoveAustin.monthlies', 'iLoveAustin.savings', 'iLoveAustin.snapshots']);
 		// reload data using the newly set period
 		Period.current();
 	},
