@@ -2,7 +2,7 @@ export const CONTEXT_URL = {
 	LOCAL: 'http://localhost/iloveaustin3/server/graphql.php',
 	// DEV: 'http://localhost:8080/frontdoor/graphql',
 	// AT: 'https://frontdoor-ws.at.utah.gov/frontdoor/graphql',
-	// PROD: 'https://frontdoor-ws.utah.gov/frontdoor/graphql'
+	PROD: 'https://rpggenerator.com/iloveaustin/ws/graphql.php'
 };
 
 export default (document.location.hostname.includes('localhost')) ? CONTEXT_URL.LOCAL
