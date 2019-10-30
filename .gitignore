@@ -9,5 +9,6 @@ npm-debug.log
 /bower_components
 /node_modules
 /vendor
+Resources**
 client_secret.json
 /serverOLD/storage/logs/
