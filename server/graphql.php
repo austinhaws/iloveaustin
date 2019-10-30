@@ -1,6 +1,5 @@
 <?php
 $origin = $_SERVER['HTTP_ORIGIN'];
-// var_dump($origin);
 $allowed_domains = [
 	'http://localhost:9000',
 	'https://rpggenerator.com',
