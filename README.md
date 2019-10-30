@@ -1,2 +1,19 @@
-# citygenerator
-Generates a fantasy city information based on the tables and process of the book.
+# iloveaustin
+Haws family funds
+
+## Deploy Process
+### Files to edit
+
+#### graphql.php
+Change ini_set
+Change $appDir
+
+#### index.html
+Change base href
+Change webserviceUrlBase
+
+#### Pages.jsx
+Change basePath
+
+#### webpack.common.js
+Change publicPath
