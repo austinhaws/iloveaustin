@@ -1,12 +1,12 @@
 {
-  "name": "city-generator",
+  "name": "iloveaustin",
   "version": "3.0.0",
-  "description": "Generate RPG City",
+  "description": "I Love Austin",
   "license": "ISC",
   "author": "Austin Haws",
   "repository": {
     "type": "git",
-    "url": "https://github.com/austinhaws/citygenerator.git"
+    "url": "https://github.com/austinhaws/iloveaustin.git"
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack --debug --display-error-details --progress --config webpack.dev.js",
