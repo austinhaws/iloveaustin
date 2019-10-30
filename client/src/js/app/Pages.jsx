@@ -4,24 +4,29 @@ import History from "../app/history/History";
 import Home from "../iloveaustin/Home";
 import Savings from "../iloveaustin/Savings";
 
+const basePath = '/iloveaustin';
+// const basePath = '';
+
+const addBasePath = path => `${basePath}${path}`;
+
 export default {
 	iLoveAustin: {
 		budget: {
-			path: '/budget',
+			path: addBasePath('/budget'),
 			component: () => <Budget/>,
-			forward: History.forward(`/budget`),
+			forward: History.forward(addBasePath(`/budget`)),
 		},
 
 		savings: {
-			path: '/savings',
+			path: addBasePath('/savings'),
 			component: () => <Savings/>,
-			forward: History.forward(`/savings`),
+			forward: History.forward(addBasePath(`/savings`)),
 		},
 
 		home: {
-			path: '/',
+			path: addBasePath('/'),
 			component: () => <Home/>,
-			forward: History.forward(`/`),
+			forward: History.forward(addBasePath(`/`)),
 		},
 	},
 };

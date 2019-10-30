@@ -14,7 +14,12 @@ if($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
 	exit(0);
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
+// Disable default PHP error reporting - we have better one for debug mode (see below)
+ini_set('display_errors', 1);
+// ini_set('display_errors', 0);
+// $appDir = '/home/rpggener/apps/iloveaustin';
+$appDir = __DIR__;
+require_once $appDir . '/vendor/autoload.php';
 
 use GraphQL\Error\Debug;
 use GraphQL\Error\FormattedError;
@@ -23,9 +28,6 @@ use GraphQL\Type\Schema;
 use ILoveAustin\AppContext;
 use ILoveAustin\Context\Context;
 use ILoveAustin\Types;
-
-// Disable default PHP error reporting - we have better one for debug mode (see below)
-ini_set('display_errors', 1);
 
 
 $debug = false;
@@ -38,9 +40,7 @@ if (!empty($_GET['debug'])) {
 
 try {
 	// use real datasource
-	DB::$user = 'root';
-	DB::$password = 'root';
-	DB::$dbName = 'iloveaustin';
+	require_once $appDir . '/src/Resources/database.php';
 
 	// Prepare context that will be available in all field resolvers (as 3rd argument):
 	$appContext = new AppContext();
