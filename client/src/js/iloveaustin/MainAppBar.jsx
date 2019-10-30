@@ -140,7 +140,7 @@ class MainAppBar extends React.Component {
 
 					</Toolbar>
 					{this.props.app.account ?
-						<Toolbar className={classes.navMenu} zIndex="500">
+						<Toolbar className={classes.navMenu}>
 							<Button onClick={Pages.iLoveAustin.budget.forward}>Budget</Button>
 							<Button onClick={Pages.iLoveAustin.savings.forward}>Savings</Button>
 						</Toolbar>
