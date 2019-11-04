@@ -11,6 +11,7 @@ Change $appDir
 #### index.html
 Change base href
 Change webserviceUrlBase
+Change base_url
 
 #### Pages.jsx
 Change basePath

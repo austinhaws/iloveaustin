@@ -1,5 +1,5 @@
 export const CONTEXT_URL = {
-	LOCAL: 'http://localhost/iloveaustin3/server/graphql.php',
+	LOCAL: 'http://localhost/iloveaustin/server/graphql.php',
 	// DEV: 'http://localhost:8080/frontdoor/graphql',
 	// AT: 'https://frontdoor-ws.at.utah.gov/frontdoor/graphql',
 	PROD: 'https://rpggenerator.com/iloveaustin/ws/graphql.php'
