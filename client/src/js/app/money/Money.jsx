@@ -1,19 +1,5 @@
 export const toDollarString = amount => amount ? '$' + (parseFloat(amount) / 100.0).toFixed(2) : '$0.00';
 
-export const fromDollarString = amountStr => {
-console.error('use of DEPRECATED formatDollarString - use toDirtyMoney instead');
-	let parts = (amountStr || '').split(/\./);
-	parts[0] = parts[0].replace(/\$/, '');
-
-	if (parts.length === 1) {
-		parts[1] = '00';
-	}
-
-	parts[1] = parts[1].padEnd(2, '0').substr(0, 2);
-
-	return Number(parts.join('').replace('\$', ''));
-};
-
 export const addPlainMoney = (plainMoney1, plainMoney2) => `${(parseInt(plainMoney1, 10) || 0) + (parseInt(plainMoney2, 10) || 0)}`;
 
 /**
@@ -39,13 +25,17 @@ export const toPlainMoney = dirtyMoney => {
 	}
 
 	// put it back together as plain money
-	return parts.join('').replace(/[^\d]/g, '');
+	return parts.join('').replace(/[^\d^-]/g, '');
 };
 
 export const toDirtyMoney = money => {
 	// make sure plain money has all its digits
-	const moneyStr = `${money}`;
+	let moneyStr = `${money}`;
+	const isNegative = moneyStr[0] === '-';
+	if (isNegative) {
+		moneyStr = moneyStr.slice(1);
+	}
 	const plainMoney = ((moneyStr && moneyStr.length < 3) ? _.padStart(moneyStr, 3, '0') : moneyStr) || '000';
 	// convert to $ decimal string
-	return '$' + plainMoney.substr(0, plainMoney.length - 2) + '.' + plainMoney.substr(plainMoney.length - 2);
+	return (isNegative ? '-' : '') + plainMoney.substr(0, plainMoney.length - 2) + '.' + plainMoney.substr(plainMoney.length - 2);
 };

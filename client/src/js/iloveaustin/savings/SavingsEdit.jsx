@@ -63,7 +63,7 @@ class SavingsEdit extends React.Component {
 
 	save = () => {
 		const saveSavings = {...this.state.editingSavings};
-		if (DateValidation.isValidDate(this.state.editingSavings.dueDate)) {
+		if (!this.state.editingSavings.dueDate || DateValidation.isValidDate(this.state.editingSavings.dueDate)) {
 			saveSavings.amountCurrent = this.state.amountCurrentTotal;
 			this.savingsMoneyFields.forEach(field => saveSavings[field] = toPlainMoney(saveSavings[field]));
 			this.props.onSave(saveSavings);
@@ -102,7 +102,7 @@ class SavingsEdit extends React.Component {
 							id="due-date"
 							label="Due Date"
 							fullWidth
-							error = {!DateValidation.isValidDate(this.state.editingSavings.dueDate)}
+							error = {this.state.editingSavings.dueDate && !DateValidation.isValidDate(this.state.editingSavings.dueDate)}
 							InputProps={{
 								inputComponent: DateMaskInput,
 								value: this.state.editingSavings.dueDate || '',

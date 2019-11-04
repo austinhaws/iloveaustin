@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 import webservice from "../../app/webservice/Webservice";
-import {fromDollarString, toDollarString} from "../../app/money/Money";
+import {toDirtyMoney, toDollarString} from "../../app/money/Money";
 import Button from "@material-ui/core/Button";
 import SnapshotEdit from "./SnapshotEdit";
 import styles from "../../app/Styles";
@@ -59,9 +59,9 @@ class Snapshot extends React.Component {
 	saveEditSnapshot = snapshot => {
 		// convert $ strings to amount ints
 		const saveSnapshot = { ...snapshot };
-		saveSnapshot.amt_goal = fromDollarString(saveSnapshot.amt_goal);
-		saveSnapshot.amt_current = fromDollarString(saveSnapshot.amt_current);
-		saveSnapshot.amt_current += fromDollarString(saveSnapshot.add_current);
+		saveSnapshot.amt_goal = toDirtyMoney(saveSnapshot.amt_goal);
+		saveSnapshot.amt_current = toDirtyMoney(saveSnapshot.amt_current);
+		saveSnapshot.amt_current += toDirtyMoney(saveSnapshot.add_current);
 
 		webservice.iLoveAustin.snapshot.save(saveSnapshot)
 			.then(() => this.setState({ editSnapshot: undefined }))
