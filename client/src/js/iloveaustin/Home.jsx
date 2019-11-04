@@ -46,7 +46,7 @@ class Home extends React.Component {
 
 		return (
 			<div className={classes.root}>
-				Welcome to the finances for the Haws.<br/> Click Login in the top right to get started.
+				Welcome to the finances for the Haws.<br/> Click Sign In in the top right to get started.
 			</div>
 		);
 	}
