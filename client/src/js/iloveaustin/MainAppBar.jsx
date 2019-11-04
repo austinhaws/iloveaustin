@@ -60,7 +60,7 @@ class MainAppBar extends React.Component {
 
 	componentDidMount() {
 		const tokenId = LocalStorage.googleTokenId.get();
-		tokenId && this.signInWithTokenId(tokenId);
+		tokenId && tokenId !== '/' && this.signInWithTokenId(tokenId);
 	}
 
 	signInWithTokenId = tokenId => Account.signIn(tokenId)
