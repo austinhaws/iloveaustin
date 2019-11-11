@@ -18,3 +18,6 @@ Change basePath
 
 #### webpack.common.js
 Change publicPath
+
+#### Account.jsx
+Set redirect for document.location.href
