@@ -1,13 +1,10 @@
 import {createStore} from 'redux';
 import reducers from './Reducers';
-import {objectAtPath} from "dts-react-common";
+import {objectAtPath, pathToParts} from "dts-react-common";
 import {dispatchUpdateData} from "./Dispatch";
 
 export function dispatchDefaultState(paths) {
-	_.castArray(paths).forEach(path => dispatchUpdateData({
-		field: path,
-		value: objectAtPath(defaultState, path)
-	}));
+	_.castArray(paths).forEach(path => dispatchUpdateData(Object.assign({ value:  objectAtPath(defaultState, path)}, pathToParts(path))));
 }
 
 export function getDefaultState(path) {

@@ -11,15 +11,16 @@ import History from '../app/history/History';
 import * as PropTypes from "prop-types";
 import {MessagePopupCore} from "dts-react-common";
 import "../../css/index.scss";
+import {withStyles} from "@material-ui/core";
+import styles from "../app/Styles";
 
 const propTypes = {
+	classes: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
-	periods: PropTypes.object,
 };
 const defaultProps = {
-	periods: undefined,
 };
-const mapStateToProps = state => ({periods: state.iLoveAustin.periods});
+const mapStateToProps = state => ({});
 
 class AppClass extends React.Component {
 
@@ -36,7 +37,7 @@ class AppClass extends React.Component {
 				<CssBaseline/>
 
 				<MainAppBar/>
-
+				<div className={this.props.classes.navBarSpacer}/>
 				<AppRoutes/>
 				<MessagePopupCore/>
 			</React.Fragment>
@@ -47,8 +48,7 @@ class AppClass extends React.Component {
 AppClass.propTypes = propTypes;
 AppClass.defaultProps = defaultProps;
 
-const App = withRouter(connect(mapStateToProps)(AppClass));
-
+const App = withRouter(connect(mapStateToProps)(withStyles(styles)(AppClass)));
 
 // This will correctly set the basename so router works
 const app = '/';

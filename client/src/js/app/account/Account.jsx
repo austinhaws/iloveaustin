@@ -26,7 +26,7 @@ export default {
 	signOut: () => {
 		LocalStorage.googleTokenId.remove();
 		dispatchDefaultState(['app.account', 'app.googleTokenId']);
-		Pages.iLoveAustin.home.forward();
+		document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:9000";
 	},
 
 	isSignedIn: () => !!reduxStore.getState().app.googleTokenId && !!reduxStore.getState().app.account,

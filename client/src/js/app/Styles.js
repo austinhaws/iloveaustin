@@ -97,4 +97,8 @@ export default theme => ({
 		fontSize: '1.5em',
 		padding: '25px 0',
 	},
+	navBarSpacer: {
+		height: '12px',
+		width: '100%',
+	},
 });

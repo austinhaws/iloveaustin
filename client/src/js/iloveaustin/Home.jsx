@@ -46,7 +46,11 @@ class Home extends React.Component {
 
 		return (
 			<div className={classes.root}>
-				Welcome to the finances for the Haws.<br/> Click Sign In in the top right to get started.
+				{
+					this.props.app.account ?
+						<div>Click a menu item to get started</div> :
+						<div>Welcome to the finances for the Haws.<br/> Click Sign In in the top right to get started.</div>
+				}
 			</div>
 		);
 	}

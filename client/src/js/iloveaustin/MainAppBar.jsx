@@ -64,7 +64,7 @@ class MainAppBar extends React.Component {
 	}
 
 	signInWithTokenId = tokenId => Account.signIn(tokenId)
-		.then(() => History.forward(LocalStorage.path.get('/')));
+		.then(() => History.forward(LocalStorage.path.get(Pages.iLoveAustin.budget.path)));
 
 	handleToggle = () => {
 		this.setState(state => ({ open: !state.open }));
