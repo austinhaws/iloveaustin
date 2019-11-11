@@ -26,7 +26,7 @@ export default {
 	signOut: () => {
 		LocalStorage.googleTokenId.remove();
 		dispatchDefaultState(['app.account', 'app.googleTokenId']);
-		document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:9000";
+		document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://rpggenerator.com";
 	},
 
 	isSignedIn: () => !!reduxStore.getState().app.googleTokenId && !!reduxStore.getState().app.account,
