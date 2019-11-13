@@ -8,7 +8,7 @@ class SavingsDao
 {
 	public function selectSavingsByAccountId($accountId)
 	{
-		return DB::query("SELECT * FROM savings WHERE account_id = %i", $accountId);
+		return DB::query("SELECT * FROM savings WHERE account_id = %i ORDER BY name", $accountId);
 	}
 
 	public function selectSavingsById($savingsId)
