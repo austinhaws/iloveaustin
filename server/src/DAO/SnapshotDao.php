@@ -7,7 +7,7 @@ class SnapshotDao
 {
 	public function selectSnapshotsByAccountId($accountId)
 	{
-		return DB::query("SELECT * FROM snapshot WHERE account_id = %i", $accountId);
+		return DB::query("SELECT * FROM snapshot WHERE account_id = %i ORDER BY name", $accountId);
 	}
 
 	public function saveSnapshot(array $snapshot)
