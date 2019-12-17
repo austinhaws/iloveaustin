@@ -14,10 +14,8 @@ if($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
 }
 
 // Disable default PHP error reporting - we have better one for debug mode (see below)
-ini_set('display_errors', 1);
-// ini_set('display_errors', 0);
-// $appDir = '/home/rpggener/apps/iloveaustin';
-$appDir = __DIR__;
+ini_set('display_errors', 0);
+$appDir = '/home/rpggener/apps/iloveaustin';
 require_once $appDir . '/vendor/autoload.php';
 
 use GraphQL\Error\Debug;

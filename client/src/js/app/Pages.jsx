@@ -4,8 +4,7 @@ import History from "../app/history/History";
 import Home from "../iloveaustin/Home";
 import Savings from "../iloveaustin/Savings";
 
-// const basePath = '/iloveaustin';
-const basePath = '';
+const basePath = '/iloveaustin';
 
 const addBasePath = path => `${basePath}${path}`;
 

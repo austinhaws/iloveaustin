@@ -33,8 +33,7 @@ const config = {
 	output: {
 		path: BUILD_DIR,
 		filename: '[name].[contenthash].bundle.js',
-		// publicPath: 'iloveaustin/',
-		publicPath: '',
+		publicPath: 'iloveaustin/',
 	},
 	optimization: {
 		runtimeChunk: 'single',
