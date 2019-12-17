@@ -66,7 +66,10 @@ class QueryType extends ObjectType
 	{
 		$period = $this->context->services->period->getPeriod($rootValue, $args);
 		if ($args['copyForward'] ?? false) {
-			$this->context->services->monthly->copyMonthliesForward($period);
+			$monthlies = $this->context->services->monthly->selectMonthlies($rootValue, ['period' => $period['period']]);
+			if (!$monthlies) {
+				$this->context->services->monthly->copyMonthliesForward($period);
+			}
 		}
 		return $period;
 	}
