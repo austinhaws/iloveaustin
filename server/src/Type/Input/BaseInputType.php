@@ -40,8 +40,10 @@ abstract class BaseInputType extends InputObjectType
 	{
 		$newRecord = $record;
 		foreach ($this->config[self::FIELD_CONVERSIONS] as $uiField => $dbField) {
-			$newRecord[$dbField] = $record[$uiField];
-			unset($newRecord[$uiField]);
+			$newRecord[$dbField] = $record[$uiField] ?? null;
+			if (isset($newRecord[$uiField])) {
+				unset($newRecord[$uiField]);
+			}
 		}
 		return $newRecord;
 	}

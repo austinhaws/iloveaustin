@@ -46,7 +46,7 @@ const graphQlWebservice = new GraphQLCore({
 			} else {
 				MessagePopupCore.addMessage({title: 'Webservice Communication Interruption', message: message});
 			}
-			throw message;
+			throw error;
 		}
 		return data;
 	}),

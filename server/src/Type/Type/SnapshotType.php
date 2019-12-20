@@ -15,8 +15,8 @@ class SnapshotType extends BaseType
 					'id' => Types::id(),
 					'name' => Types::string(),
 					'notes' => Types::string(),
-					'amountGoal' => Types::int(),
-					'amountCurrent' => Types::int(),
+					'amountGoal' => Types::string(),
+					'amountCurrent' => Types::string(),
 					'isTotalable' => Types::int(),
 				];
 			},

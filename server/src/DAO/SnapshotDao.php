@@ -12,6 +12,8 @@ class SnapshotDao
 
 	public function saveSnapshot(array $snapshot)
 	{
+		$snapshot['is_totalable'] = $snapshot['is_totalable'] ? 1 : 0;
+		$snapshot['notes'] = $snapshot['notes'] ?? '';
 		DB::insertUpdate('snapshot', $snapshot);
 		if (!isset($snapshot['id'])) {
 			$snapshot['id'] = DB::insertId();
