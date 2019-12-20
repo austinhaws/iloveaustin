@@ -20,8 +20,11 @@ class Budget extends React.Component {
 	totalBankBudget = () =>
 		toDirtyMoney(
 			addPlainMoney(
-				(this.props.iLoveAustin.monthlies.list || []).reduce((total, monthly) => addPlainMoney(total, monthly.amountGoal), undefined),
-				(this.props.iLoveAustin.snapshots.list || []).reduce((total, snapshot) => addPlainMoney(total, snapshot.amountCurrent), undefined)
+				(this.props.iLoveAustin.monthlies.list || [])
+					.reduce((total, monthly) => addPlainMoney(total, monthly.amountGoal), undefined),
+				(this.props.iLoveAustin.snapshots.list || [])
+					.filter(snapshot => snapshot.isTotalable === 1)
+					.reduce((total, snapshot) => addPlainMoney(total, snapshot.amountCurrent), undefined)
 			)
 		);
 
