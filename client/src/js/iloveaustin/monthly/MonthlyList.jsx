@@ -19,9 +19,10 @@ import {handleEvent, joinClassNames} from "dts-react-common";
 import MonthlyDatePicker from "./MonthlyDatePicker";
 import LocalStorage from "../../app/localstorage/LocalStorage";
 import webservice from "../../app/webservice/Webservice";
-import {dispatchField} from "../../app/Dispatch";
+import {createPathActionPayload, dispatchField, dispatchUpdates} from "../../app/Dispatch";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import MonthlyEdit from "./MonthlyEdit";
+import Period from "../../app/period/Period";
 
 const propTypes = {};
 const defaultProps = {};
@@ -62,11 +63,17 @@ class MonthlyList extends React.Component {
 		if (this.state.deletingId === monthly.id) {
 			this.setState({deletingId: undefined});
 			webservice.iLoveAustin.monthly.delete(monthly.id)
-				.then(() => dispatchField('iLoveAustin.monthlies.list', this.props.iLoveAustin.monthlies.list.filter(filterMonthly => filterMonthly.id !== monthly.id)));
+				.then(() => this.setNewMonthliesList(this.props.iLoveAustin.monthlies.list.filter(filterMonthly => filterMonthly.id !== monthly.id)));
 		} else {
 			this.setState({deletingId: monthly.id});
 		}
 	};
+
+	setNewMonthliesList = newList => dispatchUpdates([
+		createPathActionPayload('iLoveAustin.monthlies.list', newList),
+		createPathActionPayload('iLoveAustin.monthlies.totals', Period.totalMonthlies(newList)),
+	]);
+
 
 	addNewMonthly = () => this.setState({editingMonthly: {period: this.props.iLoveAustin.periods.period}});
 
@@ -78,12 +85,14 @@ class MonthlyList extends React.Component {
 		this.cancelMonthlyEdit();
 		webservice.iLoveAustin.monthly.save(monthlyToSave)
 			.then(monthlyResult => {
+				let newList;
 				if (this.props.iLoveAustin.monthlies.list.map(monthly => monthly.id).includes(monthlyResult.id)) {
-					dispatchField('iLoveAustin.monthlies.list', this.props.iLoveAustin.monthlies.list
-						.map(monthly => monthly.id === monthlyResult.id ? monthlyResult : monthly));
+					newList = this.props.iLoveAustin.monthlies.list.map(monthly => monthly.id === monthlyResult.id ? monthlyResult : monthly);
+					dispatchField('iLoveAustin.monthlies.list', newList);
 				} else {
-					dispatchField('iLoveAustin.monthlies.list', this.props.iLoveAustin.monthlies.list.concat(monthlyResult));
+					newList = this.props.iLoveAustin.monthlies.list.concat(monthlyResult);
 				}
+				this.setNewMonthliesList(newList);
 			});
 	};
 
