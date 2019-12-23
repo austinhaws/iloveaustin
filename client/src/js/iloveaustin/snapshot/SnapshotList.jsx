@@ -62,7 +62,9 @@ class SnapshotList extends React.Component {
 					dispatchField('iLoveAustin.snapshots.list', this.props.iLoveAustin.snapshots.list
 						.map(snapshot => snapshot.id === snapshotResult.id ? snapshotResult : snapshot));
 				} else {
-					dispatchField('iLoveAustin.snapshots.list', this.props.iLoveAustin.snapshots.list.concat(snapshotResult));
+					const newList = this.props.iLoveAustin.snapshots.list.concat(snapshotResult);
+					newList.sort(((a, b) => a.name.localeCompare(b.name)));
+					dispatchField('iLoveAustin.snapshots.list', newList);
 				}
 			});
 	};
