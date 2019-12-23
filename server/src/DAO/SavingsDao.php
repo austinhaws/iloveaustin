@@ -18,6 +18,8 @@ class SavingsDao
 
 	public function saveSavings(array $savings)
 	{
+		$savings['due_date'] = $savings['due_date'] ?? '';
+		$savings['notes'] = $savings['notes'] ?? '';
 		DB::insertUpdate('savings', $savings);
 		if (!isset($savings['id'])) {
 			$savings['id'] = DB::insertId();

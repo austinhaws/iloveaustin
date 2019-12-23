@@ -62,7 +62,9 @@ class SavingsList extends React.Component {
 					dispatchField('iLoveAustin.savings.list', this.props.iLoveAustin.savings.list
 						.map(savings => savings.id === savingsResult.id ? savingsResult : savings));
 				} else {
-					dispatchField('iLoveAustin.savings.list', this.props.iLoveAustin.savings.list.concat(savingsResult));
+					const newList = this.props.iLoveAustin.savings.list.concat(savingsResult);
+					newList.sort(((a, b) => a.name.localeCompare(b.name)));
+					dispatchField('iLoveAustin.savings.list', newList);
 				}
 			});
 	};
