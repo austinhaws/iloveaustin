@@ -6,7 +6,7 @@
   "author": "Austin Haws",
   "repository": {
     "type": "git",
-    "url": "https://github.com/austinhaws/iloveaustin.git"
+    "url": "git@gitlab.com:dts-soldel/dts/service-portal/service-portal-react-fe.git"
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack --debug --display-error-details --progress --config webpack.dev.js",
@@ -21,13 +21,13 @@
   ],
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "@dts-soldel/dts-react-common": "^7.17.0",
     "@material-ui/core": "^3.7.1",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/lab": "^3.0.0-alpha.27",
     "axios": "^0.18.0",
     "clone": "^2.1.2",
     "core-js": "^2.6.1",
-    "dts-react-common": "^7.0.6",
     "inputmask": "^3.3.11",
     "is-blank": "^2.1.0",
     "lodash": "^4.17.11",

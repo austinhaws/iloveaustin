@@ -1,4 +1,4 @@
-import {objectAtPathReducer} from 'dts-react-common';
+import {objectAtPathReducer} from '@dts-soldel/dts-react-common';
 
 let reducers = {
 	ACTION_TYPES: {

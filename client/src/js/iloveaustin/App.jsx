@@ -9,7 +9,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import MainAppBar from "./MainAppBar";
 import History from '../app/history/History';
 import * as PropTypes from "prop-types";
-import {MessagePopupCore} from "dts-react-common";
+import {MessagePopupCore} from "@dts-soldel/dts-react-common";
 import "../../css/index.scss";
 import {withStyles} from "@material-ui/core";
 import styles from "../app/Styles";

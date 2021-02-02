@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
 import reducers from './Reducers';
-import {objectAtPath, pathToParts} from "dts-react-common";
+import {objectAtPath, pathToParts} from "@dts-soldel/dts-react-common";
 import {dispatchUpdateData} from "./Dispatch";
 
 export function dispatchDefaultState(paths) {

@@ -1,4 +1,4 @@
-import {objectAtPathReducer} from "dts-react-common";
+import {objectAtPathReducer} from "@dts-soldel/dts-react-common";
 import reducers from "../app/Reducers";
 import store from "../app/ReduxStore";
 import reducer from "./Reducers";

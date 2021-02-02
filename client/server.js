@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const chalk = require('chalk');
 
-const port = 9000;
+const port = 8000;
 const path = __dirname + '/dist/';
 
 app.use(express.static(path));

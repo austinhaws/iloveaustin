@@ -10,7 +10,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Period from "../../app/period/Period";
 import MaskedInput from 'react-text-mask';
-import {joinClassNames} from "dts-react-common";
+import {joinClassNames} from "@dts-soldel/dts-react-common";
 import DateValidation from '../../app/date/DateValidation';
 
 const propTypes = {

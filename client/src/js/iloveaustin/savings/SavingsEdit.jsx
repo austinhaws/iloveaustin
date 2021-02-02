@@ -11,7 +11,7 @@ import {addPlainMoney, toDirtyMoney, toPlainMoney} from "../../app/money/Money";
 import MoneyMaskInput from "../masks/MoneyMaskInput";
 import DateMaskInput from "../masks/DateMaskInput";
 import DateValidation from "../../app/date/DateValidation";
-import {MessagePopupCore} from "dts-react-common";
+import {MessagePopupCore} from "@dts-soldel/dts-react-common";
 
 const propTypes = {
 	classes: PropTypes.object.isRequired,

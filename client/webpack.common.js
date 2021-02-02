@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // where does source live
 const APP_DIR = path.resolve(__dirname, 'src/js');
-const DTS_REACT_COMMON_NODE_MODULES = fs.realpathSync(__dirname + '/node_modules/dts-react-common');
+const DTS_REACT_COMMON_NODE_MODULES = fs.realpathSync(__dirname + '/node_modules/@dts-soldel/dts-react-common');
 
 // where does compiled code go
 const BUILD_DIR = path.resolve(__dirname, 'dist');

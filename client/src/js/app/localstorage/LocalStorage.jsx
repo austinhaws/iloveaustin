@@ -1,6 +1,6 @@
 import LocalStorageKeys from "./LocalStorageKeys";
 import reduxStore from "../ReduxStore";
-import {objectAtPath} from "dts-react-common";
+import {objectAtPath} from "@dts-soldel/dts-react-common";
 
 const storageItem = (key, accountBased) => {
 	// store keys with account prefix so that different users have different settings

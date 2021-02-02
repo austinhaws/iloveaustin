@@ -14,7 +14,7 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import MessageIcon from '@material-ui/icons/Message';
 import styles from "../../app/Styles";
-import {handleEvent} from "dts-react-common";
+import {handleEvent} from "@dts-soldel/dts-react-common";
 import webservice from "../../app/webservice/Webservice";
 import {dispatchField} from "../../app/Dispatch";
 import AddCircleIcon from '@material-ui/icons/AddCircle';

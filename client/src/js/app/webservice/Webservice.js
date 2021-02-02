@@ -1,4 +1,4 @@
-import {AjaxStatusCore, MessagePopupCore, objectAtPath} from "dts-react-common";
+import {AjaxStatusCore, MessagePopupCore, objectAtPath} from "@dts-soldel/dts-react-common";
 import store from "../ReduxStore";
 import {dispatchField} from "../Dispatch";
 import WEBSERVICE_AJAX_IDS from "./WebserviceAjaxIds";

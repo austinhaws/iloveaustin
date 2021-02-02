@@ -1,4 +1,4 @@
-import {objectAtPath} from "dts-react-common";
+import {objectAtPath} from "@dts-soldel/dts-react-common";
 
 export default {
 	propertyChanged: (prevProps, props, path) => {

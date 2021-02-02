@@ -15,7 +15,7 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import MessageIcon from '@material-ui/icons/Message';
 import styles from "../../app/Styles";
-import {handleEvent, joinClassNames} from "dts-react-common";
+import {handleEvent, joinClassNames} from "@dts-soldel/dts-react-common";
 import MonthlyDatePicker from "./MonthlyDatePicker";
 import LocalStorage from "../../app/localstorage/LocalStorage";
 import webservice from "../../app/webservice/Webservice";
