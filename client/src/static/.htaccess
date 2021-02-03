@@ -1,6 +1,8 @@
 <IfModule mod_rewrite.c>
 
   RewriteEngine On
+# make sure the header is allowed to go through to php
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
   #### remove www from front of url
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [R=301,QSA,NC,L]
