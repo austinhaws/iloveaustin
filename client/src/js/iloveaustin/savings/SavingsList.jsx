@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {Grid, IconButton, Popover, Toolbar, Tooltip, Typography, withStyles} from "@material-ui/core";
+import {Grid, IconButton, Popover, TableFooter, Toolbar, Tooltip, Typography, withStyles} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -180,6 +180,15 @@ class SavingsList extends React.Component {
 							</TableRow>
 						))}
 					</TableBody>
+					<TableFooter>
+						<TableRow className={classes.bodyTableRow}>
+							<TableCell/>
+							<TableCell align="right">Total:</TableCell>
+							<TableCell align="right">{toDollarString(savings.reduce((total, saving) => total + +(saving.amountGoal || 0), 0))}</TableCell>
+							<TableCell align="right">{toDollarString(savings.reduce((total, saving) => total + +(saving.amountCurrent || 0), 0))}</TableCell>
+							<TableCell/>
+						</TableRow>
+					</TableFooter>
 				</Table>
 				{this.state.editingSavings ?
 					<SavingsEdit
